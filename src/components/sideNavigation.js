@@ -40,10 +40,16 @@ const TopNavigation = () => {
             Laporan
           </MDBListGroupItem>
         </NavLink>
-        <NavLink to="/404" activeClassName="activeClass">
+        <NavLink to="/laporan" activeClassName="activeClass">
           <MDBListGroupItem>
-            <MDBIcon icon="exclamation" className="mr-3" />
-            404
+            <MDBIcon icon="folder-open" className="mr-3" />
+            Master
+          </MDBListGroupItem>
+        </NavLink>
+        <NavLink to="/laporan" activeClassName="activeClass">
+          <MDBListGroupItem>
+            <MDBIcon icon="user" className="mr-3" />
+            Pengguna
           </MDBListGroupItem>
         </NavLink>
       </MDBListGroup>

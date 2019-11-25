@@ -16,6 +16,8 @@ class Routes extends React.Component {
         <Route path="/pendataan" component={TablesPage} />
         <Route path="/perawatan" component={MapsPage} />
         <Route path="/laporan" component={DashboardPage} />
+        <Route path="/master" component={DashboardPage} />
+        <Route path="/pengguna" component={DashboardPage} />
         <Route path="/404" component={NotFoundPage} />
       </Switch>
     );
