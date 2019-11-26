@@ -1,18 +1,24 @@
-import React from "react";
-import { MDBFooter } from "mdbreact";
+import React, { Component } from "react";
 
-const Footer = () => {
-  return (
-    <MDBFooter color="blue" className="text-center font-small darken-2">
-      <p className="footer-copyright mb-0 py-3 text-center">
-        &copy; {new Date().getFullYear()} Copyright:{" "}
-        <a href="https://ubharajaya.ac.id">
-          {" "}
-          Direktorat Pengembangan Teknologi Informasi{" "}
-        </a>
-      </p>
-    </MDBFooter>
-  );
-};
+class Footer extends Component {
+  state = {};
+  render() {
+    return (
+      <div>
+        <footer className="main-footer">
+          <div className="pull-right hidden-xs">
+            <b>Version</b> 2.4.18
+          </div>
+          <strong>
+            Copyright © 2014-2019{"{"}" "{"}"}
+            <a href="https://adminlte.io">AdminLTE</a>.
+          </strong>
+          {"{"}" "{"}"}
+          All rights reserved.
+        </footer>
+      </div>
+    );
+  }
+}
 
 export default Footer;
