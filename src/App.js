@@ -3,6 +3,7 @@ import Header from "./components/Header.js";
 import Menu from "./components/Menu.js";
 import Footer from "./components/Footer.js";
 import Wrapper from "./components/Wrapper";
+import Datatable from "./components/pages/Datatable.js";
 
 class App extends Component {
   state = {};
@@ -12,6 +13,7 @@ class App extends Component {
         <Header />
         <Menu />
         <Wrapper />
+        <Datatable />
         <Footer />
       </div>
     );

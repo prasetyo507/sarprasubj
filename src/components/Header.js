@@ -10,11 +10,11 @@ class Header extends Component {
           <a href="index2.html" className="logo">
             {/* mini logo for sidebar mini 50x50 pixels */}
             <span className="logo-mini">
-              <b>A</b>LT
+              <img src="../assets/logo/new_ubj.png" alt="logo ubj" />
             </span>
             {/* logo for regular state and mobile devices */}
             <span className="logo-lg">
-              <b>Admin</b>LTE
+              <b>SARPRAS</b>UBJ
             </span>
           </a>
           {/* Header Navbar: style can be found in header.less */}
