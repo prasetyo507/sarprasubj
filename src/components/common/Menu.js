@@ -27,9 +27,9 @@ class Menu extends Component {
           {/* sidebar menu: : style can be found in sidebar.less */}
           <ul className="sidebar-menu" data-widget="tree">
             <li className="header">MAIN NAVIGATION</li>
-            <li className="active">
+            <li className="">
               <Link to="/">
-                <i className="fa fa-dashboard" /> Dashboard
+                <i className="fa fa-dashboard" /> <span>Dashboard</span>
               </Link>
             </li>
             <li className="treeview">
