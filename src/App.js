@@ -1,20 +1,27 @@
 import React, { Component } from "react";
-import Header from "./components/Header.js";
-import Menu from "./components/Menu.js";
-import Footer from "./components/Footer.js";
-import Wrapper from "./components/Wrapper";
-import Datatable from "./components/pages/Datatable.js";
+import { BrowserRouter as Router } from 'react-router-dom';
+import Routes from './components/router/Routes';
+
+import Header from "./components/common/Header";
+import Menu from "./components/common/Menu";
+import Footer from "./components/common/Footer";
+import Wrapper from "./components/common/Wrapper";
+import Dashboard from "./components/pages/Dashboard";
 
 class App extends Component {
   state = {};
   render() {
     return (
       <div>
-        <Header />
-        <Menu />
-        <Wrapper />
-        <Datatable />
-        <Footer />
+        <Router>
+          <Header />
+          <Menu />
+          <Wrapper>
+            <Dashboard />
+          </Wrapper>
+          <Footer />
+          <Routes />
+        </Router>
       </div>
     );
   }

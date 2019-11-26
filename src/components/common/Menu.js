@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 
 class Menu extends Component {
   state = {};
@@ -26,25 +27,10 @@ class Menu extends Component {
           {/* sidebar menu: : style can be found in sidebar.less */}
           <ul className="sidebar-menu" data-widget="tree">
             <li className="header">MAIN NAVIGATION</li>
-            <li className="active treeview menu-open">
-              <a href="#!">
-                <i className="fa fa-dashboard" /> <span>Dashboard</span>
-                <span className="pull-right-container">
-                  <i className="fa fa-angle-left pull-right" />
-                </span>
-              </a>
-              <ul className="treeview-menu">
-                <li>
-                  <a href="index.html">
-                    <i className="fa fa-circle-o" /> Dashboard v1
-                  </a>
-                </li>
-                <li className="active">
-                  <a href="index2.html">
-                    <i className="fa fa-circle-o" /> Dashboard v2
-                  </a>
-                </li>
-              </ul>
+            <li className="active">
+              <Link to="/">
+                <i className="fa fa-dashboard" /> Dashboard
+              </Link>
             </li>
             <li className="treeview">
               <a href="#!">
@@ -63,16 +49,6 @@ class Menu extends Component {
                 <li>
                   <a href="pages/charts/morris.html">
                     <i className="fa fa-circle-o" /> Morris
-                  </a>
-                </li>
-                <li>
-                  <a href="pages/charts/flot.html">
-                    <i className="fa fa-circle-o" /> Flot
-                  </a>
-                </li>
-                <li>
-                  <a href="pages/charts/inline.html">
-                    <i className="fa fa-circle-o" /> Inline charts
                   </a>
                 </li>
               </ul>
