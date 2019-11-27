@@ -28,13 +28,8 @@ class Menu extends Component {
           <ul className="sidebar-menu" data-widget="tree">
             <li className="header">MAIN NAVIGATION</li>
             <li className="active">
-              <a href="https://adminlte.io/docs">
-                <i className="fa fa-dashboard" /> Dashboard
-              </a>
-            </li>
-            <li className="">
-              <Link to="/submission">
-                <i className="fa fa-file-text" /> <span>Pengajuan</span>
+              <Link to="/">
+                <i className="fa fa-dashboard" /> <span>Dashboard</span>
               </Link>
             </li>
             <li className="treeview">
@@ -47,9 +42,9 @@ class Menu extends Component {
               </a>
               <ul className="treeview-menu">
                 <li>
-                  <a href="pages/charts/chartjs.html">
+                  <Link to="/submission">
                     <i className="fa fa-circle-o" /> Pengajuan
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a href="pages/charts/morris.html">
@@ -91,12 +86,12 @@ class Menu extends Component {
             </li>
             <li>
               <a href="https://adminlte.io/docs">
-                <i className="fa fa-wrench" /> Perawatan
+                <i className="fa fa-wrench" /> <span>Perawatan</span>
               </a>
             </li>
             <li>
               <a href="https://adminlte.io/docs">
-                <i className="fa fa-pie-chart" /> Laporan
+                <i className="fa fa-pie-chart" /> <span>Laporan</span>
               </a>
             </li>
             <li className="treeview">
