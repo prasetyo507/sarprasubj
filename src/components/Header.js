@@ -33,7 +33,7 @@ class Header extends Component {
               {/* Tasks: style can be found in dropdown.less */}
               <li className="dropdown tasks-menu">
                 <a href="#!" className="dropdown-toggle" data-toggle="dropdown">
-                  <i className="fa fa-flag-o" />
+                  <i className="fa fa-bell" />
                   <span className="label label-danger">9</span>
                 </a>
                 <ul className="dropdown-menu">
@@ -73,11 +73,6 @@ class Header extends Component {
               {/* User Account: style can be found in dropdown.less */}
               <li className="dropdown user user-menu">
                 <a href="#!" className="dropdown-toggle" data-toggle="dropdown">
-                  <img
-                    src="dist/img/user2-160x160.jpg"
-                    className="user-image"
-                    alt="User"
-                  />
                   <span className="hidden-xs">Alexander Pierce</span>
                 </a>
                 <ul className="dropdown-menu">
