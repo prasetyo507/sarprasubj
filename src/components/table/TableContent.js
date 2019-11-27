@@ -2,8 +2,14 @@ import React from 'react';
 
 const TableContent = (props) => {
     return (
-        props.tableContent.map((content, i) => 
-            <td key={i}>{content.content}</td>
+        props.tableContent.map((content, i) =>
+            <tr key={i}>
+                {
+                    Object.values(content).map((rowContent, index) => {
+                        return <td key={index}>{rowContent}</td>
+                    })
+                }
+            </tr>
         )
     )
 }

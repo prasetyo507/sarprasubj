@@ -3,7 +3,13 @@ import React from 'react';
 const TableHead = (props) => {
     return (
         props.tableHeadContent.map((content, i) => 
-            <th key={i}>{content.name}</th>
+            <tr key={i}>
+                {
+                    Object.values(content).map((headContent, index) => {
+                        return <th key={index}>{headContent}</th>
+                    })
+                }
+            </tr>
         )
     )
 }

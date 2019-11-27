@@ -25,14 +25,10 @@ class Datatable extends Component {
                 className="table table-bordered table-striped"
               >
                 <thead>
-                  <tr>
-                    <TableHead tableHeadContent={this.props.headContent} />
-                  </tr>
+                  <TableHead tableHeadContent={this.props.headContent} />
                 </thead>
                 <tbody>
-                  <tr>
-                    <TableContent tableContent={this.props.content} />
-                  </tr>
+                  <TableContent tableContent={this.props.content} />
                 </tbody>
               </table>
             </div>

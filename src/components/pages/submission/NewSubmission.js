@@ -9,16 +9,26 @@ class NewSubmission extends Component {
         super();
         this.state = {
             tableHead: [
-                {name: 'Nama Barang'},
-                {name: 'QTY'},
-                {name: 'Keterangan'},
-                {name: 'Aksi'}
+                {
+                    column0: 'Nama Barang',
+                    column1: 'QTY',
+                    column2: 'Keterangan',
+                    column3: 'Aksi',
+                }
             ],
             tableContent: [
-                {content: 'Barang 1'},
-                {content: '7'},
-                {content: 'this is keterangan'},
-                {content: <button class="btn btn-success"><i class="fa fa-plus"></i></button>}
+                {
+                    name: 'Barang 1',
+                    qty: '7',
+                    note: 'this is keterangan',
+                    action: <button class="btn btn-success"><i class="fa fa-plus"></i></button>
+                },
+                {
+                    name: 'Barang 2',
+                    qty: '74',
+                    note: 'this is keterangan 2',
+                    action: <button class="btn btn-success"><i class="fa fa-plus"></i></button>
+                }
             ]
         }
     }
