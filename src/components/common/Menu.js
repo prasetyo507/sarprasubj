@@ -32,6 +32,11 @@ class Menu extends Component {
                 <i className="fa fa-dashboard" /> <span>Dashboard</span>
               </Link>
             </li>
+            <li className="">
+              <Link to="/submission">
+                <i className="fa fa-file-text" /> <span>Pengajuan</span>
+              </Link>
+            </li>
             <li className="treeview">
               <a href="#!">
                 <i className="fa fa-pie-chart" />
