@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 class Menu extends Component {
   state = {};
@@ -27,10 +27,10 @@ class Menu extends Component {
           {/* sidebar menu: : style can be found in sidebar.less */}
           <ul className="sidebar-menu" data-widget="tree">
             <li className="header">MAIN NAVIGATION</li>
-            <li className="">
-              <Link to="/">
-                <i className="fa fa-dashboard" /> <span>Dashboard</span>
-              </Link>
+            <li className="active">
+              <a href="https://adminlte.io/docs">
+                <i className="fa fa-dashboard" /> Dashboard
+              </a>
             </li>
             <li className="">
               <Link to="/submission">
@@ -39,8 +39,8 @@ class Menu extends Component {
             </li>
             <li className="treeview">
               <a href="#!">
-                <i className="fa fa-pie-chart" />
-                <span>Charts</span>
+                <i className="fa fa-money" />
+                <span>Pembelian</span>
                 <span className="pull-right-container">
                   <i className="fa fa-angle-left pull-right" />
                 </span>
@@ -48,20 +48,103 @@ class Menu extends Component {
               <ul className="treeview-menu">
                 <li>
                   <a href="pages/charts/chartjs.html">
-                    <i className="fa fa-circle-o" /> ChartJS
+                    <i className="fa fa-circle-o" /> Pengajuan
                   </a>
                 </li>
                 <li>
                   <a href="pages/charts/morris.html">
-                    <i className="fa fa-circle-o" /> Morris
+                    <i className="fa fa-circle-o" /> Pengadaan
+                  </a>
+                </li>
+                <li>
+                  <a href="pages/charts/flot.html">
+                    <i className="fa fa-circle-o" /> Purchasing Order
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li className="treeview">
+              <a href="#!">
+                <i className="fa fa-th-list" />
+                <span>Pendataan</span>
+                <span className="pull-right-container">
+                  <i className="fa fa-angle-left pull-right" />
+                </span>
+              </a>
+              <ul className="treeview-menu">
+                <li>
+                  <a href="pages/charts/chartjs.html">
+                    <i className="fa fa-circle-o" /> Pendaftaran Barang
+                  </a>
+                </li>
+                <li>
+                  <a href="pages/charts/morris.html">
+                    <i className="fa fa-circle-o" /> Mutasi
+                  </a>
+                </li>
+                <li>
+                  <a href="pages/charts/flot.html">
+                    <i className="fa fa-circle-o" /> Disposal
                   </a>
                 </li>
               </ul>
             </li>
             <li>
               <a href="https://adminlte.io/docs">
-                <i className="fa fa-book" /> <span>Documentation</span>
+                <i className="fa fa-wrench" /> Perawatan
               </a>
+            </li>
+            <li>
+              <a href="https://adminlte.io/docs">
+                <i className="fa fa-pie-chart" /> Laporan
+              </a>
+            </li>
+            <li className="treeview">
+              <a href="#!">
+                <i className="fa fa-folder-open" />
+                <span>Master</span>
+                <span className="pull-right-container">
+                  <i className="fa fa-angle-left pull-right" />
+                </span>
+              </a>
+              <ul className="treeview-menu">
+                <li>
+                  <a href="pages/charts/chartjs.html">
+                    <i className="fa fa-circle-o" /> Barang
+                  </a>
+                </li>
+                <li>
+                  <a href="pages/charts/morris.html">
+                    <i className="fa fa-circle-o" /> Vendor
+                  </a>
+                </li>
+                <li>
+                  <a href="pages/charts/flot.html">
+                    <i className="fa fa-circle-o" /> Grup Barang
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li className="treeview">
+              <a href="#!">
+                <i className="fa fa-users" />
+                <span>Pengguna</span>
+                <span className="pull-right-container">
+                  <i className="fa fa-angle-left pull-right" />
+                </span>
+              </a>
+              <ul className="treeview-menu">
+                <li>
+                  <a href="pages/charts/chartjs.html">
+                    <i className="fa fa-circle-o" /> Daftar Pengguna
+                  </a>
+                </li>
+                <li>
+                  <a href="pages/charts/morris.html">
+                    <i className="fa fa-circle-o" /> Grup Pengguna
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
         </section>
