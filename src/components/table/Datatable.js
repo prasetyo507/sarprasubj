@@ -1,60 +1,47 @@
-import React, { Component } from "react";
-class Datatable extends Component {
-  componentDidMount() {
-    const script = document.createElement("script");
+import React from "react";
+function Datatable(props) {
+  const script = document.createElement("script");
 
-    script.src = "/js/content.js";
-    script.async = true;
+  script.src = "/js/content.js";
+  script.async = true;
 
-    document.body.appendChild(script);
-  }
-  render() {
-    return (
-      <div className="row">
-        <div className="col-xs-12">
-          <div className="box">
-            <div className="box-header">
-              <h3 className="box-title">Data Table</h3>
-            </div>
-            <div className="box-body">
-              <table
-                id="example1"
-                className="table table-bordered table-striped"
-              >
-                <thead>
-                  <tr>
-                    <th>Rendering engine</th>
-                    <th>Browser</th>
-                    <th>Platform(s)</th>
-                    <th>Engine version</th>
-                    <th>CSS grade</th>
+  document.body.appendChild(script);
+
+  return (
+    <div className="row">
+      <div className="col-xs-12">
+        <div className="box">
+          <div className="box-header">
+            <h3 className="box-title">Data Table</h3>
+          </div>
+          <div className="box-body">
+            <table id="example1" className="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Rendering engine</th>
+                  <th>Browser</th>
+                  <th>Platform(s)</th>
+                  <th>Engine version</th>
+                  <th>CSS grade</th>
+                </tr>
+              </thead>
+              <tbody>
+                {props.items.map(item => (
+                  <tr key={item.id}>
+                    <td>{item.name}</td>
+                    <td>{item.username}</td>
+                    <td>{item.email}</td>
+                    <td>{item.phone}</td>
+                    <td>{item.website}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet Explorer 4.0</td>
-                    <td>Win 95+</td>
-                    <td> 4</td>
-                    <td>X</td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <th>Rendering engine</th>
-                    <th>Browser</th>
-                    <th>Platform(s)</th>
-                    <th>Engine version</th>
-                    <th>CSS grade</th>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default Datatable;
