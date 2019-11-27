@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router } from 'react-router-dom';
-import Routes from './components/router/Routes';
+import { BrowserRouter as Router } from "react-router-dom";
 
 import Header from "./components/common/Header";
 import Menu from "./components/common/Menu";
@@ -20,7 +19,6 @@ class App extends Component {
             <Dashboard />
           </Wrapper>
           <Footer />
-          <Routes />
         </Router>
       </div>
     );

@@ -3,7 +3,7 @@ class Datatable extends Component {
   componentDidMount() {
     const script = document.createElement("script");
 
-    script.src = "js/content.js";
+    script.src = "/js/content.js";
     script.async = true;
 
     document.body.appendChild(script);
@@ -14,7 +14,7 @@ class Datatable extends Component {
         <div className="col-xs-12">
           <div className="box">
             <div className="box-header">
-              <h3 className="box-title">Data Table With Full Features</h3>
+              <h3 className="box-title">Data Table</h3>
             </div>
             <div className="box-body">
               <table

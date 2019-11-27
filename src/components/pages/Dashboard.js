@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
-import Section from '../common/Section';
+import React, { Component } from "react";
+import Section from "../common/Section";
+import Datatable from "../table/Datatable";
 
 class Home extends Component {
-    render() {
-        return (
-            <Section pageName={'Dashboard'} pageSubject={'Control panel'}>
-                <h1>Hello, Kardinah indriana meutia!</h1>
-            </Section>
-        )
-    }
+  render() {
+    return (
+      <Section pageName={"Dashboard"} pageSubject={"Control panel"}>
+        <Datatable />
+      </Section>
+    );
+  }
 }
 
 export default Home;

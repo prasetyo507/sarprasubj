@@ -28,9 +28,9 @@ class Menu extends Component {
           <ul className="sidebar-menu" data-widget="tree">
             <li className="header">MAIN NAVIGATION</li>
             <li className="active">
-              <a href="https://adminlte.io/docs">
+              <Link to="/">
                 <i className="fa fa-dashboard" /> Dashboard
-              </a>
+              </Link>
             </li>
             <li className="treeview">
               <a href="#!">
