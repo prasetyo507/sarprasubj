@@ -60,7 +60,7 @@ class Menu extends Component {
                 <i className="fa fa-dashboard" /> Dashboard
               </Link>
             </li>
-            <li className={"treeview" + pembelianClass}>
+            <li className={"treeview " + pembelianClass}>
               <Link to="#!">
                 <i className="fa fa-money" />
                 <span>Pembelian</span>
@@ -86,7 +86,7 @@ class Menu extends Component {
                 </li>
               </ul>
             </li>
-            <li className={"treeview" + pendataanClass}>
+            <li className={"treeview " + pendataanClass}>
               <Link to="#!">
                 <i className="fa fa-th-list" />
                 <span>Pendataan</span>
@@ -122,7 +122,7 @@ class Menu extends Component {
                 <i className="fa fa-pie-chart" /> Laporan
               </Link>
             </li>
-            <li className={"treeview" + masterClass}>
+            <li className={"treeview " + masterClass}>
               <Link to="#!">
                 <i className="fa fa-folder-open" />
                 <span>Master</span>
@@ -148,7 +148,7 @@ class Menu extends Component {
                 </li>
               </ul>
             </li>
-            <li className={"treeview" + userClass}>
+            <li className={"treeview " + userClass}>
               <Link to="#!">
                 <i className="fa fa-users" />
                 <span>Pengguna</span>
