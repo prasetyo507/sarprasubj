@@ -9,7 +9,13 @@ const Section = (props) => {
                     <small>{props.pageSubject}</small>
                 </h1>
             </section>
-            <section className="content">{props.children}</section>
+            <section className="content">
+                <div className="box">
+                    <div className="box-body">
+                        {props.children}
+                    </div>
+                </div>
+            </section>
         </>
     )
 }
