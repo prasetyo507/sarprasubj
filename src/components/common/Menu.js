@@ -2,7 +2,14 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class Menu extends Component {
-  state = {};
+  componentDidMount() {
+    const script = document.createElement("script");
+
+    script.src = "js/tree.js";
+    script.async = true;
+
+    document.body.appendChild(script);
+  }
   render() {
     return (
       <aside className="main-sidebar">
@@ -95,13 +102,13 @@ class Menu extends Component {
               </a>
             </li>
             <li className="treeview">
-              <a href="#!">
+              <Link to="#">
                 <i className="fa fa-folder-open" />
                 <span>Master</span>
                 <span className="pull-right-container">
                   <i className="fa fa-angle-left pull-right" />
                 </span>
-              </a>
+              </Link>
               <ul className="treeview-menu">
                 <li>
                   <a href="pages/charts/chartjs.html">
@@ -109,9 +116,9 @@ class Menu extends Component {
                   </a>
                 </li>
                 <li>
-                  <a href="pages/charts/morris.html">
+                  <Link to="/vendor">
                     <i className="fa fa-circle-o" /> Vendor
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a href="pages/charts/flot.html">
