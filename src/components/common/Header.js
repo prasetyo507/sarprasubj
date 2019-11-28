@@ -73,16 +73,12 @@ class Header extends Component {
               {/* User Account: style can be found in dropdown.less */}
               <li className="dropdown user user-menu">
                 <a href="#!" className="dropdown-toggle" data-toggle="dropdown">
-                  <span className="hidden-xs">Alexander Pierce</span>
+                  <i className="fa fa-user"></i>
+                  <span className="hidden-xs"> Alexander Pierce</span>
                 </a>
                 <ul className="dropdown-menu">
                   {/* User image */}
                   <li className="user-header">
-                    <img
-                      src="dist/img/user2-160x160.jpg"
-                      className="img-circle"
-                      alt="User"
-                    />
                     <p>
                       Alexander Pierce - Web Developer
                       <small>Member since Nov. 2012</small>

@@ -6,11 +6,15 @@ class Footer extends Component {
     return (
       <footer className="main-footer">
         <div className="pull-right hidden-xs">
-          <b>Version</b> 2.4.18
+          <b>Version</b> 1.0.0 (Beta)
         </div>
         <strong>
-          Copyright © 2014-2019 <a href="https://adminlte.io">AdminLTE</a>.
-        </strong>
+          Copyright © 2019{" "}
+          <a href="https://ubharajaya.ac.id">
+            Universitas Bhayangkara Jakarta Raya
+          </a>
+          .
+        </strong>{" "}
         All rights reserved.
       </footer>
     );
