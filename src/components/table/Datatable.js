@@ -1,12 +1,9 @@
-import React from "react";
-function Datatable(props) {
-  const script = document.createElement("script");
+import React, { Component } from "react";
 
-  script.src = "/js/content.js";
-  script.async = true;
+import TableHead from "./TableHead";
+import TableContent from "./TableContent";
 
-  document.body.appendChild(script);
-
+class Datatable extends Component {
   componentDidMount() {
     const script = document.createElement("script");
 
@@ -37,8 +34,8 @@ function Datatable(props) {
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default Datatable;
