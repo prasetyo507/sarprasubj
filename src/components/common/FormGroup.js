@@ -1,9 +1,30 @@
 import React from 'react';
 
+/**
+ * Used to make text input with type input such text, number, password, email, date
+ * @param {*} props
+ * ============================================================================================
+ usage: 
+ props structure have to like this:
+  [
+       {
+            lableFor: "",
+            lableName: "",
+            inputAttr: {
+                type: "text",
+                placeholder: "",
+                className: "form-control",
+                name: "",
+                disabled: boolean // optional
+                ...
+            }
+        }
+    ]
+ =============================================================================================*/
 export const FreeText = (props) => {
     return(
         props.formProp.map((property, i) => 
-            <div className="form-group">
+            <div className="form-group" key={i}>
                 <label htmlFor={property.lableFor}>{property.lableName}</label>
                 <input {...property.inputAttr} />
             </div>
@@ -11,6 +32,29 @@ export const FreeText = (props) => {
     )
 }
 
+/**
+ * Used to make input with type such checkbox or radio button
+ * @param {*} props
+ * ============================================================================================
+ usage: 
+ props structure have to like this:
+[
+    {
+        optionName: "first option",
+        optionList: [
+            {
+                optionName: "option A",
+                inputAttr: {
+                    type: "checkbox",
+                    name: "array[]",
+                    value: ""
+                    ...
+                }
+            }
+        ]
+    }
+]
+ =============================================================================================*/
 export const Optional = (props) => {
     return(
         props.formProp.map((property, i) => 
@@ -26,6 +70,28 @@ export const Optional = (props) => {
     )
 }
 
+/**
+ * Used to make input with select box type
+ * @param {*} props
+ * ============================================================================================
+ usage: 
+ props structure have to like this:
+[
+    {
+        selectName: "Select Box 1",
+        selectList: [
+            {
+                inputAttr: {
+                    value: "1",
+                    selected: true, // optional
+                    disabled: true // optional
+                },
+                name: "option 1"
+            }
+        ]
+    }
+]
+ =============================================================================================*/
 export const Select = (props) => {
     return(
         props.formProp.map((property, i) => 
@@ -34,7 +100,7 @@ export const Select = (props) => {
                 <select class="form-control">
                     {
                         property.selectList.map((s, i) =>
-                            <option {...s.inputAttr} >{s.name}</option>
+                            <option key={i} {...s.inputAttr} >{s.name}</option>
                         )
                     }
                 </select>

@@ -1,123 +1,66 @@
 import React from 'react';
 
-import { FreeText, Optional, Select } from '../../common/FormGroup';
+import { FreeText } from '../../common/FormGroup';
 
 const FormHeader = (props) => {
-    const forms = [
+    const forms1 = [
         {
-            lableFor: "noref",
+            lableFor: "refnumber",
             lableName: "Nomor referensi",
             inputAttr: {
+                id: "refnumber",
                 type: "text",
-                placeholder: "lalala",
+                placeholder: "nomor referansi pengajuan",
                 className: "form-control",
                 name: "asdas",
-                disabled: true
+                readOnly: ""
+            }
+        },
+        {
+            lableFor: "to",
+            lableName: "Kepada",
+            inputAttr: {
+                id: "to",
+                type: "text",
+                placeholder: "unit tujuan",
+                className: "form-control",
+                name: "to"
+            }
+        },
+        {
+            lableFor: "date",
+            lableName: "Tanggal",
+            inputAttr: {
+                type: "text",
+                placeholder: "tanggal pengajuan",
+                className: "form-control",
+                name: "date"
             }
         }
-    ]
+    ];
 
-    const optionalForm = [
+    const forms2 = [
         {
-            optionName: "Pilhan pertama",
-            optionList: [
-                {
-                    optionName: "Pilihan A",
-                    inputAttr: {
-                        type: "checkbox",
-                        name: "pil[]",
-                        value: "pila"
-                    }
-                },
-                {
-                    optionName: "Pilihan B",
-                    inputAttr: {
-                        type: "checkbox",
-                        name: "pil[]",
-                        value: "pilb"
-                    }
-                },
-                {
-                    optionName: "Pilihan C",
-                    inputAttr: {
-                        type: "checkbox",
-                        name: "pil[]",
-                        value: "pilc"
-                    }
-                }
-                
-            ]
+            lableFor: "subject",
+            lableName: "Perihal",
+            inputAttr: {
+                id: "subject",
+                type: "text",
+                placeholder: "perihal pengajuan",
+                className: "form-control",
+                name: "subject"
+            }
         },
         {
-            optionName: "Pilhan kedua",
-            optionList: [
-                {
-                    optionName: "Pilihan A",
-                    inputAttr: {
-                        type: "checkbox",
-                        name: "pil[]",
-                        value: "pila"
-                    }
-                },
-                {
-                    optionName: "Pilihan B",
-                    inputAttr: {
-                        type: "checkbox",
-                        name: "pil[]",
-                        value: "pilb"
-                    }
-                },
-                {
-                    optionName: "Pilihan C",
-                    inputAttr: {
-                        type: "checkbox",
-                        name: "pil[]",
-                        value: "pilc"
-                    }
-                }
-                
-            ]
-        }
-    ]
-
-    const selectForm = [
-        {
-            selectName: "Select Box 1",
-            selectList: [
-                {
-                    inputAttr: {
-                        value: "1",
-                        selected: true,
-                        disabled: true
-                    },
-                    name: "option 1"
-                },
-                {
-                    inputAttr: {
-                        value: "2"
-                    },
-                    name: "option 2"
-                }
-            ]
-        },
-        {
-            selectName: "Select Box 2",
-            selectList: [
-                {
-                    inputAttr: {
-                        value: "",
-                        selected: true,
-                        disabled: true
-                    },
-                    name: "-- pilih --"
-                },
-                {
-                    inputAttr: {
-                        value: "2"
-                    },
-                    name: "option 2"
-                }
-            ]
+            lableFor: "from",
+            lableName: "Dari",
+            inputAttr: {
+                id: "from",
+                type: "text",
+                placeholder: "unit yang mengajukan",
+                className: "form-control",
+                name: "from"
+            }
         }
     ]
 
@@ -125,31 +68,10 @@ const FormHeader = (props) => {
         <div className="row">
             <form>
                 <div className="col-md-6">
-                    <FreeText formProp={forms} />
-                    <Optional formProp={optionalForm} />
-                    <Select formProp={selectForm} />
-                    <div className="form-group">
-                        <label for="noref">Nomor referensi</label>
-                        <input type="text" className="form-control" id="noref" />
-                    </div>
-                    <div className="form-group">
-                        <label for="to">Kepada</label>
-                        <input type="text" className="form-control" id="to" placeholder="unit tujuan" />
-                    </div>
-                    <div className="form-group">
-                        <label for="tanggal">Tanggal</label>
-                        <input type="text" className="form-control" id="tanggal" placeholder="tanggal pengajuan" />
-                    </div>
+                    <FreeText formProp={forms1} />
                 </div>
                 <div className="col-md-6">
-                    <div className="form-group">
-                        <label for="subject">Perihal</label>
-                        <input type="text" className="form-control" id="subject" placeholder="perihal pengajuan" />
-                    </div>
-                    <div className="form-group">
-                        <label for="from">Dari</label>
-                        <input type="text" className="form-control" id="from" placeholder="unit pengaju" />
-                    </div>
+                    <FreeText formProp={forms2} />
                 </div>
             </form>
         </div>
