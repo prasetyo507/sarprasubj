@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Section from "../../common/Section";
 import Master from "../Master";
 import Datatable from "../../table/Datatable";
+import { Link } from "react-router-dom";
 
 class Vendor extends Component {
   constructor() {
@@ -40,9 +41,20 @@ class Vendor extends Component {
     };
   }
   render() {
+    const button = (
+      <Link to="/addvendor">
+        <button type="button" class="btn btn-success">
+          <i class="fa fa-plus" aria-hidden="true"></i> Tambah
+        </button>
+      </Link>
+    );
     return (
       <Master>
-        <Section pageName={"Vendor"} pageSubject={"Kelola vendor"}>
+        <Section
+          pageName={"Vendor"}
+          pageSubject={"Kelola vendor"}
+          box_header={button}
+        >
           <Datatable
             headContent={this.state.tableHead}
             content={this.state.tableContent}
