@@ -1,6 +1,19 @@
 import React from "react";
 
-function ConditionInput({ type, label, value, id, readOnly,placeholder,disabled,name,checked }) {
+
+
+
+function ConditionInput({
+  type,
+  label,
+  value,
+  id,
+  readOnly,
+  placeholder,
+  disabled,
+  name,
+  checked,props
+}) {
   if (
     type === "text" ||
     type === "date" ||
@@ -24,12 +37,35 @@ function ConditionInput({ type, label, value, id, readOnly,placeholder,disabled,
         ></input>
       </>
     );
+  } else if (type === "select") {
+    return (
+      <>
+        <label>{label}</label>
+        <select
+          className="form-control"
+          id={id}
+          name={name}
+          readOnly={readOnly}
+          disabled={disabled}
+        >
+          {props.selectbox.map((options, index) => (
+  <option key={index} selected={options.selected}>{options.opt}</option>
+          ))}
+        </select>
+      </>
+    );
   } else {
     return (
       <>
         <div className={type}>
           <label>
-            <input type={type} name={name} value={value} id={id} checked={checked} />
+            <input
+              type={type}
+              name={name}
+              value={value}
+              id={id}
+              checked={checked}
+            />
             {label}
           </label>
         </div>
@@ -39,7 +75,7 @@ function ConditionInput({ type, label, value, id, readOnly,placeholder,disabled,
 }
 
 const FormGroup = props => {
-  return props.label.map((lbl, i) => (
+  return props.form.map((lbl, i) => (
     <div className="form-group" key={i}>
       <ConditionInput
         type={lbl.type}
@@ -51,7 +87,9 @@ const FormGroup = props => {
         readOnly={lbl.readonly}
         disabled={lbl.disabled}
         checked={lbl.checked}
+        props={props}
       />
+     
     </div>
   ));
 };

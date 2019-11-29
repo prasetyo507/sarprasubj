@@ -29,10 +29,15 @@ class AddVendor extends Component {
           id: "email"
         },
         {
-          label: "wanita",
-          type: "checkbox",
-          id: "email"
+          label: "pilihan",
+          type: "select",
+          id: "id_select"
         }
+      ],
+      selectbox: [
+        { opt: "satu", selected: false },
+        { opt: "dua", selected: false },
+        { opt: "tiga", selected: true }
       ]
     };
   }
@@ -41,7 +46,10 @@ class AddVendor extends Component {
       <Master>
         <Section pageName={"Vendor"} pageSubject={"Tambah vendor baru"}>
           <form>
-            <FormGroup label={this.state.form} />
+            <FormGroup
+              form={this.state.form}
+              selectbox={this.state.selectbox}
+            />
           </form>
         </Section>
       </Master>
