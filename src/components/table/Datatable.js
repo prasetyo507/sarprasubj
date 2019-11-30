@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 
-import TableHead from './TableHead';
-import TableContent from './TableContent';
+import TableHead from "./TableHead";
+import TableContent from "./TableContent";
 
 class Datatable extends Component {
-
   componentDidMount() {
     const script = document.createElement("script");
 
@@ -16,6 +15,7 @@ class Datatable extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <div className="row">
         <div className="col-xs-12">
           <table
@@ -31,6 +31,18 @@ class Datatable extends Component {
           </table>
         </div>
       </div>
+=======
+      <>
+        <table id="example1" className="table table-bordered table-striped">
+          <thead>
+            <TableHead tableHeadContent={this.props.headContent} />
+          </thead>
+          <tbody>
+            <TableContent tableContent={this.props.content} />
+          </tbody>
+        </table>
+      </>
+>>>>>>> develop
     );
   }
 }

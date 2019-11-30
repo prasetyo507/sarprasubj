@@ -2,142 +2,170 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class Menu extends Component {
-  state = {};
+  componentDidMount() {
+    const script = document.createElement("script");
+
+    script.src = "js/tree.js";
+    script.async = true;
+
+    document.body.appendChild(script);
+  }
   render() {
+    const homeClass = window.location.pathname === "/" ? "active" : "";
+
+    const pembelianClass =
+      window.location.pathname === "/submission" ? "active" : "";
+    const submissionClass =
+      window.location.pathname === "/submission" ? "active" : "";
+    const procClass =
+      window.location.pathname === "/procurement" ? "active" : "";
+    const poClass = window.location.pathname === "/po" ? "active" : "";
+
+    const pendataanClass =
+      window.location.pathname === "/registration" ? "active" : "";
+    const registClass =
+      window.location.pathname === "/registration" ? "active" : "";
+    const mutationClass =
+      window.location.pathname === "/mutation" ? "active" : "";
+    const disposalClass =
+      window.location.pathname === "/disposal" ? "active" : "";
+
+    const maintenanceClass =
+      window.location.pathname === "/maintenance" ? "active" : "";
+
+    const reportClass = window.location.pathname === "/report" ? "active" : "";
+
+    const masterClass = window.location.pathname === "/vendor" ? "active" : "";
+    const itemsClass = window.location.pathname === "/items" ? "active" : "";
+    const vendorClass = window.location.pathname === "/vendor" ? "active" : "";
+    const groupitemsClass =
+      window.location.pathname === "/group-items" ? "active" : "";
+
+    const userClass =
+      window.location.pathname === "/list-users" ? "active" : "";
+    const listusersClass =
+      window.location.pathname === "/list-users" ? "active" : "";
+    const groupusersClass =
+      window.location.pathname === "/group-users" ? "active" : "";
+
     return (
       <aside className="main-sidebar">
         {/* sidebar: style can be found in sidebar.less */}
         <section className="sidebar">
-          {/* Sidebar user panel */}
-          <div className="user-panel">
-            <div className="pull-left image">
-              <img
-                src="dist/img/user2-160x160.jpg"
-                className="img-circle"
-                alt="User"
-              />
-            </div>
-            <div className="pull-left info">
-              <p>Alexander Pierce</p>
-              <a href="#!">
-                <i className="fa fa-circle text-success" /> Online
-              </a>
-            </div>
-          </div>
           {/* sidebar menu: : style can be found in sidebar.less */}
           <ul className="sidebar-menu" data-widget="tree">
             <li className="header">MAIN NAVIGATION</li>
-            <li className="active">
+            <li className={homeClass}>
               <Link to="/">
-                <i className="fa fa-dashboard" /> <span>Dashboard</span>
+                <i className="fa fa-dashboard" /> Dashboard
               </Link>
             </li>
-            <li className="treeview">
-              <a href="#!">
+            <li className={"treeview " + pembelianClass}>
+              <Link to="#!">
                 <i className="fa fa-money" />
                 <span>Pembelian</span>
                 <span className="pull-right-container">
                   <i className="fa fa-angle-left pull-right" />
                 </span>
-              </a>
+              </Link>
               <ul className="treeview-menu">
-                <li>
+                <li className={submissionClass}>
                   <Link to="/submission">
                     <i className="fa fa-circle-o" /> Pengajuan
                   </Link>
                 </li>
-                <li>
-                  <a href="pages/charts/morris.html">
+                <li className={procClass}>
+                  <Link to="/procurement">
                     <i className="fa fa-circle-o" /> Pengadaan
-                  </a>
+                  </Link>
                 </li>
-                <li>
-                  <a href="pages/charts/flot.html">
+                <li className={poClass}>
+                  <Link to="/po">
                     <i className="fa fa-circle-o" /> Purchasing Order
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
-            <li className="treeview">
-              <a href="#!">
+            <li className={"treeview " + pendataanClass}>
+              <Link to="#!">
                 <i className="fa fa-th-list" />
                 <span>Pendataan</span>
                 <span className="pull-right-container">
                   <i className="fa fa-angle-left pull-right" />
                 </span>
-              </a>
+              </Link>
               <ul className="treeview-menu">
-                <li>
-                  <a href="pages/charts/chartjs.html">
+                <li className={registClass}>
+                  <Link to="/registration">
                     <i className="fa fa-circle-o" /> Pendaftaran Barang
-                  </a>
+                  </Link>
                 </li>
-                <li>
-                  <a href="pages/charts/morris.html">
+                <li className={mutationClass}>
+                  <Link to="/mutation">
                     <i className="fa fa-circle-o" /> Mutasi
-                  </a>
+                  </Link>
                 </li>
-                <li>
-                  <a href="pages/charts/flot.html">
+                <li className={disposalClass}>
+                  <Link to="/disposal">
                     <i className="fa fa-circle-o" /> Disposal
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
-            <li>
-              <a href="https://adminlte.io/docs">
-                <i className="fa fa-wrench" /> <span>Perawatan</span>
-              </a>
+            <li className={maintenanceClass}>
+              <Link to="/maintenance">
+                <i className="fa fa-wrench" /> Perawatan
+              </Link>
             </li>
-            <li>
-              <a href="https://adminlte.io/docs">
-                <i className="fa fa-pie-chart" /> <span>Laporan</span>
-              </a>
+            <li className={reportClass}>
+              <Link to="/report">
+                <i className="fa fa-pie-chart" /> Laporan
+              </Link>
             </li>
-            <li className="treeview">
-              <a href="#!">
+            <li className={"treeview " + masterClass}>
+              <Link to="#!">
                 <i className="fa fa-folder-open" />
                 <span>Master</span>
                 <span className="pull-right-container">
                   <i className="fa fa-angle-left pull-right" />
                 </span>
-              </a>
+              </Link>
               <ul className="treeview-menu">
-                <li>
-                  <a href="pages/charts/chartjs.html">
+                <li className={itemsClass}>
+                  <Link to="/items">
                     <i className="fa fa-circle-o" /> Barang
-                  </a>
+                  </Link>
                 </li>
-                <li>
-                  <a href="pages/charts/morris.html">
+                <li className={vendorClass}>
+                  <Link to="/vendor">
                     <i className="fa fa-circle-o" /> Vendor
-                  </a>
+                  </Link>
                 </li>
-                <li>
-                  <a href="pages/charts/flot.html">
+                <li className={groupitemsClass}>
+                  <Link to="/group-items">
                     <i className="fa fa-circle-o" /> Grup Barang
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
-            <li className="treeview">
-              <a href="#!">
+            <li className={"treeview " + userClass}>
+              <Link to="#!">
                 <i className="fa fa-users" />
                 <span>Pengguna</span>
                 <span className="pull-right-container">
                   <i className="fa fa-angle-left pull-right" />
                 </span>
-              </a>
+              </Link>
               <ul className="treeview-menu">
-                <li>
-                  <a href="pages/charts/chartjs.html">
+                <li className={listusersClass}>
+                  <Link to="/list-users">
                     <i className="fa fa-circle-o" /> Daftar Pengguna
-                  </a>
+                  </Link>
                 </li>
-                <li>
-                  <a href="pages/charts/morris.html">
+                <li className={groupusersClass}>
+                  <Link to="/group-users">
                     <i className="fa fa-circle-o" /> Grup Pengguna
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
