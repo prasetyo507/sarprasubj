@@ -45,12 +45,19 @@ class Menu extends Component {
 
     const masterClass =
       window.location.pathname === "/vendor" ||
+      window.location.pathname === "/addvendor" ||
+      window.location.pathname === "/editvendor" ||
       window.location.pathname === "/items" ||
       window.location.pathname === "/group-items"
         ? "active"
         : "";
     const itemsClass = window.location.pathname === "/items" ? "active" : "";
-    const vendorClass = window.location.pathname === "/vendor" ? "active" : "";
+    const vendorClass =
+      window.location.pathname === "/vendor" ||
+      window.location.pathname === "/addvendor" ||
+      window.location.pathname === "/editvendor"
+        ? "active"
+        : "";
     const groupitemsClass =
       window.location.pathname === "/group-items" ? "active" : "";
 
