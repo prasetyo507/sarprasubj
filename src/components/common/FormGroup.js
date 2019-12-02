@@ -3,29 +3,27 @@ import React from 'react';
 /**
  * Used to make text input with type input such text, number, password, email, date
  * @param {*} props
- * ============================================================================================
- usage: 
- props structure have to like this:
-  [
-       {
-            lableFor: "",
-            lableName: "",
-            inputAttr: {
-                type: "text",
-                placeholder: "",
-                className: "form-control",
-                name: "",
-                disabled: boolean // optional
-                ...
-            }
+ * @usage dispatch array of object(s) in props such below
+[
+    {
+        forAttr: "",
+        lableName: "",
+        inputAttr: {
+            type: "text/password/number/ ...",
+            placeholder: "",
+            className: "form-control ...",
+            name: "",
+            disabled: "" // optional
+            ...
         }
-    ]
- =============================================================================================*/
+    }
+]
+*/
 export const FreeText = (props) => {
     return(
         props.formProp.map((property, i) => 
             <div className="form-group" key={i}>
-                <label htmlFor={property.lableFor}>{property.lableName}</label>
+                <label htmlFor={property.forAttr}>{property.lableName}</label>
                 <input {...property.inputAttr} />
             </div>
         )
@@ -35,15 +33,13 @@ export const FreeText = (props) => {
 /**
  * Used to make input with type such checkbox or radio button
  * @param {*} props
- * ============================================================================================
- usage: 
- props structure have to like this:
+ * @usage dispatch array of object(s) in props such below 
 [
     {
         optionName: "first option",
         optionList: [
             {
-                optionName: "option A",
+                optionLable: "option A",
                 inputAttr: {
                     type: "checkbox",
                     name: "array[]",
@@ -54,15 +50,15 @@ export const FreeText = (props) => {
         ]
     }
 ]
- =============================================================================================*/
-export const Optional = (props) => {
+*/
+export const Option = (props) => {
     return(
         props.formProp.map((property, i) => 
             <div class="form-group" key={i}>
                 <label>{property.optionName}</label>
                 {property.optionList.map((c,index) => 
                     <div class="checkbox" key={index}>
-                        <label><input {...c.inputAttr} /> {c.optionName}</label>
+                        <label><input {...c.inputAttr} /> {c.optionLable}</label>
                     </div>
                 )}
             </div>
@@ -73,13 +69,12 @@ export const Optional = (props) => {
 /**
  * Used to make input with select box type
  * @param {*} props
- * ============================================================================================
- usage: 
- props structure have to like this:
+ * @return jsx
+ * @usage dispatch array of object(s) in props like below
 [
     {
         selectName: "Select Box 1",
-        selectList: [
+        optionList: [
             {
                 inputAttr: {
                     value: "1",
@@ -91,7 +86,7 @@ export const Optional = (props) => {
         ]
     }
 ]
- =============================================================================================*/
+*/
 export const Select = (props) => {
     return(
         props.formProp.map((property, i) => 
@@ -99,7 +94,7 @@ export const Select = (props) => {
                 <label>{property.selectName}</label>
                 <select class="form-control">
                     {
-                        property.selectList.map((s, i) =>
+                        property.optionList.map((s, i) =>
                             <option key={i} {...s.inputAttr} >{s.name}</option>
                         )
                     }
