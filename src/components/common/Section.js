@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Section = (props) => {
     return (
@@ -11,6 +11,7 @@ const Section = (props) => {
             </section>
             <section className="content">
                 <div className="box">
+                    {props.box_header ? <div className="box-header with-border">{props.box_header}</div> : null }
                     <div className="box-body">
                         {props.children}
                     </div>

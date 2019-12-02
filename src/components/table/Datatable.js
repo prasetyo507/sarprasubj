@@ -15,21 +15,16 @@ class Datatable extends Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-xs-12">
-          <table
-            id={this.props.tableKind}
-            className="table table-bordered table-striped"
-          >
-            <thead>
-              <TableHead tableHeadContent={this.props.headContent} />
-            </thead>
-            <tbody>
-              <TableContent tableContent={this.props.content} />
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <>
+        <table id="example1" className="table table-bordered table-striped">
+          <thead>
+            <TableHead tableHeadContent={this.props.headContent} />
+          </thead>
+          <tbody>
+            <TableContent tableContent={this.props.content} />
+          </tbody>
+        </table>
+      </>
     );
   }
 }
