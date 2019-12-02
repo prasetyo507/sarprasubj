@@ -14,7 +14,11 @@ class Menu extends Component {
     const homeClass = window.location.pathname === "/" ? "active" : "";
 
     const pembelianClass =
-      window.location.pathname === "/submission" ? "active" : "";
+      window.location.pathname === "/submission" ||
+      window.location.pathname === "/procurement" ||
+      window.location.pathname === "/po"
+        ? "active"
+        : "";
     const submissionClass =
       window.location.pathname === "/submission" ? "active" : "";
     const procClass =
@@ -22,7 +26,11 @@ class Menu extends Component {
     const poClass = window.location.pathname === "/po" ? "active" : "";
 
     const pendataanClass =
-      window.location.pathname === "/registration" ? "active" : "";
+      window.location.pathname === "/registration" ||
+      window.location.pathname === "/mutation" ||
+      window.location.pathname === "/disposal"
+        ? "active"
+        : "";
     const registClass =
       window.location.pathname === "/registration" ? "active" : "";
     const mutationClass =
@@ -35,14 +43,22 @@ class Menu extends Component {
 
     const reportClass = window.location.pathname === "/report" ? "active" : "";
 
-    const masterClass = window.location.pathname === "/vendor" ? "active" : "";
+    const masterClass =
+      window.location.pathname === "/vendor" ||
+      window.location.pathname === "/items" ||
+      window.location.pathname === "/group-items"
+        ? "active"
+        : "";
     const itemsClass = window.location.pathname === "/items" ? "active" : "";
     const vendorClass = window.location.pathname === "/vendor" ? "active" : "";
     const groupitemsClass =
       window.location.pathname === "/group-items" ? "active" : "";
 
     const userClass =
-      window.location.pathname === "/list-users" ? "active" : "";
+      window.location.pathname === "/list-users" ||
+      window.location.pathname === "/group-users"
+        ? "active"
+        : "";
     const listusersClass =
       window.location.pathname === "/list-users" ? "active" : "";
     const groupusersClass =
