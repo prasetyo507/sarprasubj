@@ -22,9 +22,11 @@ class Vendor extends Component {
           email: "bla@yahoo.com",
           note: "Matraman",
           action: (
-            <button className="btn btn-success">
-              <i className="fa fa-plus"></i>
-            </button>
+            <Link to="/editvendor">
+              <button className="btn btn-warning">
+                <i className="fa fa-edit"></i>
+              </button>
+            </Link>
           )
         },
         {
@@ -32,9 +34,11 @@ class Vendor extends Component {
           email: "nyo@gmail.com",
           note: "Mangga Dua",
           action: (
-            <button className="btn btn-success">
-              <i className="fa fa-plus"></i>
-            </button>
+            <Link to="/editvendor">
+              <button className="btn btn-warning">
+                <i className="fa fa-edit"></i>
+              </button>
+            </Link>
           )
         }
       ]
@@ -52,7 +56,7 @@ class Vendor extends Component {
       <Master>
         <Section
           pageName={"Vendor"}
-          pageSubject={"Kelola vendor"}
+          pageSubject={"Daftar vendor"}
           box_header={button}
         >
           <Datatable
