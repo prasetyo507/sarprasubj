@@ -48,10 +48,17 @@ class Menu extends Component {
       window.location.pathname === "/addvendor" ||
       window.location.pathname === "/editvendor" ||
       window.location.pathname === "/items" ||
+      window.location.pathname === "/additem" ||
+      window.location.pathname === "/edititem" ||
       window.location.pathname === "/group-items"
         ? "active"
         : "";
-    const itemsClass = window.location.pathname === "/items" ? "active" : "";
+    const itemsClass =
+      window.location.pathname === "/items" ||
+      window.location.pathname === "/additem" ||
+      window.location.pathname === "/edititem"
+        ? "active"
+        : "";
     const vendorClass =
       window.location.pathname === "/vendor" ||
       window.location.pathname === "/addvendor" ||

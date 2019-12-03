@@ -93,7 +93,7 @@ export const Option = props => {
 */
 export const Select = props => {
   return props.formProp.map((property, i) => (
-    <div className="form-group">
+    <div className="form-group" key={i}>
       <label>{property.selectName}</label>
       <select {...property.selectAttr}>
         {property.optionList.map((s, i) => (
