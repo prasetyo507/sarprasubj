@@ -3,6 +3,7 @@ import "./Catalogue.css";
 import Box from "../../common/Box";
 import AddCatalogue from "./AddCatalogue";
 import EditCatalogue from "./EditCatalogue";
+import { SelectHorizontal } from "../../common/FormGroup";
 class Catalogue extends Component {
   constructor(props) {
     super(props);
@@ -111,6 +112,45 @@ class Catalogue extends Component {
     };
   }
   render() {
+    const sorting = [
+      {
+        selectName: "Urutkan :",
+        labelAttr: {
+          className: "col-sm-4 control-label"
+        },
+        colSelect: "col-sm-8",
+        selectAttr: {
+          className: "form-control",
+          name: "tipe_garansi"
+        },
+        optionList: [
+          {
+            inputAttr: {
+              value: "Terbaru"
+            },
+            name: "Terbaru"
+          },
+          {
+            inputAttr: {
+              value: "Terlama"
+            },
+            name: "Terlama"
+          },
+          {
+            inputAttr: {
+              value: "Harga Tertinggi"
+            },
+            name: "Harga Tertinggi"
+          },
+          {
+            inputAttr: {
+              value: "Harga Terendah"
+            },
+            name: "Harga Terendah"
+          }
+        ]
+      }
+    ];
     return (
       <>
         <button
@@ -122,7 +162,37 @@ class Catalogue extends Component {
           <i className="fa fa-plus" aria-hidden="true"></i>
           &nbsp;Tambah
         </button>
+
         <hr />
+        <div className="row">
+          <div className="col-md-6">
+            <form action="#!" method="get">
+              <div className="input-group">
+                <input
+                  type="text"
+                  name="q"
+                  className="form-control"
+                  placeholder="Search..."
+                />
+                <span className="input-group-btn">
+                  <button
+                    type="submit"
+                    name="search"
+                    id="search-btn"
+                    className="btn btn-flat"
+                  >
+                    <i className="fa fa-search" />
+                  </button>
+                </span>
+              </div>
+            </form>
+          </div>
+          <div className="col-md-6">
+            <form action="#!" method="get" className="form-horizontal">
+              <SelectHorizontal formProp={sorting} />
+            </form>
+          </div>
+        </div>
         <Box BoxProperty={this.state.BoxProperty} />
         <div className="modal fade" id="modal_catalogue">
           <AddCatalogue />
