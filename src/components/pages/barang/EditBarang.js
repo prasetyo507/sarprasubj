@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FreeText, Select } from "../../common/FormGroup";
+import { FreeText, Select, TextArea } from "../../common/FormGroup";
 import Modal from "../../common/Modal";
 
 class EditBarang extends Component {
@@ -66,7 +66,9 @@ class EditBarang extends Component {
           className: "form-control",
           name: "photo"
         }
-      },
+      }
+    ];
+    const forms4 = [
       {
         lableFor: "note",
         lableName: "Catatan",
@@ -99,6 +101,7 @@ class EditBarang extends Component {
             <FreeText formProp={forms1} />
             <Select formProp={forms2} />
             <FreeText formProp={forms3} />
+            <TextArea formProp={forms4} />
           </div>
         </form>
       </Modal>
