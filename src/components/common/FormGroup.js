@@ -29,6 +29,34 @@ export const FreeText = props => {
 };
 
 /**
+ * Used to make text area
+ * @param {*} props
+ * @usage dispatch array of object(s) in props such below
+[
+    {
+        forAttr: "",
+        lableName: "",
+        inputAttr: {
+            className: "form-control ...",
+            name: "",
+            disabled: "" // optional
+            ...
+        }
+    }
+]
+*/
+export const TextArea = (props) => {
+    return(
+        props.formProp.map((property, i) => 
+            <div className="form-group" key={i}>
+                <label htmlFor={property.forAttr}>{property.lableName}</label>
+                <textarea {...property.inputAttr} ></textarea>
+            </div>
+        )
+    )
+}
+
+/**
  * Used to make input with type such checkbox or radio button
  * @param {*} props
  * @usage dispatch array of object(s) in props such below 

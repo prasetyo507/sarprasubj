@@ -3,21 +3,22 @@ import React from 'react';
 import { FreeText } from '../../common/FormGroup';
 
 const FormHeader = (props) => {
-    const forms1 = [
+    const leftForm = [
         {
-            lableFor: "refnumber",
+            forAttr: "refnumber",
             lableName: "Nomor referensi",
             inputAttr: {
                 id: "refnumber",
                 type: "text",
                 placeholder: "nomor referansi pengajuan",
                 className: "form-control",
-                name: "asdas",
-                readOnly: ""
+                name: "refnumber",
+                readOnly: "readonly",
+                value: "2987-291119-01"
             }
         },
         {
-            lableFor: "to",
+            forAttr: "to",
             lableName: "Kepada",
             inputAttr: {
                 id: "to",
@@ -28,7 +29,7 @@ const FormHeader = (props) => {
             }
         },
         {
-            lableFor: "date",
+            forAttr: "date",
             lableName: "Tanggal",
             inputAttr: {
                 type: "text",
@@ -39,9 +40,9 @@ const FormHeader = (props) => {
         }
     ];
 
-    const forms2 = [
+    const rightForm = [
         {
-            lableFor: "subject",
+            forAttr: "subject",
             lableName: "Perihal",
             inputAttr: {
                 id: "subject",
@@ -52,7 +53,7 @@ const FormHeader = (props) => {
             }
         },
         {
-            lableFor: "from",
+            forAttr: "from",
             lableName: "Dari",
             inputAttr: {
                 id: "from",
@@ -68,10 +69,10 @@ const FormHeader = (props) => {
         <div className="row">
             <form>
                 <div className="col-md-6">
-                    <FreeText formProp={forms1} />
+                    <FreeText formProp={leftForm} />
                 </div>
                 <div className="col-md-6">
-                    <FreeText formProp={forms2} />
+                    <FreeText formProp={rightForm} />
                 </div>
             </form>
         </div>
