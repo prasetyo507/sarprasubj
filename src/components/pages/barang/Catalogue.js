@@ -1,156 +1,65 @@
 import React, { Component } from "react";
 import "./Catalogue.css";
-import Box from "../../common/Box";
 import AddCatalogue from "./AddCatalogue";
 import EditCatalogue from "./EditCatalogue";
-import { SelectHorizontal } from "../../common/FormGroup";
+import Datatable from "../../table/Datatable";
 class Catalogue extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      BoxProperty: [
+      idTable: "example2",
+      tableHead: [
         {
-          col: "col-md-3 col-lg-2 col-sm-4 col-xs-6",
-          src: "../../dist/img/user4-128x128.jpg",
-          alt: "123",
-          name: "Barang satu",
-          price: "Rp.10.000",
-          btn_tooltip: "Ubah katalog",
-          btn_className: "btn btn-warning btn-xs",
-          mdl_target: "#modal_edit_catalogue",
-          icon: "fa fa-edit"
+          column0: "Nama Barang",
+          column1: "Vendor",
+          column2: "Harga",
+          column3: "Grup",
+          column4: "Kategory",
+          column5: "Jenis",
+          column6: "Aksi"
+        }
+      ],
+      tableContent: [
+        {
+          name: "Laptop Tuf Gaming",
+          vendor: "King",
+          prive: "Rp.50.000",
+          grup: "Tidak Habis Pakai",
+          category: "Elektronik",
+          jenis: "Laptop",
+          action: (
+            <button
+              type="button"
+              className="btn btn-warning"
+              data-toggle="modal"
+              data-target="#modal_edit_catalogue"
+            >
+              <i className="fa fa-edit" aria-hidden="true"></i>
+            </button>
+          )
         },
         {
-          col: "col-md-3 col-lg-2 col-sm-4 col-xs-6",
-          src: "../../dist/img/user4-128x128.jpg",
-          alt: "456",
-          name: "Barang dua",
+          name: "I Phone x",
+          vendor: "Enter",
           price: "Rp.20.000",
-          btn_tooltip: "Ubah katalog",
-          btn_className: "btn btn-warning btn-xs",
-          mdl_target: "#modal_edit_catalogue",
-          icon: "fa fa-edit"
-        },
-        {
-          col: "col-md-3 col-lg-2 col-sm-4 col-xs-6",
-          src: "../../dist/img/user4-128x128.jpg",
-          alt: "789",
-          name: "Barang tiga",
-          price: "Rp.30.000",
-          btn_tooltip: "Ubah katalog",
-          btn_className: "btn btn-warning btn-xs",
-          mdl_target: "#modal_edit_catalogue",
-          icon: "fa fa-edit"
-        },
-        {
-          col: "col-md-3 col-lg-2 col-sm-4 col-xs-6",
-          src: "../../dist/img/user4-128x128.jpg",
-          alt: "123",
-          name: "Barang satu",
-          price: "Rp.10.000",
-          btn_tooltip: "Ubah katalog",
-          btn_className: "btn btn-warning btn-xs",
-          mdl_target: "#modal_edit_catalogue",
-          icon: "fa fa-edit"
-        },
-        {
-          col: "col-md-3 col-lg-2 col-sm-4 col-xs-6",
-          src: "../../dist/img/user4-128x128.jpg",
-          alt: "456",
-          name: "Barang dua",
-          price: "Rp.20.000",
-          btn_tooltip: "Ubah katalog",
-          btn_className: "btn btn-warning btn-xs",
-          mdl_target: "#modal_edit_catalogue",
-          icon: "fa fa-edit"
-        },
-        {
-          col: "col-md-3 col-lg-2 col-sm-4 col-xs-6",
-          src: "../../dist/img/user4-128x128.jpg",
-          alt: "789",
-          name: "Barang tiga",
-          price: "Rp.30.000",
-          btn_tooltip: "Ubah katalog",
-          btn_className: "btn btn-warning btn-xs",
-          mdl_target: "#modal_edit_catalogue",
-          icon: "fa fa-edit"
-        },
-        {
-          col: "col-md-3 col-lg-2 col-sm-4 col-xs-6",
-          src: "../../dist/img/user4-128x128.jpg",
-          alt: "123",
-          name: "Barang satu",
-          price: "Rp.10.000",
-          btn_tooltip: "Ubah katalog",
-          btn_className: "btn btn-warning btn-xs",
-          mdl_target: "#modal_edit_catalogue",
-          icon: "fa fa-edit"
-        },
-        {
-          col: "col-md-3 col-lg-2 col-sm-4 col-xs-6",
-          src: "../../dist/img/user4-128x128.jpg",
-          alt: "456",
-          name: "Barang dua",
-          price: "Rp.20.000",
-          btn_tooltip: "Ubah katalog",
-          btn_className: "btn btn-warning btn-xs",
-          mdl_target: "#modal_edit_catalogue",
-          icon: "fa fa-edit"
-        },
-        {
-          col: "col-md-3 col-lg-2 col-sm-4 col-xs-6",
-          src: "../../dist/img/user4-128x128.jpg",
-          alt: "789",
-          name: "Barang tiga",
-          price: "Rp.30.000",
-          btn_tooltip: "Ubah katalog",
-          btn_className: "btn btn-warning btn-xs",
-          mdl_target: "#modal_edit_catalogue",
-          icon: "fa fa-edit"
+          grup: "Tidak Habis Pakai",
+          category: "Elektronik",
+          jenis: "Handphone",
+          action: (
+            <button
+              type="button"
+              className="btn btn-warning"
+              data-toggle="modal"
+              data-target="#modal_edit_catalogue"
+            >
+              <i className="fa fa-edit" aria-hidden="true"></i>
+            </button>
+          )
         }
       ]
     };
   }
   render() {
-    const sorting = [
-      {
-        selectName: "Urutkan :",
-        labelAttr: {
-          className: "col-sm-4 control-label"
-        },
-        colSelect: "col-sm-8",
-        selectAttr: {
-          className: "form-control",
-          name: "tipe_garansi"
-        },
-        optionList: [
-          {
-            inputAttr: {
-              value: "Terbaru"
-            },
-            name: "Terbaru"
-          },
-          {
-            inputAttr: {
-              value: "Terlama"
-            },
-            name: "Terlama"
-          },
-          {
-            inputAttr: {
-              value: "Harga Tertinggi"
-            },
-            name: "Harga Tertinggi"
-          },
-          {
-            inputAttr: {
-              value: "Harga Terendah"
-            },
-            name: "Harga Terendah"
-          }
-        ]
-      }
-    ];
     return (
       <>
         <button
@@ -164,36 +73,12 @@ class Catalogue extends Component {
         </button>
 
         <hr />
-        <div className="row">
-          <div className="col-md-6">
-            <form action="#!" method="get">
-              <div className="input-group">
-                <input
-                  type="text"
-                  name="q"
-                  className="form-control"
-                  placeholder="Search..."
-                />
-                <span className="input-group-btn">
-                  <button
-                    type="submit"
-                    name="search"
-                    id="search-btn"
-                    className="btn btn-flat"
-                  >
-                    <i className="fa fa-search" />
-                  </button>
-                </span>
-              </div>
-            </form>
-          </div>
-          <div className="col-md-6">
-            <form action="#!" method="get" className="form-horizontal">
-              <SelectHorizontal formProp={sorting} />
-            </form>
-          </div>
-        </div>
-        <Box BoxProperty={this.state.BoxProperty} />
+
+        <Datatable
+          headContent={this.state.tableHead}
+          content={this.state.tableContent}
+          idTable={this.state.idTable}
+        />
         <div className="modal fade" id="modal_catalogue">
           <AddCatalogue />
         </div>

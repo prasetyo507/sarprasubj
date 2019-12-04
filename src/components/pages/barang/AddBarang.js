@@ -30,10 +30,10 @@ class AddBarang extends Component {
     ];
     const forms2 = [
       {
-        selectName: "Tipe",
+        selectName: "Jenis",
         selectAttr: {
           className: "form-control select2",
-          name: "type"
+          name: "jenis"
         },
         optionList: [
           {

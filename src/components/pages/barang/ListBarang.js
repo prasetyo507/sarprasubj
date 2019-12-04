@@ -6,6 +6,7 @@ class ListBarang extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      idTable: "example1",
       tableHead: [
         {
           column0: "Nama",
@@ -70,6 +71,7 @@ class ListBarang extends Component {
         <Datatable
           headContent={this.state.tableHead}
           content={this.state.tableContent}
+          idTable={this.state.idTable}
         />
         <div className="modal fade" id="modal">
           <AddBarang />
