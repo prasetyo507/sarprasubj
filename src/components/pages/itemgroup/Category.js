@@ -10,6 +10,8 @@ class Category extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      todoCategory: "",
+      fillCategory: { name: "", action: "" },
       idTable: "example1",
       tableHead: [
         {
@@ -71,6 +73,45 @@ class Category extends Component {
       ]
     };
   }
+  handleSubmit = event => {
+    event.preventDefault();
+    this.setState({
+      tableContent: this.state.tableContent.concat([this.state.fillCategory]),
+      fillCategory: { name: "", action: "" },
+      todoCategory: ""
+    });
+  };
+  handleChange = event => {
+    this.setState({
+      todoCategory: event.target.value,
+      fillCategory: {
+        name: event.target.value,
+        action: (
+          <>
+            <button
+              type="button"
+              className="btn btn-warning"
+              data-toggle="modal"
+              data-target="#edit_category"
+            >
+              <i className="fa fa-edit" aria-hidden="true"></i>
+            </button>
+            &nbsp;
+            <Link to="/jenis">
+              <button className="btn btn-success">
+                <i className="fa fa-eye"></i>
+              </button>
+            </Link>
+            &nbsp;
+            <button type="button" className="btn btn-danger">
+              <i className="fa fa-close" aria-hidden="true"></i>
+            </button>
+          </>
+        )
+      }
+    });
+  };
+
   render() {
     const forms1 = [
       {
@@ -80,7 +121,9 @@ class Category extends Component {
           type: "text",
           placeholder: "Nama Kategori Barang",
           className: "form-control",
-          name: "name"
+          name: "name",
+          onChange: this.handleChange,
+          value: this.state.todoCategory
         }
       }
     ];
@@ -95,23 +138,20 @@ class Category extends Component {
                 box_header={"Buat Kategori Barang"}
                 class_section={"padding_right"}
               >
-                <FreeText formProp={forms1} />
-                <div className="pull-right">
-                  <Link to="/group-items">
-                    <button type="button" className="btn btn-warning">
-                      Kembali
+                <form onSubmit={this.handleSubmit}>
+                  <FreeText formProp={forms1} />
+                  <div className="pull-right">
+                    <Link to="/group-items">
+                      <button type="button" className="btn btn-warning">
+                        Kembali
+                      </button>
+                    </Link>
+                    &nbsp;
+                    <button type="submit" className="btn btn-success">
+                      Tambah
                     </button>
-                  </Link>
-                  &nbsp;
-                  <button
-                    type="button"
-                    className="btn btn-success"
-                    data-toggle="modal"
-                    data-target="#add_grup"
-                  >
-                    Tambah
-                  </button>
-                </div>
+                  </div>
+                </form>
               </Section>
             </div>
           </div>

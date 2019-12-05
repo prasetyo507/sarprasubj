@@ -10,6 +10,8 @@ class Jenis extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      todoJenis: "",
+      fillJenis: { name: "", action: "" },
       idTable: "example1",
       tableHead: [
         {
@@ -59,6 +61,38 @@ class Jenis extends Component {
       ]
     };
   }
+  handleSubmit = event => {
+    event.preventDefault();
+    this.setState({
+      tableContent: this.state.tableContent.concat([this.state.fillJenis]),
+      fillJenis: { name: "", action: "" },
+      todoJenis: ""
+    });
+  };
+  handleChange = event => {
+    this.setState({
+      todoJenis: event.target.value,
+      fillJenis: {
+        name: event.target.value,
+        action: (
+          <>
+            <button
+              type="button"
+              className="btn btn-warning"
+              data-toggle="modal"
+              data-target="#edit_jenis"
+            >
+              <i className="fa fa-edit" aria-hidden="true"></i>
+            </button>
+            &nbsp;
+            <button type="button" className="btn btn-danger">
+              <i className="fa fa-close" aria-hidden="true"></i>
+            </button>
+          </>
+        )
+      }
+    });
+  };
   render() {
     const forms1 = [
       {
@@ -68,7 +102,9 @@ class Jenis extends Component {
           type: "text",
           placeholder: "Nama Jenis Barang",
           className: "form-control",
-          name: "name"
+          name: "name",
+          onChange: this.handleChange,
+          value: this.state.todoCategory
         }
       }
     ];
@@ -83,18 +119,20 @@ class Jenis extends Component {
                 box_header={"Buat Jenis Barang"}
                 class_section={"padding_right"}
               >
-                <FreeText formProp={forms1} />
-                <div className="pull-right">
-                  <Link to="/category">
-                    <button type="button" className="btn btn-warning">
-                      Kembali
+                <form onSubmit={this.handleSubmit}>
+                  <FreeText formProp={forms1} />
+                  <div className="pull-right">
+                    <Link to="/category">
+                      <button type="button" className="btn btn-warning">
+                        Kembali
+                      </button>
+                    </Link>
+                    &nbsp;
+                    <button type="submit" className="btn btn-success">
+                      Tambah
                     </button>
-                  </Link>
-                  &nbsp;
-                  <button type="button" className="btn btn-success">
-                    Tambah
-                  </button>
-                </div>
+                  </div>
+                </form>
               </Section>
             </div>
           </div>
