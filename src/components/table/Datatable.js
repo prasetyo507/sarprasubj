@@ -16,7 +16,10 @@ class Datatable extends Component {
   render() {
     return (
       <>
-        <table id="example1" className="table table-bordered table-striped">
+        <table
+          id={this.props.idTable}
+          className="table table-bordered table-striped"
+        >
           <thead>
             <TableHead tableHeadContent={this.props.headContent} />
           </thead>
