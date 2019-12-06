@@ -24,7 +24,8 @@ class EditBarang extends Component {
           type: "text",
           placeholder: "Nama Barang",
           className: "form-control",
-          name: "name"
+          name: "name",
+          required: true
         }
       }
     ];
@@ -33,7 +34,8 @@ class EditBarang extends Component {
         selectName: "Jenis",
         selectAttr: {
           className: "form-control select2",
-          name: "jenis"
+          name: "jenis",
+          required: true
         },
         optionList: [
           {

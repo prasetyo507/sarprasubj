@@ -24,7 +24,8 @@ class EditCatalogue extends Component {
           type: "text",
           placeholder: "Harga Barang",
           className: "form-control",
-          name: "price"
+          name: "price",
+          required: true
         }
       }
     ];
@@ -33,7 +34,8 @@ class EditCatalogue extends Component {
         selectName: "Nama Barang",
         selectAttr: {
           className: "form-control select2",
-          name: "name"
+          name: "name",
+          required: true
         },
         optionList: [
           {
@@ -60,7 +62,8 @@ class EditCatalogue extends Component {
         selectName: "Vendor",
         selectAttr: {
           className: "form-control select2",
-          name: "vendor"
+          name: "vendor",
+          required: true
         },
         optionList: [
           {
@@ -83,7 +86,8 @@ class EditCatalogue extends Component {
         selectName: "Tipe Garansi",
         selectAttr: {
           className: "form-control",
-          name: "tipe_garansi"
+          name: "tipe_garansi",
+          required: true
         },
         optionList: [
           {
@@ -115,7 +119,8 @@ class EditCatalogue extends Component {
           type: "number",
           placeholder: "Jangka Waktu Garansi (Bulan)",
           className: "form-control",
-          name: "waktu_garansi"
+          name: "waktu_garansi",
+          required: true
         }
       }
     ];
