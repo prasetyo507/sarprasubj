@@ -16,7 +16,8 @@ class EditJenis extends Component {
           type: "text",
           placeholder: "Nama Jenis Barang",
           className: "form-control",
-          name: "name"
+          name: "name",
+          required: true
         }
       }
     ];

@@ -123,7 +123,8 @@ class Category extends Component {
           className: "form-control",
           name: "name",
           onChange: this.handleChange,
-          value: this.state.todoCategory
+          value: this.state.todoCategory,
+          required: true
         }
       }
     ];

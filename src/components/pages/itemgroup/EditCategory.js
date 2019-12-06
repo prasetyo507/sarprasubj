@@ -16,7 +16,8 @@ class EditCategory extends Component {
           type: "text",
           placeholder: "Nama Kategori Barang",
           className: "form-control",
-          name: "name"
+          name: "name",
+          required: true
         }
       }
     ];

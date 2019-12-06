@@ -16,7 +16,8 @@ class AddItemGroup extends Component {
           type: "text",
           placeholder: "Nama Grup Barang",
           className: "form-control",
-          name: "name"
+          name: "name",
+          required: true
         }
       }
     ];
