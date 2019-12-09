@@ -3,7 +3,7 @@ import $ from 'jquery';
 import { connect } from 'react-redux';
 
 import { FreeText } from '../../common/FormGroup';
-import { fillOutSubmissionHeader } from '../../../store/actions/submissionHeader';
+import { fillOutSubmissionHeader } from '../../../store/actions/submissionAction';
 
 const HeaderSubmission = (props) => {
     const d = new Date();
@@ -17,20 +17,24 @@ const HeaderSubmission = (props) => {
     });
 
     const handleFormChange = e => {
-        setState({...headerState, 
-            [e.target.name]: e.target.value,
-            refnumber: $('input[name="refnumber"]').val(),
-            date: `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`,
-            to: $('input[name="to"]').val(),
-            from: $('input[name="from"]').val()
-        })
+        if (e.target.value !== '' && e.target.value !== headerState.subject) {
+            setState({...headerState, 
+                [e.target.name]: e.target.value,
+                refnumber: $('input[name="refnumber"]').val(),
+                date: `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`,
+                to: $('input[name="to"]').val(),
+                from: $('input[name="from"]').val()
+            })
+        }
     }
 
     const formHeader = {...headerState}
 
+    const { fillSubmissionHeader } = props;
+
     useEffect(() => {
-        props.fillSubmissionHeader(formHeader)
-    },[props, formHeader])
+        fillSubmissionHeader(formHeader)
+    },[fillSubmissionHeader, formHeader])
 
     const refNumber = [{
             forAttr: "refnumber",
@@ -42,8 +46,7 @@ const HeaderSubmission = (props) => {
                 className: "form-control",
                 name: "refnumber",
                 readOnly: "readonly",
-                value: "2987-291119-01",
-                onChange: e => handleFormChange(e)
+                value: "2987-291119-01"
             }
     }];
     
@@ -56,8 +59,7 @@ const HeaderSubmission = (props) => {
                 placeholder: "tanggal pengajuan",
                 className: "form-control",
                 name: "date",
-                readOnly: true,
-                onChange: e => handleFormChange(e)
+                readOnly: true
             }
     }]
         
@@ -70,7 +72,7 @@ const HeaderSubmission = (props) => {
                 placeholder: "perihal pengajuan",
                 className: "form-control",
                 name: "subject",
-                onChange: e => handleFormChange(e)
+                onBlur: e => handleFormChange(e)
             }
     }];
 
@@ -84,8 +86,7 @@ const HeaderSubmission = (props) => {
                 placeholder: "unit tujuan",
                 className: "form-control",
                 name: "to",
-                readOnly: true,
-                onChange: e => handleFormChange(e)
+                readOnly: true
             }
     }];
 
@@ -99,8 +100,7 @@ const HeaderSubmission = (props) => {
                 className: "form-control",
                 name: "from",
                 readOnly: true,
-                value: "PTI",
-                onChange: e => handleFormChange(e)
+                value: "PTI"
             }
     }];
 

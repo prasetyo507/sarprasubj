@@ -1,5 +1,5 @@
 import { createStore, combineReducers } from 'redux';
-import { submissionReducer } from './reducers/submission';
+import { submissionReducer } from './reducers/submissionReducer';
 
 const rootReducer = combineReducers({
     submission: submissionReducer

@@ -25,7 +25,7 @@ class NewSubmission extends Component {
         }
 
         let newItem = {
-            id: (this.state.items.length + 1),
+            id: `ITEM-${(this.state.items.length + 1)}`,
             item: $('input[name=item_name]').val(),
             qty: $('input[name=item_qty]').val()
         }
@@ -56,8 +56,25 @@ class NewSubmission extends Component {
         }
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.formHeader !== this.props.formHeader) {
+            this.setState({headerForm: this.props.formHeader})
+        }
+    }
+
+    handleSubmit() {
+        const _ = require('lodash')
+        const itemRequired = this.state.items.map(item => {
+            return _.pick(item,['item','qty'])
+        })
+        const payload = {
+            ...this.props.formHeader,
+            itemRequired
+        }
+        console.log(payload);
+    }
+
     render() {
-        console.log(this.props.formHeader)
         const tableHeader = [
             {
                 column0: 'ID Barang',
@@ -79,8 +96,9 @@ class NewSubmission extends Component {
         // add new item to table content
         if (this.state.items !== "") {
             let newItemList = this.state.items.map(items => {
-                items.action = <button className="btn btn-danger btn-sm" onClick={() => this.handleRemoveItem(items.id)}><i className="fa fa-minus"></i></button>
-                return items    
+                let itemClone = {...items}
+                itemClone.action = <button className="btn btn-danger btn-sm" onClick={() => this.handleRemoveItem(items.id)}><i className="fa fa-minus"></i></button>
+                return itemClone  
             })
             
             newItemList.map(newList => tableInput.push(newList))
@@ -95,6 +113,9 @@ class NewSubmission extends Component {
                         headContent={tableHeader}
                         content={tableInput} 
                     />
+                    <button className="btn btn-success pull-right" onClick={() => this.handleSubmit()}>
+                        <i className="fa fa-paper-plane"></i> Ajukan Formulir
+                    </button>
                 </Section>
             </Master>
         )
@@ -103,7 +124,8 @@ class NewSubmission extends Component {
 
 const mapStateToProps = state => {
     return {
-        formHeader: state.submissionHeader
+        formHeader: state.submission.submissionHeader,
+        itemsSubmissioned: state.submission.submissionItem
     }
 }
 

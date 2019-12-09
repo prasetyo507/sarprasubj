@@ -9,7 +9,7 @@ export const submissionReducer = (state = initState, action) => {
         case actionType.FILL_SUBMISSION_HEADER:
             return {
                 ...state,
-                submissionHeader: [...state.submissionHeader, action.payload]
+                submissionHeader: action.payload
             }
     
         default:
