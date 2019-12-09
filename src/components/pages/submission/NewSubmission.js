@@ -19,15 +19,18 @@ class NewSubmission extends Component {
 
     handleAddNewItem() {
         // name and qty item column do not empty
-        if ($('input[name=item_name]').val() === '' || $('input[name=item_qty]').val() === '') {
-            alert('Kolom Nama Barang dan QTY tidak boleh kosong!');
+        let itemName = $('input[name=item_name]').val();
+        let itemQty = $('input[name=item_qty]').val();
+        
+        if (itemName === '' || itemQty === '') {
+            alert('Kolom Nama Barang dan Qty tidak boleh kosong!');
             return;
         }
 
         let newItem = {
             id: `ITEM-${(this.state.items.length + 1)}`,
-            item: $('input[name=item_name]').val(),
-            qty: $('input[name=item_qty]').val()
+            item: itemName,
+            qty: itemQty
         }
         newItem = [...this.state.items, newItem];
         this.setState({items: newItem})
