@@ -3,7 +3,7 @@ import Section from "../../common/Section";
 import Master from "../Master";
 import { FreeText, Select } from "../../common/FormGroup";
 
-class AddVendor extends Component {
+class EditVendor extends Component {
   constructor() {
     super();
     this.state = {};
@@ -166,7 +166,7 @@ class AddVendor extends Component {
     ];
     return (
       <Master>
-        <Section pageName={"Vendor"} pageSubject={"Tambah vendor baru"}>
+        <Section pageName={"Vendor"} pageSubject={"Ubah vendor"}>
           <form>
             <div className="col-md-6">
               <FreeText formProp={forms1} />
@@ -179,7 +179,7 @@ class AddVendor extends Component {
             </div>
             <div className="col-md-12">
               <button type="submit" class="btn btn-primary pull-right">
-                Simpan
+                Ubah
               </button>
             </div>
           </form>
@@ -189,4 +189,4 @@ class AddVendor extends Component {
   }
 }
 
-export default AddVendor;
+export default EditVendor;
