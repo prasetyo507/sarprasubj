@@ -6,6 +6,9 @@ import NewSubmission from "../pages/submission/NewSubmission";
 import Vendor from "../pages/vendor/Vendor";
 import AddVendor from "../pages/vendor/AddVendor";
 import EditVendor from "../pages/vendor/EditVendor";
+import Items from "../pages/barang/Items";
+import AddBarang from "../pages/barang/AddBarang";
+import EditBarang from "../pages/barang/EditBarang";
 import NotFound from "../pages/404/404";
 
 class Routes extends React.Component {
@@ -17,6 +20,9 @@ class Routes extends React.Component {
         <Route path="/vendor" component={Vendor} />
         <Route path="/addvendor" component={AddVendor} />
         <Route path="/editvendor" component={EditVendor} />
+        <Route path="/items" component={Items} />
+        <Route path="/additem" component={AddBarang} />
+        <Route path="/edititem" component={EditBarang} />
         <Route component={NotFound} />
       </Switch>
     );

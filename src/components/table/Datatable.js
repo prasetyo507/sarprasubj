@@ -15,6 +15,7 @@ class Datatable extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <div className="row">
         <div className="col-xs-12">
           <table
@@ -31,6 +32,22 @@ class Datatable extends Component {
         </div>
       </div>
     )
+=======
+      <>
+        <table
+          id={this.props.idTable}
+          className="table table-bordered table-striped"
+        >
+          <thead>
+            <TableHead tableHeadContent={this.props.headContent} />
+          </thead>
+          <tbody>
+            <TableContent tableContent={this.props.content} />
+          </tbody>
+        </table>
+      </>
+    );
+>>>>>>> feature/barang
   }
 }
 
