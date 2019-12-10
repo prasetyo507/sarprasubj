@@ -125,6 +125,9 @@ class Menu extends Component {
 			}
 		];
 
+		let parentUrlPath = window.location.pathname.split("/");
+		parentUrlPath = "/" + parentUrlPath[1];
+
 		return (
 			<aside className='main-sidebar'>
 				{/* sidebar: style can be found in sidebar.less */}
@@ -135,7 +138,13 @@ class Menu extends Component {
 						{menus.map(menu =>
 							// if class_name object is null, it is mean not dropdown menu
 							isNull(menu.class_name) ? (
-								<li>
+								<li
+									className={
+										menu.destination === window.location.pathname
+											? "active"
+											: null
+									}
+								>
 									<NavLink to={menu.destination}>
 										<i className={menu.icon} /> {menu.name}
 									</NavLink>
@@ -144,7 +153,7 @@ class Menu extends Component {
 								<li
 									className={`${menu.class_name} ${
 										_.some(menu.submenu, {
-											destination: window.location.pathname
+											destination: parentUrlPath
 										})
 											? "active"
 											: null
