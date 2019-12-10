@@ -9,7 +9,11 @@ const Section = props => {
           <small>{props.pageSubject}</small>
         </h1>
       </section>
+<<<<<<< HEAD
       <section className="content">
+=======
+      <section className={"content " + props.class_section}>
+>>>>>>> feature/grup_barang
         <div className="box">
           {props.box_header ? (
             <div className="box-header with-border">{props.box_header}</div>
