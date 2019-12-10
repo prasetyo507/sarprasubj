@@ -23,15 +23,12 @@ class Routes extends React.Component {
         <Route path="/vendor" component={Vendor} />
         <Route path="/addvendor" component={AddVendor} />
         <Route path="/editvendor" component={EditVendor} />
-<<<<<<< HEAD
         <Route path="/items" component={Items} />
         <Route path="/additem" component={AddBarang} />
         <Route path="/edititem" component={EditBarang} />
-=======
         <Route path="/group-items" component={ItemGroup} />
         <Route path="/category" component={Category} />
         <Route path="/jenis" component={Jenis} />
->>>>>>> feature/grup_barang
         <Route component={NotFound} />
       </Switch>
     );
