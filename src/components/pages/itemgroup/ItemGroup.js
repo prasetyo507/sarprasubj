@@ -25,7 +25,7 @@ class ItemGroup extends Component {
                 type="button"
                 className="btn btn-warning"
                 data-toggle="modal"
-                data-target="#edit_category"
+                data-target="#edit_grup"
               >
                 <i className="fa fa-edit" aria-hidden="true"></i>
               </button>
@@ -71,10 +71,8 @@ class ItemGroup extends Component {
     };
   }
   render() {
-    return (
-      <Master>
-        <Section pageName={"Grup Barang"} pageSubject={"Kelola Grup Barang"}>
-          <button
+    const button = (
+      <button
             type="button"
             className="btn btn-success"
             data-toggle="modal"
@@ -83,11 +81,16 @@ class ItemGroup extends Component {
             <i className="fa fa-plus" aria-hidden="true"></i>
             &nbsp;Tambah
           </button>
-          <hr />
+    );
+    return (
+      <Master>
+        <Section pageName={"Grup Barang"} pageSubject={"Kelola Grup Barang"}
+          box_header={button}>
+          
           <Datatable
             headContent={this.state.tableHead}
             content={this.state.tableContent}
-            idTable={this.state.idTable}
+            tableKind={this.state.idTable}
           />
           <div className="modal fade" id="add_grup">
             <AddItemGroup />

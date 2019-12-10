@@ -164,7 +164,7 @@ class Category extends Component {
               <Datatable
                 headContent={this.state.tableHead}
                 content={this.state.tableContent}
-                idTable={this.state.idTable}
+                tableKind={this.state.idTable}
               />
               <div className="modal fade" id="edit_category">
                 <EditCategory />
