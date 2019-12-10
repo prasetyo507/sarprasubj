@@ -135,7 +135,13 @@ class Menu extends Component {
 						{menus.map(menu =>
 							// if class_name object is null, it is mean not dropdown menu
 							isNull(menu.class_name) ? (
-								<li>
+								<li
+									className={
+										menu.destination === window.location.pathname
+											? "active"
+											: null
+									}
+								>
 									<NavLink to={menu.destination}>
 										<i className={menu.icon} /> {menu.name}
 									</NavLink>
