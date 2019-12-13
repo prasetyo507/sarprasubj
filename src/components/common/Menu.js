@@ -132,10 +132,10 @@ class Menu extends Component {
 					{/* sidebar menu: : style can be found in sidebar.less */}
 					<ul className='sidebar-menu' data-widget='tree'>
 						<li className='header'>MAIN NAVIGATION</li>
-						{menus.map(menu =>
+						{menus.map((menu, i) =>
 							// if class_name object is null, it is mean not dropdown menu
 							isNull(menu.class_name) ? (
-								<li
+								<li key={i}
 									className={
 										menu.destination === window.location.pathname
 											? "active"
@@ -150,39 +150,39 @@ class Menu extends Component {
 									</NavLink>
 								</li>
 							) : (
-								<li
-									className={`${menu.class_name} ${
-										_.some(menu.submenu, {
-											destination: window.location.pathname
-										})
-											? "active"
-											: null
-									}`}
-								>
-									<NavLink to={menu.destination}>
-										<i className={menu.icon} />
-										<span>{menu.name}</span>
-										<span className='pull-right-container'>
-											<i className={menu.spanIcon} />
-										</span>
-									</NavLink>
-									<ul className='treeview-menu'>
-										{menu.submenu.map((sub, key) => (
-											<li
-												className={
-													sub.destination === window.location.pathname
-														? `active ${key}`
-														: null
-												}
-											>
-												<NavLink to={sub.destination} activeClassName='active'>
-													<i className={sub.icon} /> {sub.name}
-												</NavLink>
-											</li>
-										))}
-									</ul>
-								</li>
-							)
+									<li key={i}
+										className={`${menu.class_name} ${
+											_.some(menu.submenu, {
+												destination: window.location.pathname
+											})
+												? "active"
+												: null
+											}`}
+									>
+										<NavLink to={menu.destination}>
+											<i className={menu.icon} />
+											<span>{menu.name}</span>
+											<span className='pull-right-container'>
+												<i className={menu.spanIcon} />
+											</span>
+										</NavLink>
+										<ul className='treeview-menu'>
+											{menu.submenu.map((sub, key) => (
+												<li key={key}
+													className={
+														sub.destination === window.location.pathname
+															? `active`
+															: null
+													}
+												>
+													<NavLink to={sub.destination} activeClassName='active'>
+														<i className={sub.icon} /> {sub.name}
+													</NavLink>
+												</li>
+											))}
+										</ul>
+									</li>
+								)
 						)}
 					</ul>
 				</section>
