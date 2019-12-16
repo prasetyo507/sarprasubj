@@ -121,7 +121,7 @@ export const Option = props => {
 */
 export const Select = props => {
   return props.formProp.map((property, i) => (
-    <div className="form-group">
+    <div className="form-group" key={i}>
       <label>{property.selectName}</label>
       <select {...property.selectAttr}>
         {property.optionList.map((s, i) => (
@@ -130,6 +130,22 @@ export const Select = props => {
           </option>
         ))}
       </select>
+    </div>
+  ));
+};
+export const SelectHorizontal = props => {
+  return props.formProp.map((property, i) => (
+    <div className="form-group" key={i}>
+      <label {...property.labelAttr}>{property.selectName}</label>
+      <div className={property.colSelect}>
+        <select {...property.selectAttr}>
+          {property.optionList.map((s, i) => (
+            <option key={i} {...s.inputAttr}>
+              {s.name}
+            </option>
+          ))}
+        </select>
+      </div>
     </div>
   ));
 };

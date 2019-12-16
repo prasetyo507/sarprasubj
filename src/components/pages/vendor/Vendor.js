@@ -8,6 +8,7 @@ class Vendor extends Component {
 	constructor() {
 		super();
 		this.state = {
+			idTable: "example1",
 			tableHead: [
 				{
 					column0: "Nama Supplier",
@@ -62,6 +63,7 @@ class Vendor extends Component {
 					<Datatable
 						headContent={this.state.tableHead}
 						content={this.state.tableContent}
+						tableKind={this.state.idTable}
 					/>
 				</Section>
 			</Master>

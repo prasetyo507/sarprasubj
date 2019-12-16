@@ -44,7 +44,7 @@ const SubmissionList = props => {
 				</Link>
 				<hr />
 				<Datatable
-					tableKind='data-table'
+					tableKind='example1'
 					headContent={tableHead}
 					content={submissions}
 				/>

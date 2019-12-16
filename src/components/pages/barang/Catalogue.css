@@ -1,0 +1,31 @@
+.profile-user-image {
+  margin: 0 auto;
+  height: 100px;
+  width: 100%;
+  object-fit: cover;
+  vertical-align: middle;
+  position: relative;
+}
+.shade {
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  height: 220px;
+}
+
+.icon {
+  color: orange;
+  position: absolute;
+  top: 12%;
+  left: 92%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+.fa-edit:hover {
+  color: #eee;
+}
+
+.containerz {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
