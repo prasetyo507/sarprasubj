@@ -2,8 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import Dashboard from "../pages/dashboard/Dashboard";
-import SubmissionList from "../pages/submission/SubmissionList";
-import NewSubmission from "../pages/submission/NewSubmission";
+import Submission from "../pages/submission/container";
 import Vendor from "../pages/vendor/Vendor";
 import AddVendor from "../pages/vendor/AddVendor";
 import EditVendor from "../pages/vendor/EditVendor";
@@ -13,8 +12,7 @@ const Routes = () => {
 	return (
 		<Switch>
 			<Route path='/' exact component={Dashboard} />
-			<Route path='/submission' exact component={SubmissionList} />
-			<Route path='/submission/new' component={NewSubmission} />
+			<Route path='/submission' component={Submission} />
 			<Route path='/vendor' component={Vendor} />
 			<Route path='/addvendor' component={AddVendor} />
 			<Route path='/editvendor' component={EditVendor} />

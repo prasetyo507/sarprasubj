@@ -4,13 +4,11 @@ import { isNull } from "util";
 
 class Menu extends Component {
 	componentDidMount() {
-		const script = document.createElement("script");
-
-		script.src = "js/tree.js";
-		script.async = true;
-
+		let script = document.createElement("script");
+		script.innerHTML = "$('.sidebar-menu').tree();";
 		document.body.appendChild(script);
 	}
+
 	render() {
 		const _ = require("lodash");
 		const menus = [
@@ -22,7 +20,7 @@ class Menu extends Component {
 			},
 			{
 				name: "Pembelian",
-				destination: "!#",
+				destination: "/!#",
 				class_name: "treeview",
 				icon: "fa fa-money",
 				spanIcon: "fa fa-angle-left pull-right",
@@ -46,7 +44,7 @@ class Menu extends Component {
 			},
 			{
 				name: "Pendataan",
-				destination: "!#",
+				destination: "/!#",
 				class_name: "treeview",
 				icon: "fa fa-th-list",
 				spanIcon: "fa fa-angle-left pull-right",
@@ -82,7 +80,7 @@ class Menu extends Component {
 			},
 			{
 				name: "Master",
-				destination: "!#",
+				destination: "/!#",
 				class_name: "treeview",
 				icon: "fa fa-folder-open",
 				spanIcon: "fa fa-angle-left pull-right",
@@ -106,7 +104,7 @@ class Menu extends Component {
 			},
 			{
 				name: "Pengguna",
-				destination: "!#",
+				destination: "/!#",
 				class_name: "treeview",
 				icon: "fa fa-users",
 				spanIcon: "fa fa-angle-left pull-right",
@@ -135,10 +133,11 @@ class Menu extends Component {
 					{/* sidebar menu: : style can be found in sidebar.less */}
 					<ul className='sidebar-menu' data-widget='tree'>
 						<li className='header'>MAIN NAVIGATION</li>
-						{menus.map(menu =>
+						{menus.map((menu, i) =>
 							// if class_name object is null, it is mean not dropdown menu
 							isNull(menu.class_name) ? (
 								<li
+									key={i}
 									className={
 										menu.destination === window.location.pathname
 											? "active"
@@ -151,6 +150,7 @@ class Menu extends Component {
 								</li>
 							) : (
 								<li
+									key={i}
 									className={`${menu.class_name} ${
 										_.some(menu.submenu, {
 											destination: parentUrlPath
@@ -169,9 +169,10 @@ class Menu extends Component {
 									<ul className='treeview-menu'>
 										{menu.submenu.map((sub, key) => (
 											<li
+												key={key}
 												className={
 													sub.destination === window.location.pathname
-														? `active ${key}`
+														? `active`
 														: null
 												}
 											>

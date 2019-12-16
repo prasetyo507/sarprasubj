@@ -1,1 +1,1 @@
-$("ul.sidebar-menu").tree();
+$(".sidebar-menu").tree();

@@ -1,10 +1,13 @@
-import { createStore, combineReducers } from 'redux';
-import { submissionReducer } from './reducers/submissionReducer';
+import { createStore, combineReducers } from "redux";
+import { submissionReducer } from "../components/pages/submission/store/reducers/submissionReducer";
 
 const rootReducer = combineReducers({
-    submission: submissionReducer
-})
+	submission: submissionReducer
+});
 
-const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+const store = createStore(
+	rootReducer,
+	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
-export default store
+export default store;

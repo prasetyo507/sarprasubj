@@ -1,0 +1,62 @@
+import React from "react";
+import { Link, useRouteMatch } from "react-router-dom";
+import { connect } from "react-redux";
+
+import Master from "../../Master";
+import Section from "../../../common/Section";
+import Datatable from "../../../common/table/Datatable";
+
+const SubmissionList = props => {
+	let submissions = props.submission.map((lists, key) => {
+		return {
+			no: key + 1,
+			refNumber: lists.refnumber,
+			date: lists.date,
+			action: (
+				<button className='btn btn-success btn-sm'>
+					<i className='fa fa-eye'></i>
+				</button>
+			)
+		};
+	});
+
+	console.log(submissions);
+
+	const tableHead = [
+		{
+			column1: "No",
+			column2: "Nomor Referensi",
+			column3: "Tanggal",
+			column4: "Lihat"
+		}
+	];
+
+	let { url } = useRouteMatch();
+
+	return (
+		<Master>
+			<Section
+				pageName={"Daftar Pengajuan"}
+				pageSubject={"Daftar seluruh pengajuan"}
+			>
+				<Link className='btn btn-success' to={`${url}/new`}>
+					<i className='fa fa-file'></i> Buat Pengajuan
+				</Link>
+				<hr />
+				<Datatable
+					tableKind='data-table'
+					headContent={tableHead}
+					content={submissions}
+				/>
+			</Section>
+		</Master>
+	);
+};
+
+const mapStateToProps = state => {
+	return {
+		submission: state.submission.submissionForm
+	};
+};
+
+export default connect(mapStateToProps, null)(SubmissionList);
