@@ -1,15 +1,12 @@
 import React, { Component } from "react";
-
 import TableHead from "./TableHead";
 import TableContent from "./TableContent";
 
 class Datatable extends Component {
   componentDidMount() {
-    const script = document.createElement("script");
-
-    script.src = "js/content.js";
-    script.async = true;
-
+    let script = document.createElement("script");
+    let dtTable = "$('#example1').DataTable(); $('#example2').DataTable();";
+    script.innerHTML = dtTable;
     document.body.appendChild(script);
   }
 
