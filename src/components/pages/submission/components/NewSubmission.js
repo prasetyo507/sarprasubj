@@ -12,6 +12,7 @@ class NewSubmission extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			resetHeader: false,
 			headerForm: null,
 			items: []
 		};
@@ -74,7 +75,7 @@ class NewSubmission extends Component {
 		this.setState({ headerForm: dataHeader });
 	}
 
-	handleSubmitSubmission() {
+	async handleSubmitSubmission() {
 		const _ = require("lodash");
 		const items = this.state.items.map(item => {
 			return _.pick(item, ["item", "qty", "type"]);
@@ -95,9 +96,9 @@ class NewSubmission extends Component {
 			items
 		};
 
-		this.props.submitSubmission(payload);
-		this.setState({ headerForm: null, items: [] });
-		alert("Pengajuan berhasul dikirim!");
+		await this.props.submitSubmission(payload);
+		this.setState({ headerForm: null, items: [], resetHeader: true });
+		alert("Pengajuan berhasil dikirim!");
 		this.props.history.push("/submission");
 	}
 
@@ -175,7 +176,10 @@ class NewSubmission extends Component {
 					pageName={"Formulir Pengajuan"}
 					pageSubject={"Buat pengajuan barang baru"}
 				>
-					<HeaderSubmission handleSubjectInput={this.subjectInputHandler} />
+					<HeaderSubmission
+						handleSubjectInput={this.subjectInputHandler}
+						resetHeader={this.state.resetHeader}
+					/>
 					<hr />
 					<Datatable headContent={tableHeader} content={tableInput} />
 					<button

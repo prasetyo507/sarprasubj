@@ -6,13 +6,7 @@ import { FreeText } from "../../../common/FormGroup";
 const HeaderSubmission = props => {
 	const d = new Date();
 
-	const [headerState, setState] = useState({
-		refnumber: "",
-		date: "",
-		subject: "",
-		to: "",
-		from: ""
-	});
+	const [headerState, setState] = useState({});
 
 	const handleFormChange = e => {
 		if (e.target.value !== "" && e.target.value !== headerState.subject) {
@@ -27,7 +21,17 @@ const HeaderSubmission = props => {
 		}
 	};
 
-	const { handleSubjectInput } = props;
+	const { handleSubjectInput, resetHeader } = props;
+
+	useEffect(() => {
+		setState({
+			refnumber: "",
+			date: "",
+			subject: "",
+			to: "",
+			from: ""
+		});
+	}, [resetHeader]);
 
 	useEffect(() => {
 		handleSubjectInput({ ...headerState });

@@ -161,8 +161,8 @@ class Menu extends Component {
 								>
 									<NavLink to={menu.destination}>
 										<i className={menu.icon} /> <span>{menu.name}</span>
-										<span class='pull-right-container'>
-											<i class='fa fa-angle-left pull-right'></i>
+										<span className='pull-right-container'>
+											<i className='fa fa-angle-left pull-right'></i>
 										</span>
 									</NavLink>
 									<ul className='treeview-menu'>
