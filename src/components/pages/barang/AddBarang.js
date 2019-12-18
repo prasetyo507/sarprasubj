@@ -25,7 +25,8 @@ class AddBarang extends Component {
           placeholder: "Nama Barang",
           className: "form-control",
           name: "name",
-          required: true
+          required: true,
+          autofocus: ""
         }
       }
     ];
