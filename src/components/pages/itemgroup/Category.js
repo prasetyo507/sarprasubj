@@ -175,12 +175,7 @@ class Category extends Component {
 									<FreeText formProp={forms1} />
 									<Option formProp={radiobtn} />
 									<div className='pull-right'>
-										<Link to='/group-items'>
-											<button type='button' className='btn btn-warning'>
-												Kembali
-											</button>
-										</Link>
-										&nbsp;
+
 										<button type='submit' className='btn btn-success'>
 											Tambah
 										</button>
