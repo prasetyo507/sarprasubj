@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import $ from "jquery";
 
-import { FreeText } from "../../../common/FormGroup";
+import HeaderLayout from "./HeaderLayout";
 
-const HeaderSubmission = props => {
+export const HeaderService = props => {
 	const d = new Date();
 
 	const [headerState, setState] = useState({});
@@ -48,7 +48,7 @@ const HeaderSubmission = props => {
 				className: "form-control",
 				name: "refnumber",
 				readOnly: "readonly",
-				value: "2987-291119-01"
+				value: Math.floor(Math.random() * 101)
 			}
 		}
 	];
@@ -116,28 +116,8 @@ const HeaderSubmission = props => {
 	];
 
 	return (
-		<>
-			<div className='row'>
-				<div className='col-md-3'>
-					<FreeText formProp={refNumber} />
-				</div>
-				<div className='col-md-3'>
-					<FreeText formProp={submissionDate} />
-				</div>
-				<div className='col-md-6'>
-					<FreeText formProp={subjectForm} />
-				</div>
-			</div>
-			<div className='row'>
-				<div className='col-md-6'>
-					<FreeText formProp={recipient} />
-				</div>
-				<div className='col-md-6'>
-					<FreeText formProp={sender} />
-				</div>
-			</div>
-		</>
+		<HeaderLayout
+			formAttr={{ refNumber, submissionDate, subjectForm, recipient, sender }}
+		/>
 	);
 };
-
-export default HeaderSubmission;

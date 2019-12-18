@@ -7,20 +7,23 @@ import Section from "../../../common/Section";
 import Datatable from "../../../common/table/Datatable";
 
 const SubmissionList = props => {
+	const { url } = useRouteMatch();
+
 	let submissions = props.submission.map((lists, key) => {
 		return {
 			no: key + 1,
 			refNumber: lists.refnumber,
 			date: lists.date,
 			action: (
-				<button className='btn btn-success btn-sm'>
+				<Link
+					className='btn btn-success btn-sm'
+					to={`${url}/${lists.refnumber}/detail`}
+				>
 					<i className='fa fa-eye'></i>
-				</button>
+				</Link>
 			)
 		};
 	});
-
-	console.log(submissions);
 
 	const tableHead = [
 		{
@@ -31,18 +34,19 @@ const SubmissionList = props => {
 		}
 	];
 
-	let { url } = useRouteMatch();
+	const createSubmissionBtn = (
+		<Link className='btn btn-success' to={`${url}/new`}>
+			<i className='fa fa-file'></i> Buat Pengajuan
+		</Link>
+	);
 
 	return (
 		<Master>
 			<Section
 				pageName={"Daftar Pengajuan"}
 				pageSubject={"Daftar seluruh pengajuan"}
+				box_header={createSubmissionBtn}
 			>
-				<Link className='btn btn-success' to={`${url}/new`}>
-					<i className='fa fa-file'></i> Buat Pengajuan
-				</Link>
-				<hr />
 				<Datatable
 					tableKind='example1'
 					headContent={tableHead}

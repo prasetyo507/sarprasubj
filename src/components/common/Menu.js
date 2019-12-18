@@ -5,7 +5,7 @@ import { isNull } from "util";
 class Menu extends Component {
 	componentDidMount() {
 		let script = document.createElement("script");
-		script.innerHTML = "$('.sidebar-menu').tree();";
+		script.innerHTML = `$('.sidebar-menu').tree(); $('[data-toggle="tooltip"]').tooltip()`;
 		document.body.appendChild(script);
 	}
 

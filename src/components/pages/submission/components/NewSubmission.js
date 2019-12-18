@@ -6,12 +6,14 @@ import { dispatchSubmission } from "../store/actions/submissionAction";
 import Section from "../../../common/Section";
 import Master from "../../Master";
 import Datatable from "../../../common/table/Datatable";
-import HeaderSubmission from "./HeaderSubmission";
+import { HeaderService } from "./HeaderService";
+import { Link } from "react-router-dom";
 
 class NewSubmission extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			isFormSubmited: false,
 			resetHeader: false,
 			headerForm: null,
 			items: []
@@ -25,6 +27,7 @@ class NewSubmission extends Component {
 		let itemName = $("input[name=item_name]").val();
 		let itemQty = $("input[name=item_qty]").val();
 		let itemType = $("#type option:selected").val();
+		let itemNote = $("input[name=item_note]").val();
 
 		if (itemName === "" || itemQty === "" || itemType === "") {
 			alert("Kolom Nama Barang, Quantity, dan Tipe barang tidak boleh kosong!");
@@ -35,7 +38,8 @@ class NewSubmission extends Component {
 			id: `ITEM-${this.state.items.length + 1}`,
 			item: itemName,
 			type: itemType,
-			qty: itemQty
+			qty: itemQty,
+			note: itemNote
 		};
 		newItem = [...this.state.items, newItem];
 		this.setState({ items: newItem });
@@ -47,6 +51,7 @@ class NewSubmission extends Component {
 	clearRowInput() {
 		$("input[name=item_name]").val("");
 		$("input[name=item_qty]").val("");
+		$("input[name=item_note]").val("");
 		$("#type").val("");
 	}
 
@@ -78,7 +83,7 @@ class NewSubmission extends Component {
 	async handleSubmitSubmission() {
 		const _ = require("lodash");
 		const items = this.state.items.map(item => {
-			return _.pick(item, ["item", "qty", "type"]);
+			return _.pick(item, ["item", "qty", "type", "note"]);
 		});
 
 		if (this.state.headerForm.subject === "") {
@@ -97,33 +102,32 @@ class NewSubmission extends Component {
 		};
 
 		await this.props.submitSubmission(payload);
-		this.setState({ headerForm: null, items: [], resetHeader: true });
-		alert("Pengajuan berhasil dikirim!");
-		this.props.history.push("/submission");
+		this.setState({
+			headerForm: null,
+			items: [],
+			resetHeader: true,
+			isFormSubmited: true
+		});
+		setTimeout(() => {
+			this.props.history.push("/submission");
+		}, 2000);
 	}
 
 	render() {
 		const tableHeader = [
 			{
 				column0: "ID Barang",
-				column1: "Nama Barang",
 				column2: "Tipe",
+				column1: "Nama Barang",
 				column3: "QTY",
-				column4: "Aksi"
+				column4: "Catatan",
+				column5: "Aksi"
 			}
 		];
 
 		const tableInput = [
 			{
 				id: <p style={{ fontWeight: "bold", fontSize: "16px" }}>#</p>,
-				item: (
-					<input
-						type='text'
-						className='form-control'
-						name='item_name'
-						placeholder='masukan nama item'
-					/>
-				),
 				tipe: (
 					<select className='form-control' name='item_type' id='type'>
 						<option value=''>-- Pilih Tipe Barang --</option>
@@ -132,6 +136,14 @@ class NewSubmission extends Component {
 						<option value='mejakerja'>Meja Kerja</option>
 					</select>
 				),
+				item: (
+					<input
+						type='text'
+						className='form-control'
+						name='item_name'
+						placeholder='masukan nama item'
+					/>
+				),
 				qty: (
 					<input
 						type='text'
@@ -139,6 +151,14 @@ class NewSubmission extends Component {
 						name='item_qty'
 						placeholder='masukan jumlah item'
 						onChange={this.handleQtyInput}
+					/>
+				),
+				note: (
+					<input
+						type='text'
+						className='form-control'
+						name='item_note'
+						placeholder='masukan keterangan tambahan'
 					/>
 				),
 				action: (
@@ -175,12 +195,22 @@ class NewSubmission extends Component {
 				<Section
 					pageName={"Formulir Pengajuan"}
 					pageSubject={"Buat pengajuan barang baru"}
+					box_header={
+						<HeaderService
+							handleSubjectInput={this.subjectInputHandler}
+							resetHeader={this.state.resetHeader}
+						/>
+					}
 				>
-					<HeaderSubmission
-						handleSubjectInput={this.subjectInputHandler}
-						resetHeader={this.state.resetHeader}
-					/>
-					<hr />
+					{/* show toast if form has submitted */}
+					{this.state.isFormSubmited ? (
+						<div class='callout callout-success'>
+							<h4>Berhasil!</h4>
+							<p>Formulir berhasil diajukan!</p>
+						</div>
+					) : (
+						""
+					)}
 					<Datatable headContent={tableHeader} content={tableInput} />
 					<button
 						className='btn btn-success pull-right'
@@ -188,6 +218,9 @@ class NewSubmission extends Component {
 					>
 						<i className='fa fa-paper-plane'></i> Ajukan Formulir
 					</button>
+					<Link to='/submission' className='btn btn-warning'>
+						<i className='fa fa-arrow-left'></i> Batalkan dan Kembali
+					</Link>
 				</Section>
 			</Master>
 		);
