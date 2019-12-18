@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Section from "../../common/Section";
 import Master from "../Master";
-import { FreeText, Select } from "../../common/FormGroup";
+import { FreeText, Select, TextArea } from "../../common/FormGroup";
 
 class AddVendor extends Component {
   constructor() {
@@ -70,26 +70,6 @@ class AddVendor extends Component {
           placeholder: "Kode Pos Vendor",
           className: "form-control",
           name: "zip"
-        }
-      },
-      {
-        lableFor: "address",
-        lableName: "Alamat",
-        inputAttr: {
-          type: "text",
-          placeholder: "Alamat Vendor",
-          className: "form-control",
-          name: "address"
-        }
-      },
-      {
-        lableFor: "note",
-        lableName: "Catatan",
-        inputAttr: {
-          type: "text",
-          placeholder: "Keterangan Tambahan",
-          className: "form-control",
-          name: "note"
         }
       }
     ];
@@ -164,6 +144,26 @@ class AddVendor extends Component {
         }
       }
     ];
+    const forms6 = [
+      {
+        lableFor: "address",
+        lableName: "Alamat",
+        inputAttr: {
+          placeholder: "Alamat Vendor",
+          className: "form-control",
+          name: "address"
+        }
+      },
+      {
+        lableFor: "note",
+        lableName: "Catatan",
+        inputAttr: {
+          placeholder: "Keterangan Tambahan",
+          className: "form-control",
+          name: "note"
+        }
+      }
+    ];
     return (
       <Master>
         <Section pageName={"Vendor"} pageSubject={"Tambah vendor baru"}>
@@ -172,6 +172,7 @@ class AddVendor extends Component {
               <FreeText formProp={forms1} />
               <Select formProp={forms2} />
               <FreeText formProp={forms3} />
+              <TextArea formProp={forms6} />
             </div>
             <div className="col-md-6">
               <Select formProp={forms4} />

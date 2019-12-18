@@ -9,7 +9,7 @@ const Section = props => {
           <small>{props.pageSubject}</small>
         </h1>
       </section>
-      <section className="content">
+      <section className={"content " + props.class_section}>
         <div className="box">
           {props.box_header ? (
             <div className="box-header with-border">{props.box_header}</div>
