@@ -9,7 +9,7 @@ class AddCatalogue extends Component {
   }
   componentDidMount() {
     let script = document.createElement("script");
-    script.innerHTML = "$('.select2').select2();";
+    script.innerHTML = "$('.select2').select2()";
     document.body.appendChild(script);
   }
   render() {
@@ -22,7 +22,8 @@ class AddCatalogue extends Component {
           placeholder: "Harga Barang",
           className: "form-control",
           name: "price",
-          required: true
+          required: true,
+          autofocus: ""
         }
       }
     ];

@@ -101,6 +101,8 @@ class AddBarang extends Component {
             <FreeText formProp={forms1} />
             <Select formProp={forms2} />
             <FreeText formProp={forms3} />
+            <small>Gunakan File dengan format .jpeg, .gif atau .png<br />
+              Gunakan File dengan ukuran maksimal 512Kb</small>
             <TextArea formProp={forms4} />
           </div>
         </form>
