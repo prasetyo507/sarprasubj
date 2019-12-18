@@ -12,36 +12,26 @@ import React from "react";
 } 
       */
 
-function TabTitle({ i, name, title }) {
-  let activated = i === 0 ? "active" : "";
-  return (
-    <li key={i} className={activated}>
-      <a href={"#" + name} data-toggle="tab">
-        {title}
-      </a>
-    </li>
-  );
-}
-function TabContent({ i, name, content }) {
-  let activated = i === 0 ? "active" : "";
-  return (
-    <div className={activated + " tab-pane "} id={name} key={i}>
-      {content}
-    </div>
-  );
-}
+
+
 const Tabs = props => {
   return (
     <>
       <div className="nav-tabs-custom">
         <ul className="nav nav-tabs">
           {props.tabinput.map((tab, index) => (
-            <TabTitle i={index} name={tab.name} title={tab.title} />
+            <li key={index} className={index === 0 ? "active" : ""} >
+              <a href={"#" + tab.name} data-toggle="tab">
+                {tab.title}
+              </a>
+            </li>
           ))}
         </ul>
         <div className="tab-content">
           {props.tabinput.map((tab, index) => (
-            <TabContent i={index} name={tab.name} content={tab.content} />
+            <div className={index === 0 ? "active tab-pane" : "tab-pane"} id={tab.name} key={index}>
+              {tab.content}
+            </div>
           ))}
         </div>
       </div>

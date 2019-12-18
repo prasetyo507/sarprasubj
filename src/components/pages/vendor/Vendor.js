@@ -48,8 +48,8 @@ class Vendor extends Component {
 	render() {
 		const button = (
 			<Link to='/addvendor'>
-				<button type='button' class='btn btn-success'>
-					<i class='fa fa-plus' aria-hidden='true'></i> Tambah
+				<button type='button' className='btn btn-success'>
+					<i className='fa fa-plus' aria-hidden='true'></i> Tambah
 				</button>
 			</Link>
 		);

@@ -179,7 +179,7 @@ class AddVendor extends Component {
               <FreeText formProp={forms5} />
             </div>
             <div className="col-md-12">
-              <button type="submit" class="btn btn-primary pull-right">
+              <button type="submit" className="btn btn-primary pull-right">
                 Simpan
               </button>
             </div>
