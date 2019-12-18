@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FreeText } from "../../common/FormGroup";
+import { FreeText, Option } from "../../common/FormGroup";
 import Modal from "../../common/Modal";
 
 class EditCategory extends Component {
@@ -17,10 +17,36 @@ class EditCategory extends Component {
           placeholder: "Nama Kategori Barang",
           className: "form-control",
           name: "name",
-          required: true
+          required: true,
+          autofocus: ""
         }
       }
     ];
+    const radiobtn = [
+      {
+        optionName: "Grup Barang",
+        optionList: [
+          {
+            optionLable: "Habis Pakai",
+            inputAttr: {
+              type: "radio",
+              name: "optgrup",
+              value: "CONSUMABLE",
+              required: true
+            }
+          },
+          {
+            optionLable: "Tidak Habis Pakai",
+            inputAttr: {
+              type: "radio",
+              name: "optgrup",
+              value: "NONCONSUMABLE",
+              required: true
+            }
+          }
+        ]
+      }
+    ]
     const save = (
       <button type="submit" className="btn btn-primary pull-right">
         Ubah
@@ -40,6 +66,7 @@ class EditCategory extends Component {
         <Modal title="Ubah Kategori Barang" save={save} close={close}>
           <div className="col-md-12">
             <FreeText formProp={forms1} />
+            <Option formProp={radiobtn} />
           </div>
         </Modal>
       </form>

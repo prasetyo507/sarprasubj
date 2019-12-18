@@ -50,8 +50,8 @@ class Menu extends Component {
 				spanIcon: "fa fa-angle-left pull-right",
 				submenu: [
 					{
-						name: "Pendaftaran Barang",
-						destination: "/registration",
+						name: "Gudang",
+						destination: "/warehouse",
 						icon: "fa fa-circle-o"
 					},
 					{
@@ -96,8 +96,8 @@ class Menu extends Component {
 						icon: "fa fa-circle-o"
 					},
 					{
-						name: "Grup Barang",
-						destination: "/group-items",
+						name: "Kategori Barang",
+						destination: "/category",
 						icon: "fa fa-circle-o"
 					}
 				]
@@ -149,40 +149,40 @@ class Menu extends Component {
 									</NavLink>
 								</li>
 							) : (
-								<li
-									key={i}
-									className={`${menu.class_name} ${
-										_.some(menu.submenu, {
-											destination: parentUrlPath
-										})
-											? "active"
-											: null
-									}`}
-								>
-									<NavLink to={menu.destination}>
-										<i className={menu.icon} /> <span>{menu.name}</span>
-										<span className='pull-right-container'>
-											<i className='fa fa-angle-left pull-right'></i>
-										</span>
-									</NavLink>
-									<ul className='treeview-menu'>
-										{menu.submenu.map((sub, key) => (
-											<li
-												key={key}
-												className={
-													sub.destination === window.location.pathname
-														? `active`
-														: null
-												}
-											>
-												<NavLink to={sub.destination} activeClassName='active'>
-													<i className={sub.icon} /> {sub.name}
-												</NavLink>
-											</li>
-										))}
-									</ul>
-								</li>
-							)
+									<li
+										key={i}
+										className={`${menu.class_name} ${
+											_.some(menu.submenu, {
+												destination: parentUrlPath
+											})
+												? "active"
+												: null
+											}`}
+									>
+										<NavLink to={menu.destination}>
+											<i className={menu.icon} /> <span>{menu.name}</span>
+											<span className='pull-right-container'>
+												<i className='fa fa-angle-left pull-right'></i>
+											</span>
+										</NavLink>
+										<ul className='treeview-menu'>
+											{menu.submenu.map((sub, key) => (
+												<li
+													key={key}
+													className={
+														sub.destination === window.location.pathname
+															? `active`
+															: null
+													}
+												>
+													<NavLink to={sub.destination} activeClassName='active'>
+														<i className={sub.icon} /> {sub.name}
+													</NavLink>
+												</li>
+											))}
+										</ul>
+									</li>
+								)
 						)}
 					</ul>
 				</section>
