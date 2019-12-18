@@ -8,11 +8,8 @@ class EditBarang extends Component {
     this.state = {};
   }
   componentDidMount() {
-    const script = document.createElement("script");
-
-    script.src = "js/select2.js";
-    script.async = true;
-
+    let script = document.createElement("script");
+    script.innerHTML = "$('.select2').select2();";
     document.body.appendChild(script);
   }
   render() {
