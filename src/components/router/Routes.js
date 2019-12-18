@@ -10,7 +10,6 @@ import Items from "../pages/barang/Items";
 import AddBarang from "../pages/barang/AddBarang";
 import EditBarang from "../pages/barang/EditBarang";
 import NotFound from "../pages/404/404";
-import ItemGroup from "../pages/itemgroup/ItemGroup";
 import Category from "../pages/itemgroup/Category";
 import Jenis from "../pages/itemgroup/Jenis";
 
@@ -26,7 +25,6 @@ class Routes extends React.Component {
 				<Route path='/items' component={Items} />
 				<Route path='/additem' component={AddBarang} />
 				<Route path='/edititem' component={EditBarang} />
-				<Route path='/group-items' component={ItemGroup} />
 				<Route path='/category' component={Category} />
 				<Route path='/jenis' component={Jenis} />
 				<Route component={NotFound} />

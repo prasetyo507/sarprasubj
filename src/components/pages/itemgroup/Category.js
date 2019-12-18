@@ -3,25 +3,25 @@ import Section from "../../common/Section";
 import Master from "../Master";
 import Datatable from "../../common/table/Datatable";
 import { Link } from "react-router-dom";
-import { FreeText } from "../../common/FormGroup";
+import { FreeText, Option } from "../../common/FormGroup";
 import "./Category.css";
 import EditCategory from "./EditCategory";
 class Category extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			todoCategory: "",
-			fillCategory: { name: "", action: "" },
 			idTable: "example1",
 			tableHead: [
 				{
 					column0: "Kategori",
+					column1: "Grup",
 					column3: "Aksi"
 				}
 			],
 			tableContent: [
 				{
 					name: "Alat Tulis Kantor",
+					grup: "Tidak Habis Pakai",
 					action: (
 						<>
 							<button
@@ -47,6 +47,7 @@ class Category extends Component {
 				},
 				{
 					name: "Furniture",
+					grup: "Tidak Habis Pakai",
 					action: (
 						<>
 							<button
@@ -75,44 +76,52 @@ class Category extends Component {
 	}
 	handleSubmit = event => {
 		event.preventDefault();
-		this.setState({
-			tableContent: this.state.tableContent.concat([this.state.fillCategory]),
-			fillCategory: { name: "", action: "" },
-			todoCategory: ""
-		});
-	};
-	handleChange = event => {
-		this.setState({
-			todoCategory: event.target.value,
-			fillCategory: {
-				name: event.target.value,
-				action: (
-					<>
-						<button
-							type='button'
-							className='btn btn-warning'
-							data-toggle='modal'
-							data-target='#edit_category'
-						>
-							<i className='fa fa-edit' aria-hidden='true'></i>
+		var grup_barang = "-"
+		if (event.target.optgrup.value === "CONSUMABLE") {
+			grup_barang = "Habis Pakai"
+		} else if (event.target.optgrup.value === "NONCONSUMABLE") {
+			grup_barang = "TIdak Habis Pakai"
+		} else {
+			grup_barang = "-"
+		}
+
+		let fillCategory = {
+			name: event.target.name.value,
+			grup: grup_barang,
+			action: (
+				<>
+					<button
+						type='button'
+						className='btn btn-warning'
+						data-toggle='modal'
+						data-target='#edit_category'
+					>
+						<i className='fa fa-edit' aria-hidden='true'></i>
+					</button>
+					&nbsp;
+					<Link to='/jenis'>
+						<button className='btn btn-success'>
+							<i className='fa fa-eye'></i>
 						</button>
-						&nbsp;
-						<Link to='/jenis'>
-							<button className='btn btn-success'>
-								<i className='fa fa-eye'></i>
-							</button>
-						</Link>
-						&nbsp;
-						<button type='button' className='btn btn-danger'>
-							<i className='fa fa-close' aria-hidden='true'></i>
-						</button>
-					</>
-				)
-			}
-		});
+					</Link>
+					&nbsp;
+					<button type='button' className='btn btn-danger'>
+						<i className='fa fa-close' aria-hidden='true'></i>
+					</button>
+				</>
+			)
+		}
+		this.setState({
+			tableContent: [...this.state.tableContent, fillCategory]
+		})
+		event.target.reset();
 	};
 
+
+
+
 	render() {
+
 		const forms1 = [
 			{
 				lableFor: "name",
@@ -122,12 +131,35 @@ class Category extends Component {
 					placeholder: "Nama Kategori Barang",
 					className: "form-control",
 					name: "name",
-					onChange: this.handleChange,
-					value: this.state.todoCategory,
 					required: true
 				}
 			}
 		];
+		const radiobtn = [
+			{
+				optionName: "Grup Barang",
+				optionList: [
+					{
+						optionLable: "Habis Pakai",
+						inputAttr: {
+							type: "radio",
+							name: "optgrup",
+							value: "CONSUMABLE",
+							required: true
+						}
+					},
+					{
+						optionLable: "Tidak Habis Pakai",
+						inputAttr: {
+							type: "radio",
+							name: "optgrup",
+							value: "NONCONSUMABLE",
+							required: true
+						}
+					}
+				]
+			}
+		]
 		return (
 			<Master>
 				<div className='row'>
@@ -135,19 +167,15 @@ class Category extends Component {
 						<div className='padding_right'>
 							<Section
 								pageName={"Kategori Barang"}
-								pageSubject={"Grup Habis Pakai"}
+								pageSubject={"Kelola Kategori Barang"}
 								box_header={"Buat Kategori Barang"}
 								class_section={"padding_right"}
 							>
-								<form onSubmit={this.handleSubmit}>
+								<form onSubmit={this.handleSubmit} name="forms">
 									<FreeText formProp={forms1} />
+									<Option formProp={radiobtn} />
 									<div className='pull-right'>
-										<Link to='/group-items'>
-											<button type='button' className='btn btn-warning'>
-												Kembali
-											</button>
-										</Link>
-										&nbsp;
+
 										<button type='submit' className='btn btn-success'>
 											Tambah
 										</button>
@@ -172,7 +200,7 @@ class Category extends Component {
 						</Section>
 					</div>
 				</div>
-			</Master>
+			</Master >
 		);
 	}
 }
