@@ -10,7 +10,7 @@ class ListBarang extends Component {
 			tableHead: [
 				{
 					column0: "Nama",
-					column1: "Tipe",
+					column1: "Jenis",
 					column2: "Kategori",
 					column3: "Grup",
 					column4: "Gambar",

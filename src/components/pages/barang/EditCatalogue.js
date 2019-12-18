@@ -22,7 +22,8 @@ class EditCatalogue extends Component {
           placeholder: "Harga Barang",
           className: "form-control",
           name: "price",
-          required: true
+          required: true,
+          autofocus: ""
         }
       }
     ];
