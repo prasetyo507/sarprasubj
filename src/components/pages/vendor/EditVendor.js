@@ -8,6 +8,13 @@ class EditVendor extends Component {
     super();
     this.state = {};
   }
+  // price column must a number
+  handleChange(e) {
+    if (isNaN(e.target.value)) {
+      e.target.value = "";
+      alert(e.target.placeholder + " harus berupa angka!");
+    }
+  }
   render() {
     const forms1 = [
       {
@@ -69,7 +76,8 @@ class EditVendor extends Component {
           type: "text",
           placeholder: "Kode Pos Vendor",
           className: "form-control",
-          name: "zip"
+          name: "zip",
+          maxlength: "10"
         }
       }
     ];
@@ -110,7 +118,9 @@ class EditVendor extends Component {
           type: "text",
           placeholder: "Nomor Telepon Vendor",
           className: "form-control",
-          name: "phone"
+          name: "phone",
+          onChange: this.handleChange,
+          maxlength: "18"
         }
       },
       {
@@ -120,7 +130,9 @@ class EditVendor extends Component {
           type: "text",
           placeholder: "Fax Vendor",
           className: "form-control",
-          name: "fax"
+          name: "fax",
+          onChange: this.handleChange,
+          maxlength: "18"
         }
       },
       {
