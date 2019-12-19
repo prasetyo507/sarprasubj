@@ -31,7 +31,8 @@ class AddCatalogue extends Component {
           name: "price",
           required: true,
           autofocus: "",
-          onChange: this.handleChange
+          onChange: this.handleChange,
+          maxLength: "15"
         }
       }
     ];
