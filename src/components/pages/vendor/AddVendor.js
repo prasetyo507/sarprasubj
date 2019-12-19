@@ -8,6 +8,11 @@ class AddVendor extends Component {
     super();
     this.state = {};
   }
+  componentDidMount() {
+    let script = document.createElement("script");
+    script.innerHTML = "$('.select2').select2();";
+    document.body.appendChild(script);
+  }
   // price column must a number
   handleChange(e) {
     if (isNaN(e.target.value)) {
@@ -33,7 +38,7 @@ class AddVendor extends Component {
       {
         selectName: "Negara",
         selectAttr: {
-          className: "form-control",
+          className: "form-control select2",
           name: "country"
         },
         optionList: [
@@ -77,7 +82,7 @@ class AddVendor extends Component {
           placeholder: "Kode Pos Vendor",
           className: "form-control",
           name: "zip",
-          maxlength: "10"
+          maxLength: "10"
         }
       }
     ];
@@ -85,7 +90,7 @@ class AddVendor extends Component {
       {
         selectName: "Kota",
         selectAttr: {
-          className: "form-control",
+          className: "form-control select2",
           name: "city"
         },
         optionList: [
@@ -120,7 +125,7 @@ class AddVendor extends Component {
           className: "form-control",
           name: "phone",
           onChange: this.handleChange,
-          maxlength: "18"
+          maxLength: "18"
         }
       },
       {
@@ -132,7 +137,7 @@ class AddVendor extends Component {
           className: "form-control",
           name: "fax",
           onChange: this.handleChange,
-          maxlength: "18"
+          maxLength: "18"
         }
       },
       {
