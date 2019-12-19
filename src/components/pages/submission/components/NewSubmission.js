@@ -204,7 +204,7 @@ class NewSubmission extends Component {
 				>
 					{/* show toast if form has submitted */}
 					{this.state.isFormSubmited ? (
-						<div class='callout callout-success'>
+						<div className='callout callout-success'>
 							<h4>Berhasil!</h4>
 							<p>Formulir berhasil diajukan!</p>
 						</div>

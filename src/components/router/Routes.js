@@ -2,7 +2,8 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import Dashboard from "../pages/dashboard/Dashboard";
-import NewSubmission from "../pages/submission/container";
+import Submission from "../pages/submission/container";
+import Procurement from "../pages/procurement/container";
 import Vendor from "../pages/vendor/Vendor";
 import AddVendor from "../pages/vendor/AddVendor";
 import EditVendor from "../pages/vendor/EditVendor";
@@ -19,7 +20,8 @@ class Routes extends React.Component {
 		return (
 			<Switch>
 				<Route path='/' exact component={Dashboard} />
-				<Route path='/submission' component={NewSubmission} />
+				<Route path='/submission' component={Submission} />
+				<Route path='/procurement' component={Procurement} />
 				<Route path='/vendor' component={Vendor} />
 				<Route path='/addvendor' component={AddVendor} />
 				<Route path='/editvendor' component={EditVendor} />

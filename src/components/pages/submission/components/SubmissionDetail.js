@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 
 import HeaderLayout from "./HeaderLayout";
@@ -8,12 +8,12 @@ import Master from "../../Master";
 import Datatable from "../../../common/table/Datatable";
 
 const SubmissionDetail = props => {
-	const param = props.match.params.refnumber;
+	let { refnumber } = useParams();
+	const param = refnumber;
 	const getDetailSubmission = props.detailSubmission.find(submission => {
 		return submission.refnumber === param;
 	});
 
-	console.log(getDetailSubmission);
 	const tableHeader = [
 		{
 			column0: "No",
@@ -23,6 +23,11 @@ const SubmissionDetail = props => {
 			column4: "Catatan"
 		}
 	];
+
+	// will show action button if login by BAUs
+	if (props.usedByProcurementChecking) {
+		tableHeader.map(header => (header.column5 = "Aksi"));
+	}
 
 	const refNumber = [
 		{
@@ -98,7 +103,7 @@ const SubmissionDetail = props => {
 		}
 	];
 
-	let backButton = (
+	let navButton = (
 		<>
 			<Link className='btn btn-warning' to='/submission'>
 				Kembali
@@ -109,25 +114,50 @@ const SubmissionDetail = props => {
 		</>
 	);
 
-	const tableContent = [];
+	// add action button to item object
+	const prepareTableContent = getDetailSubmission.items.map((items, i) => {
+		let itemClone = { ...items };
+		if (props.usedByProcurementChecking) {
+			itemClone.action = (
+				<>
+					<button
+						className='btn btn-danger'
+						data-toggle='tooltip'
+						title='tolak barang'
+					>
+						<i className='fa fa-ban'></i>
+					</button>
+					<button
+						className='btn btn-success'
+						data-toggle='tooltip'
+						title='setujui barang'
+						style={{ marginLeft: "3px" }}
+					>
+						<i className='fa fa-check'></i>
+					</button>
+				</>
+			);
+		}
+		return itemClone;
+	});
 
-	const itemSubmission = getDetailSubmission.items.map((items, i) => {
+	const serveTableContent = prepareTableContent.map((items, i) => {
 		return {
 			no: i + 1,
 			type: items.type,
 			item: items.item,
 			qty: items.qty,
-			note: items.note
+			note: items.note,
+			action: items.action
 		};
 	});
-	itemSubmission.map(items => tableContent.push(items));
 
 	return (
 		<Master>
 			<Section
 				pageName={"Detail Pengajuan"}
 				pageSubject={`Nomor ${getDetailSubmission.refnumber}`}
-				box_header={backButton}
+				box_header={navButton}
 			>
 				<HeaderLayout
 					formAttr={{
@@ -139,7 +169,7 @@ const SubmissionDetail = props => {
 					}}
 				/>
 				<hr />
-				<Datatable headContent={tableHeader} content={tableContent} />
+				<Datatable headContent={tableHeader} content={serveTableContent} />
 			</Section>
 		</Master>
 	);
