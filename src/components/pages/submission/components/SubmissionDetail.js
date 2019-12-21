@@ -24,7 +24,7 @@ const SubmissionDetail = props => {
 		}
 	];
 
-	// will show action button if login by BAUs
+	// will show action button if login by BAU
 	if (props.usedByProcurementChecking) {
 		tableHeader.map(header => (header.column5 = "Aksi"));
 	}
@@ -108,13 +108,23 @@ const SubmissionDetail = props => {
 			<Link className='btn btn-warning' to='/submission'>
 				Kembali
 			</Link>
-			<Link className='btn btn-danger pull-right' to=''>
-				Batalkan Pengajuan
-			</Link>
+			{/* button will different depend on who is login */}
+			{props.usedByProcurementChecking ? (
+				<Link
+					className='btn btn-success pull-right'
+					to={`/procurement/${refnumber}/submission/create_procurement`}
+				>
+					Buat Pengadaan
+				</Link>
+			) : (
+				<Link className='btn btn-danger pull-right' to=''>
+					Batalkan Pengajuan
+				</Link>
+			)}
 		</>
 	);
 
-	// add action button to item object
+	// add action button to item object if login as BAU
 	const prepareTableContent = getDetailSubmission.items.map((items, i) => {
 		let itemClone = { ...items };
 		if (props.usedByProcurementChecking) {

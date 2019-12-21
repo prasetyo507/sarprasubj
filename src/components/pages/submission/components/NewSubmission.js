@@ -49,10 +49,7 @@ class NewSubmission extends Component {
 	}
 
 	clearRowInput() {
-		$("input[name=item_name]").val("");
-		$("input[name=item_qty]").val("");
-		$("input[name=item_note]").val("");
-		$("#type").val("");
+		$(".form-input").val("");
 	}
 
 	handleRemoveItem(id) {
@@ -117,7 +114,7 @@ class NewSubmission extends Component {
 		const tableHeader = [
 			{
 				column0: "ID Barang",
-				column2: "Tipe",
+				column2: "Jenis",
 				column1: "Nama Barang",
 				column3: "QTY",
 				column4: "Catatan",
@@ -129,8 +126,12 @@ class NewSubmission extends Component {
 			{
 				id: <p style={{ fontWeight: "bold", fontSize: "16px" }}>#</p>,
 				tipe: (
-					<select className='form-control' name='item_type' id='type'>
-						<option value=''>-- Pilih Tipe Barang --</option>
+					<select
+						className='form-control form-input'
+						name='item_type'
+						id='type'
+					>
+						<option value=''>-- Pilih Jenis Barang --</option>
 						<option value='monitorpc'>Monitor PC</option>
 						<option value='sepeda'>Sepeda</option>
 						<option value='mejakerja'>Meja Kerja</option>
@@ -139,7 +140,7 @@ class NewSubmission extends Component {
 				item: (
 					<input
 						type='text'
-						className='form-control'
+						className='form-control form-input'
 						name='item_name'
 						placeholder='masukan nama item'
 					/>
@@ -147,7 +148,7 @@ class NewSubmission extends Component {
 				qty: (
 					<input
 						type='text'
-						className='form-control'
+						className='form-control form-input'
 						name='item_qty'
 						placeholder='masukan jumlah item'
 						onChange={this.handleQtyInput}
@@ -156,7 +157,7 @@ class NewSubmission extends Component {
 				note: (
 					<input
 						type='text'
-						className='form-control'
+						className='form-control form-input'
 						name='item_note'
 						placeholder='masukan keterangan tambahan'
 					/>
@@ -192,6 +193,16 @@ class NewSubmission extends Component {
 
 		return (
 			<Master>
+				{/* show toast if form has submitted */}
+				{this.state.isFormSubmited ? (
+					<div className='callout callout-success'>
+						<h4>Berhasil!</h4>
+						<p>Formulir berhasil diajukan!</p>
+					</div>
+				) : (
+					""
+				)}
+				{/* toast end */}
 				<Section
 					pageName={"Formulir Pengajuan"}
 					pageSubject={"Buat pengajuan barang baru"}
@@ -202,15 +213,6 @@ class NewSubmission extends Component {
 						/>
 					}
 				>
-					{/* show toast if form has submitted */}
-					{this.state.isFormSubmited ? (
-						<div className='callout callout-success'>
-							<h4>Berhasil!</h4>
-							<p>Formulir berhasil diajukan!</p>
-						</div>
-					) : (
-						""
-					)}
 					<Datatable headContent={tableHeader} content={tableInput} />
 					<button
 						className='btn btn-success pull-right'

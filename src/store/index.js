@@ -1,8 +1,10 @@
 import { createStore, combineReducers } from "redux";
 import { submissionReducer } from "../components/pages/submission/store/reducers/submissionReducer";
+import { procurementReducer } from "../components/pages/procurement/store/reducer/procurementReducer";
 
 const rootReducer = combineReducers({
-	submission: submissionReducer
+	submission: submissionReducer,
+	procurement: procurementReducer
 });
 
 const store = createStore(

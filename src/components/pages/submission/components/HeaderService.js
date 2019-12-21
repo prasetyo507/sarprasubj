@@ -47,8 +47,8 @@ export const HeaderService = props => {
 				placeholder: "nomor referansi pengajuan",
 				className: "form-control",
 				name: "refnumber",
-				readOnly: "readonly",
-				value: 29
+				readOnly: true,
+				value: Math.floor(Math.random() * 1001)
 			}
 		}
 	];

@@ -130,48 +130,40 @@ class Category extends Component {
 		];
 		return (
 			<Master>
-				<div className='row'>
-					<div className='col-xs-12 col-sm-4 col-md-4 col-lg-4'>
-						<div className='padding_right'>
-							<Section
-								pageName={"Kategori Barang"}
-								pageSubject={"Grup Habis Pakai"}
-								box_header={"Buat Kategori Barang"}
-								class_section={"padding_right"}
-							>
-								<form onSubmit={this.handleSubmit}>
-									<FreeText formProp={forms1} />
-									<div className='pull-right'>
-										<Link to='/group-items'>
-											<button type='button' className='btn btn-warning'>
-												Kembali
-											</button>
-										</Link>
-										&nbsp;
-										<button type='submit' className='btn btn-success'>
-											Tambah
-										</button>
-									</div>
-								</form>
-							</Section>
+				<Section
+					pageName={"Kategori Barang"}
+					pageSubject={"Grup Habis Pakai"}
+					box_header={"Buat Kategori Barang"}
+					class_section='col-xs-12 col-sm-4 col-md-4 col-lg-4'
+				>
+					<form onSubmit={this.handleSubmit}>
+						<FreeText formProp={forms1} />
+						<div className='pull-right'>
+							<Link to='/group-items'>
+								<button type='button' className='btn btn-warning'>
+									Kembali
+								</button>
+							</Link>
+							&nbsp;
+							<button type='submit' className='btn btn-success'>
+								Tambah
+							</button>
 						</div>
+					</form>
+				</Section>
+				<Section
+					box_header={"Daftar Kategori Barang"}
+					class_section='col-xs-12 col-sm-8 col-md-8 col-lg-8'
+				>
+					<Datatable
+						headContent={this.state.tableHead}
+						content={this.state.tableContent}
+						tableKind={this.state.idTable}
+					/>
+					<div className='modal fade' id='edit_category'>
+						<EditCategory />
 					</div>
-					<div className='col-xs-12 col-sm-8 col-md-8 col-lg-8'>
-						<Section
-							box_header={"Daftar Kategori Barang"}
-							class_section='padding_left'
-						>
-							<Datatable
-								headContent={this.state.tableHead}
-								content={this.state.tableContent}
-								tableKind={this.state.idTable}
-							/>
-							<div className='modal fade' id='edit_category'>
-								<EditCategory />
-							</div>
-						</Section>
-					</div>
-				</div>
+				</Section>
 			</Master>
 		);
 	}
