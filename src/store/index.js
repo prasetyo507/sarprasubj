@@ -1,8 +1,10 @@
 import { createStore, combineReducers } from "redux";
 import { submissionReducer } from "../components/pages/submission/store/reducers/submissionReducer";
+import { vendorReducer } from "../components/pages/vendor/store/reducers/vendorReducer";
 
 const rootReducer = combineReducers({
-	submission: submissionReducer
+	submission: submissionReducer,
+	vendor: vendorReducer
 });
 
 const store = createStore(
