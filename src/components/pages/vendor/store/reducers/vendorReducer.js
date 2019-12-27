@@ -11,11 +11,21 @@ export const vendorReducer = (state = initState, action) => {
 				...state,
 				vendorForm: [...state.vendorForm, action.payload]
 			};
-		case actionType.EDIT_TODO:
+		case actionType.DELETE_VENDOR:
+			let deleteForm = [...state.vendorForm]
+			let deleteId = action.payload
+			var formDelete = deleteForm.filter(vendor => {
+				return vendor.id !== deleteId;
+			});
+			return {
+				...state,
+				vendorForm: formDelete
+			};
+		case actionType.EDIT_VENDOR:
 			// ganti data todo
-			let vendorForm = [...state.vendorForm]
-			let id = action.payload.index
-			let todo = action.payload.vendorData
+			var vendorForm = [...state.vendorForm]
+			var id = action.payload.index
+			var todo = action.payload.vendorData
 			var form = vendorForm.find(vendor => {
 				return vendor.id === id;
 			});

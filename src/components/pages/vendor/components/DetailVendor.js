@@ -5,6 +5,7 @@ import { FreeText, TextArea } from "../../../common/FormGroup";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
+
 class DetailVendor extends Component {
   constructor(props) {
     super(props);
@@ -12,12 +13,9 @@ class DetailVendor extends Component {
     };
   }
 
-
-
   render() {
-
     const param = this.props.match.params.refnumber;
-    var getEditVendor = this.props.editVendor.find(vendor => {
+    var getDetailVendor = this.props.detailVendor.find(vendor => {
       return String(vendor.id) === param;
     });
 
@@ -29,7 +27,7 @@ class DetailVendor extends Component {
           type: "text",
           className: "form-control",
           name: "name",
-          defaultValue: getEditVendor.nama,
+          defaultValue: getDetailVendor.nama,
           readOnly: true
         }
       },
@@ -40,7 +38,7 @@ class DetailVendor extends Component {
           type: "text",
           className: "form-control",
           name: "country",
-          defaultValue: getEditVendor.negara,
+          defaultValue: getDetailVendor.negara,
           readOnly: true
         }
       },
@@ -51,7 +49,7 @@ class DetailVendor extends Component {
           type: "text",
           className: "form-control",
           name: "province",
-          defaultValue: getEditVendor.provinsi,
+          defaultValue: getDetailVendor.provinsi,
           readOnly: true
         }
       },
@@ -62,7 +60,7 @@ class DetailVendor extends Component {
           type: "text",
           className: "form-control",
           name: "city",
-          defaultValue: getEditVendor.kota,
+          defaultValue: getDetailVendor.kota,
           readOnly: true
         }
       },
@@ -75,7 +73,7 @@ class DetailVendor extends Component {
           className: "form-control",
           name: "zip",
           maxLength: "10",
-          defaultValue: getEditVendor.kodepos,
+          defaultValue: getDetailVendor.kodepos,
           readOnly: true
         }
       }
@@ -89,7 +87,7 @@ class DetailVendor extends Component {
           placeholder: "Alamat Vendor",
           className: "form-control",
           name: "address",
-          defaultValue: getEditVendor.alamat,
+          defaultValue: getDetailVendor.alamat,
           readOnly: true
         }
       }
@@ -103,7 +101,7 @@ class DetailVendor extends Component {
           placeholder: "Kontak Vendor",
           className: "form-control",
           name: "contact",
-          defaultValue: getEditVendor.kontak,
+          defaultValue: getDetailVendor.kontak,
           readOnly: true
         }
       },
@@ -116,7 +114,7 @@ class DetailVendor extends Component {
           className: "form-control",
           name: "phone",
           maxLength: "18",
-          defaultValue: getEditVendor.telp,
+          defaultValue: getDetailVendor.telp,
           readOnly: true
         }
       },
@@ -129,7 +127,7 @@ class DetailVendor extends Component {
           className: "form-control",
           name: "fax",
           maxLength: "18",
-          defaultValue: getEditVendor.fax,
+          defaultValue: getDetailVendor.fax,
           readOnly: true
         }
       },
@@ -141,7 +139,7 @@ class DetailVendor extends Component {
           placeholder: "Website Vendor",
           className: "form-control",
           name: "website",
-          defaultValue: getEditVendor.web,
+          defaultValue: getDetailVendor.web,
           readOnly: true
         }
       },
@@ -153,7 +151,7 @@ class DetailVendor extends Component {
           placeholder: "Email Vendor",
           className: "form-control",
           name: "email",
-          defaultValue: getEditVendor.email,
+          defaultValue: getDetailVendor.email,
           readOnly: true
         }
       }
@@ -167,7 +165,7 @@ class DetailVendor extends Component {
           placeholder: "Keterangan Tambahan",
           className: "form-control",
           name: "note",
-          defaultValue: getEditVendor.catatan,
+          defaultValue: getDetailVendor.catatan,
           readOnly: true
         }
       }
@@ -177,16 +175,13 @@ class DetailVendor extends Component {
         <Link to='/vendor' className='btn btn-warning'>
           <i className='fa fa-chevron-left'></i> Kembali
 				</Link>
-        <Link className='btn btn-danger pull-right' to=''>
-          <i className='fa fa-trash'></i> Hapus
-			</Link>
       </>
     );
     return (
       <Master>
-        <Section pageName={"Vendor"} pageSubject={`Detail  ${getEditVendor.nama}`}
+        <Section pageName={"Vendor"} pageSubject={`Detail  ${getDetailVendor.nama}`}
           box_header={backButton}>
-          <form >
+          <form>
             <div className="col-md-6">
               <FreeText formProp={forms1} />
               <TextArea formProp={forms6} />
@@ -204,7 +199,7 @@ class DetailVendor extends Component {
 
 const mapStateToProps = state => {
   return {
-    editVendor: state.vendor.vendorForm
+    detailVendor: state.vendor.vendorForm
   };
 };
 

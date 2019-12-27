@@ -4,9 +4,22 @@ import Master from "../../Master";
 import Datatable from "../../../common/table/Datatable";
 import { Link, useRouteMatch } from "react-router-dom";
 import { connect } from "react-redux";
+import { dispatchDeleteVendor } from "../store/actions/vendorAction";
 
 const ListVendor = props => {
 	const { url } = useRouteMatch();
+	const handleClick = id => {
+		props.deleteVendor(id);
+		/* Toast */
+		var toast = document.getElementById("snackbar");
+		/* Show Toast */
+		toast.className = "show";
+		setTimeout(() => {
+			/* hide Toast after 2 seconds */
+			toast.className = toast.className.replace("show", "");
+		}, 2000);
+	}
+
 	let vendors = props.vendor.map((lists, key) => {
 		return {
 			no: key + 1,
@@ -31,6 +44,9 @@ const ListVendor = props => {
 					>
 						<i className='fa fa-edit'></i>
 					</Link>
+					<button className='btn btn-danger btn-sm' title="Hapus" onClick={() => handleClick(lists.id)}>
+						<i className='fa fa-trash'></i>
+					</button>
 				</>
 			)
 		};
@@ -47,11 +63,14 @@ const ListVendor = props => {
 	];
 
 	const button = (
-		<Link to={`${url}/new`}>
-			<button type='button' className='btn btn-primary'>
-				<i className='fa fa-plus' aria-hidden='true'></i> Tambah
+		<>
+			<Link to={`${url}/new`}>
+				<button type='button' className='btn btn-primary'>
+					<i className='fa fa-plus' aria-hidden='true'></i> Tambah
 			</button>
-		</Link>
+			</Link>
+
+		</>
 	);
 
 	return (
@@ -66,15 +85,21 @@ const ListVendor = props => {
 					content={vendors}
 					tableKind='example1'
 				/>
+				<div id="snackbar">Berhasil dihapus...</div>
 			</Section>
 		</Master>
 	);
 };
-
+const mapDispatchToProps = dispatch => {
+	return {
+		deleteVendor: id =>
+			dispatch(dispatchDeleteVendor(id))
+	};
+};
 const mapStateToProps = state => {
 	return {
 		vendor: state.vendor.vendorForm
 	};
 };
 
-export default connect(mapStateToProps, null)(ListVendor);
+export default connect(mapStateToProps, mapDispatchToProps)(ListVendor);
