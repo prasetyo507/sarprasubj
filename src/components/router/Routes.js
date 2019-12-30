@@ -3,9 +3,7 @@ import { Route, Switch } from "react-router-dom";
 
 import Dashboard from "../pages/dashboard/Dashboard";
 import NewSubmission from "../pages/submission/container";
-import Vendor from "../pages/vendor/Vendor";
-import AddVendor from "../pages/vendor/AddVendor";
-import EditVendor from "../pages/vendor/EditVendor";
+import Vendor from "../pages/vendor/container";
 import Items from "../pages/barang/Items";
 import AddBarang from "../pages/barang/AddBarang";
 import EditBarang from "../pages/barang/EditBarang";
@@ -20,8 +18,6 @@ class Routes extends React.Component {
 				<Route path='/' exact component={Dashboard} />
 				<Route path='/submission' component={NewSubmission} />
 				<Route path='/vendor' component={Vendor} />
-				<Route path='/addvendor' component={AddVendor} />
-				<Route path='/editvendor' component={EditVendor} />
 				<Route path='/items' component={Items} />
 				<Route path='/additem' component={AddBarang} />
 				<Route path='/edititem' component={EditBarang} />
