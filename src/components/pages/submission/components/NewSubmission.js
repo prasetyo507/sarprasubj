@@ -105,9 +105,15 @@ class NewSubmission extends Component {
 			resetHeader: true,
 			isFormSubmited: true
 		});
+		/* Toast */
+		var toast = document.getElementById("snackbar");
+		/* Show Toast */
+		toast.className = "show";
 		setTimeout(() => {
+			/* hide Toast after 2 seconds */
+			toast.className = toast.className.replace("show", "");
 			this.props.history.push("/submission");
-		}, 1500);
+		}, 2000);
 	}
 
 	render() {
@@ -203,16 +209,6 @@ class NewSubmission extends Component {
 						/>
 					}
 				>
-					{/* show toast if form has submitted */}
-					{this.state.isFormSubmited ? (
-						<div className='callout callout-success'>
-							<h4>Berhasil!</h4>
-							<p>Formulir berhasil diajukan!</p>
-						</div>
-					) : (
-						""
-					)}
-					{/* toast end */}
 					<Datatable headContent={tableHeader} content={tableInput} />
 					<button
 						className='btn btn-success pull-right'
@@ -223,6 +219,9 @@ class NewSubmission extends Component {
 					<Link to='/submission' className='btn btn-warning'>
 						<i className='fa fa-chevron-left'></i> Batalkan dan Kembali
 					</Link>
+
+					{/* toast */}
+					<div id='snackbar'>Pengajuan berhasil diajukan</div>
 				</Section>
 			</Master>
 		);
