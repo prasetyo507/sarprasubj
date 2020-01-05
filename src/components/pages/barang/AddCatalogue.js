@@ -9,8 +9,15 @@ class AddCatalogue extends Component {
   }
   componentDidMount() {
     let script = document.createElement("script");
-    script.innerHTML = "$('.select2').select2();";
+    script.innerHTML = "$('.select2').select2()";
     document.body.appendChild(script);
+  }
+  // price column must a number
+  handleChange(e) {
+    if (isNaN(e.target.value)) {
+      e.target.value = "";
+      alert("Harga harus berupa angka!");
+    }
   }
   render() {
     const forms1 = [
@@ -22,7 +29,10 @@ class AddCatalogue extends Component {
           placeholder: "Harga Barang",
           className: "form-control",
           name: "price",
-          required: true
+          required: true,
+          autofocus: "",
+          onChange: this.handleChange,
+          maxLength: "15"
         }
       }
     ];

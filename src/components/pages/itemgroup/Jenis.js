@@ -3,25 +3,25 @@ import Section from "../../common/Section";
 import Master from "../Master";
 import Datatable from "../../common/table/Datatable";
 import { Link } from "react-router-dom";
-import { FreeText } from "../../common/FormGroup";
+import { FreeText, Option } from "../../common/FormGroup";
 import "./Category.css";
 import EditJenis from "./EditJenis";
 class Jenis extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			todoJenis: "",
-			fillJenis: { name: "", action: "" },
 			idTable: "example1",
 			tableHead: [
 				{
 					column0: "Kategori",
+					column1: "Klasifikasi",
 					column3: "Aksi"
 				}
 			],
 			tableContent: [
 				{
 					name: "Pulpen",
+					classification: "Barang Non IT",
 					action: (
 						<>
 							<button
@@ -41,6 +41,7 @@ class Jenis extends Component {
 				},
 				{
 					name: "Penggaris",
+					classification: "Barang Non IT",
 					action: (
 						<>
 							<button
@@ -63,36 +64,40 @@ class Jenis extends Component {
 	}
 	handleSubmit = event => {
 		event.preventDefault();
+		var klasifikasi = "-";
+		if (event.target.optit.value === "IT") {
+			klasifikasi = "Barang IT";
+		} else if (event.target.optit.value === "NONIT") {
+			klasifikasi = "Barang Non IT";
+		} else {
+			klasifikasi = "-";
+		}
+		let fillJenis = {
+			name: event.target.name.value,
+			classification: klasifikasi,
+			action: (
+				<>
+					<button
+						type='button'
+						className='btn btn-warning'
+						data-toggle='modal'
+						data-target='#edit_jenis'
+					>
+						<i className='fa fa-edit' aria-hidden='true'></i>
+					</button>
+					&nbsp;
+					<button type='button' className='btn btn-danger'>
+						<i className='fa fa-close' aria-hidden='true'></i>
+					</button>
+				</>
+			)
+		};
 		this.setState({
-			tableContent: this.state.tableContent.concat([this.state.fillJenis]),
-			fillJenis: { name: "", action: "" },
-			todoJenis: ""
+			tableContent: [...this.state.tableContent, fillJenis]
 		});
+		event.target.reset();
 	};
-	handleChange = event => {
-		this.setState({
-			todoJenis: event.target.value,
-			fillJenis: {
-				name: event.target.value,
-				action: (
-					<>
-						<button
-							type='button'
-							className='btn btn-warning'
-							data-toggle='modal'
-							data-target='#edit_jenis'
-						>
-							<i className='fa fa-edit' aria-hidden='true'></i>
-						</button>
-						&nbsp;
-						<button type='button' className='btn btn-danger'>
-							<i className='fa fa-close' aria-hidden='true'></i>
-						</button>
-					</>
-				)
-			}
-		});
-	};
+
 	render() {
 		const forms1 = [
 			{
@@ -103,35 +108,66 @@ class Jenis extends Component {
 					placeholder: "Nama Jenis Barang",
 					className: "form-control",
 					name: "name",
-					onChange: this.handleChange,
-					value: this.state.todoCategory,
 					required: true
 				}
 			}
 		];
+		const radiobtn = [
+			{
+				optionName: "Klasifikasi Barang",
+				optionList: [
+					{
+						optionLable: "Barang IT",
+						inputAttr: {
+							type: "radio",
+							name: "optit",
+							value: "IT",
+							required: true
+						}
+					},
+					{
+						optionLable: "Barang Non IT",
+						inputAttr: {
+							type: "radio",
+							name: "optit",
+							value: "NONIT",
+							required: true
+						}
+					}
+				]
+			}
+		];
 		return (
 			<Master>
-				<Section
-					pageName={"Jenis Barang"}
-					pageSubject={"Kategori Alat Tulis Kantor"}
-					box_header={"Buat Jenis Barang"}
-					class_section={"col-xs-12 col-sm-4 col-md-4 col-lg-4"}
-				>
-					<form onSubmit={this.handleSubmit}>
-						<FreeText formProp={forms1} />
-						<div className='pull-right'>
-							<Link to='/category'>
-								<button type='button' className='btn btn-warning'>
-									Kembali
-								</button>
-							</Link>
-							&nbsp;
-							<button type='submit' className='btn btn-success'>
-								Tambah
-							</button>
+				<div className='row'>
+					<div className='col-xs-12 col-sm-4 col-md-4 col-lg-4'>
+						<div className='padding_right'>
+							<Section
+								pageName={"Jenis Barang"}
+								pageSubject={"Kategori Alat Tulis Kantor"}
+								box_header={"Buat Jenis Barang"}
+								class_section={"padding_right"}
+							>
+								<form onSubmit={this.handleSubmit} name='forms'>
+									<FreeText formProp={forms1} />
+									<Option formProp={radiobtn} />
+
+									<div className='pull-right'>
+										<Link to='/category'>
+											<button type='button' className='btn btn-warning'>
+												Kembali
+											</button>
+										</Link>
+										&nbsp;
+										<button type='submit' className='btn btn-success'>
+											Tambah
+										</button>
+									</div>
+								</form>
+							</Section>
 						</div>
-					</form>
-				</Section>
+					</div>
+				</div>
 				<Section
 					box_header={"Daftar Jenis Barang"}
 					class_section='col-xs-12 col-sm-8 col-md-8 col-lg-8'

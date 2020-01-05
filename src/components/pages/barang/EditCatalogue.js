@@ -12,6 +12,13 @@ class EditCatalogue extends Component {
     script.innerHTML = "$('.select2').select2();";
     document.body.appendChild(script);
   }
+  // price column must a number
+  handleChange(e) {
+    if (isNaN(e.target.value)) {
+      e.target.value = "";
+      alert("Harga harus berupa angka!");
+    }
+  }
   render() {
     const forms1 = [
       {
@@ -22,7 +29,10 @@ class EditCatalogue extends Component {
           placeholder: "Harga Barang",
           className: "form-control",
           name: "price",
-          required: true
+          required: true,
+          autofocus: "",
+          onChange: this.handleChange,
+          maxLength: "15"
         }
       }
     ];
