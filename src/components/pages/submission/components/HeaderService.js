@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { currentDate } from "../../../services/Helper";
 import $ from "jquery";
 
 import HeaderLayout from "./HeaderLayout";
 
 export const HeaderService = props => {
-	const d = new Date();
-
 	const [headerState, setState] = useState({});
 
 	const handleFormChange = e => {
@@ -14,7 +13,7 @@ export const HeaderService = props => {
 				...headerState,
 				[e.target.name]: e.target.value,
 				refnumber: $('input[name="refnumber"]').val(),
-				date: `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`,
+				date: $('input[name="date"]').val(),
 				to: $('input[name="to"]').val(),
 				from: $('input[name="from"]').val()
 			});
@@ -59,7 +58,7 @@ export const HeaderService = props => {
 			lableName: "Tanggal",
 			inputAttr: {
 				type: "text",
-				value: `${d.getDate()}/${d.getMonth()}/${d.getFullYear()}`,
+				value: currentDate(),
 				placeholder: "tanggal pengajuan",
 				className: "form-control",
 				name: "date",

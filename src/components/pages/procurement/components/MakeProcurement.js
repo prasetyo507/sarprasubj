@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { dispatchProcurement } from "../store/actions/procurementAction";
+import { currentDate } from "../../../services/Helper";
 import { useParams } from "react-router-dom";
 import Section from "../../../common/Section";
 import Master from "../../Master";
@@ -10,6 +12,13 @@ import Datatable from "../../../common/table/Datatable";
 
 const MakeProcurement = props => {
 	const _ = require("lodash");
+
+	useEffect(() => {
+		let script = document.createElement("script");
+		script.innerHTML = "$('.select2').select2();";
+		document.body.appendChild(script);
+	});
+
 	// get detail submission for left panel
 	const { refnumber } = useParams();
 	const getDetailSubmission = props.submission.find(
@@ -24,7 +33,10 @@ const MakeProcurement = props => {
 		let itemList = {
 			id: procItem.length + 1,
 			item: e.target["item_name"].value,
-			vendor: e.target["vendor"].value,
+			vendor_id: e.target["vendor"].value,
+			vendor_name:
+				e.target["vendor"].options[e.target["vendor"].options.selectedIndex]
+					.text,
 			price: e.target["price"].value,
 			amount: e.target["amount"].value
 		};
@@ -43,16 +55,20 @@ const MakeProcurement = props => {
 	const submitProcurementHandler = e => {
 		e.preventDefault();
 		const pickItemObject = procItem.map(item => {
-			return _.pick(item, ["item", "vendor", "price", "amount"]);
+			return _.pick(item, ["item", "vendor_id", "price", "amount"]);
 		});
-		const d = new Date();
+
 		let procurement = {
 			submission_id: getDetailSubmission.refnumber,
-			date: `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`,
+			date: currentDate(),
 			note: e.target["note"].value,
 			items: [...pickItemObject]
 		};
 		props.submitProcurement(procurement);
+
+		setTimeout(() => {
+			props.history.push("/procurement");
+		}, 1300);
 	};
 
 	const detailSubmission = [
@@ -165,7 +181,7 @@ const MakeProcurement = props => {
 					type='text'
 					className='form-control'
 					name='amount'
-					placeholder='jumalh barang'
+					placeholder='jumlah barang'
 				/>
 			),
 			action: (
@@ -179,7 +195,12 @@ const MakeProcurement = props => {
 	if (procItem.length !== 0) {
 		let adjustItemList = procItem.map(item => {
 			// filter object, item id not used here
-			let pickSomeData = _.pick(item, ["item", "vendor", "price", "amount"]);
+			let pickSomeData = _.pick(item, [
+				"item",
+				"vendor_name",
+				"price",
+				"amount"
+			]);
 			let cloneProcItem = { ...pickSomeData };
 			cloneProcItem.action = (
 				<button
@@ -203,9 +224,10 @@ const MakeProcurement = props => {
 				class_section='col-md-3'
 			>
 				<FreeText formProp={detailSubmission} />
-				<button className='btn btn-block btn-primary'>
-					Lihat barang pengajuan
-				</button>
+				<Link to='/procurement' className='btn btn-primary'>
+					Kembali
+				</Link>
+				<button className='btn btn-warning pull-right'>Lihat barang</button>
 			</Section>
 			<Section class_section='col-md-9'>
 				<form onSubmit={addItemHandler} name='formInput'>

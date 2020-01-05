@@ -107,7 +107,7 @@ class NewSubmission extends Component {
 		});
 		setTimeout(() => {
 			this.props.history.push("/submission");
-		}, 2000);
+		}, 1500);
 	}
 
 	render() {
@@ -193,16 +193,6 @@ class NewSubmission extends Component {
 
 		return (
 			<Master>
-				{/* show toast if form has submitted */}
-				{this.state.isFormSubmited ? (
-					<div className='callout callout-success'>
-						<h4>Berhasil!</h4>
-						<p>Formulir berhasil diajukan!</p>
-					</div>
-				) : (
-					""
-				)}
-				{/* toast end */}
 				<Section
 					pageName={"Formulir Pengajuan"}
 					pageSubject={"Buat pengajuan barang baru"}
@@ -213,15 +203,25 @@ class NewSubmission extends Component {
 						/>
 					}
 				>
+					{/* show toast if form has submitted */}
+					{this.state.isFormSubmited ? (
+						<div className='callout callout-success'>
+							<h4>Berhasil!</h4>
+							<p>Formulir berhasil diajukan!</p>
+						</div>
+					) : (
+						""
+					)}
+					{/* toast end */}
 					<Datatable headContent={tableHeader} content={tableInput} />
 					<button
 						className='btn btn-success pull-right'
 						onClick={() => this.handleSubmitSubmission()}
 					>
-						<i className='fa fa-paper-plane'></i> Ajukan Formulir
+						<i className='fa fa-paper-plane'></i> Ajukan
 					</button>
 					<Link to='/submission' className='btn btn-warning'>
-						<i className='fa fa-arrow-left'></i> Batalkan dan Kembali
+						<i className='fa fa-chevron-left'></i> Batalkan dan Kembali
 					</Link>
 				</Section>
 			</Master>

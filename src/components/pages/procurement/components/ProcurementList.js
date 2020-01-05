@@ -19,23 +19,23 @@ const ProcurementList = props => {
 
 	const tableContent = [];
 
-	const submissionList = props.submission.map((submissions, i) => {
+	const procurementList = props.procurement.map((procurements, i) => {
 		return {
 			no: i + 1,
-			refnumber: submissions.refnumber,
-			date: submissions.date,
+			refnumber: procurements.submission_id,
+			date: procurements.date,
 			status: "Baru",
 			action: (
 				<Link
 					className='btn btn-success btn-sm'
-					to={`${url}/${submissions.refnumber}/seesubmission`}
+					to={`${url}/${procurements.submission_id}/procurement`}
 				>
 					<i className='fa fa-eye'></i>
 				</Link>
 			)
 		};
 	});
-	submissionList.map(content => tableContent.push(content));
+	procurementList.map(content => tableContent.push(content));
 
 	return (
 		<Master>
@@ -55,7 +55,7 @@ const ProcurementList = props => {
 
 const mapStateToProps = state => {
 	return {
-		submission: state.submission.submissionForm
+		procurement: state.procurement.list
 	};
 };
 

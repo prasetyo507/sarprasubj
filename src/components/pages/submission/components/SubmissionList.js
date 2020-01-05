@@ -15,12 +15,20 @@ const SubmissionList = props => {
 			refNumber: lists.refnumber,
 			date: lists.date,
 			action: (
-				<Link
-					className='btn btn-success btn-sm'
-					to={`${url}/${lists.refnumber}/detail`}
-				>
-					<i className='fa fa-eye'></i>
-				</Link>
+				<>
+					<Link
+						className='btn btn-success btn-sm'
+						to={`${url}/${lists.refnumber}/detail`}
+					>
+						<i className='fa fa-eye'></i>
+					</Link>
+					<Link
+						className='btn btn-info btn-sm'
+						to={`${url}/${lists.refnumber}/seesubmission`}
+					>
+						<i className='fa fa-eye'></i>
+					</Link>
+				</>
 			)
 		};
 	});
