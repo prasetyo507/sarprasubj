@@ -254,8 +254,7 @@ class AddVendor extends Component {
           type: "url",
           placeholder: "Website Vendor (http://)",
           className: "form-control",
-          name: "website",
-          defaultValue: "http://"
+          name: "website"
         }
       },
       {

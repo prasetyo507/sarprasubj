@@ -79,7 +79,6 @@ class EditVendor extends Component {
         }
       }
     ];
-
     const forms2 = [
       {
         selectName: "Negara",

@@ -1,11 +1,14 @@
 import React, { Component } from "react";
-import { FreeText, Select } from "../../common/FormGroup";
-import Modal from "../../common/Modal";
+import { FreeText, Select } from "../../../../common/FormGroup";
+import Modal from "../../../../common/Modal";
+import { connect } from "react-redux";
+import { dispatchCatalogue } from "../../store/actions/itemsAction";
 
 class AddCatalogue extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {};
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
     let script = document.createElement("script");
@@ -19,6 +22,29 @@ class AddCatalogue extends Component {
       alert("Harga harus berupa angka!");
     }
   }
+  async handleSubmit(event) {
+    event.preventDefault();
+    let fillCatalogue = {
+      id: 1,
+      name: event.target.name.value,
+      price: event.target.price.value,
+      vendor: event.target.vendor.value,
+      tipe_garansi: event.target.tipe_garansi.value,
+      waktu_garansi: event.target.waktu_garansi.value
+    }
+    await this.props.submitCatalogue(fillCatalogue);
+    var my_form = document.getElementById("myForm");
+    my_form.reset()
+    /* Toast */
+    var toast = document.getElementById("snackbar4");
+    /* Show Toast */
+    toast.className = "show";
+    setTimeout(() => {
+      /* hide Toast after 2 seconds */
+      toast.className = toast.className.replace("show", "");
+      this.props.hide();
+    }, 2000);
+  }
   render() {
     const forms1 = [
       {
@@ -29,8 +55,6 @@ class AddCatalogue extends Component {
           placeholder: "Harga Barang",
           className: "form-control",
           name: "price",
-          required: true,
-          autofocus: "",
           onChange: this.handleChange,
           maxLength: "15"
         }
@@ -42,9 +66,16 @@ class AddCatalogue extends Component {
         selectAttr: {
           className: "form-control select2",
           name: "name",
-          required: true
+          defaultValue: ""
         },
         optionList: [
+          {
+            inputAttr: {
+              value: "",
+              disabled: true
+            },
+            name: "-- Pilih Barang --"
+          },
           {
             inputAttr: {
               value: "handphone Nokia 3610"
@@ -70,9 +101,16 @@ class AddCatalogue extends Component {
         selectAttr: {
           className: "form-control select2",
           name: "vendor",
-          required: true
+          defaultValue: ""
         },
         optionList: [
+          {
+            inputAttr: {
+              value: "",
+              disabled: true
+            },
+            name: "-- Pilih Vendor --"
+          },
           {
             inputAttr: {
               value: "king"
@@ -92,14 +130,21 @@ class AddCatalogue extends Component {
       {
         selectName: "Tipe Garansi",
         selectAttr: {
-          className: "form-control",
+          className: "form-control select2",
           name: "tipe_garansi",
-          required: true
+          defaultValue: ""
         },
         optionList: [
           {
             inputAttr: {
-              value: "-"
+              value: "",
+              disabled: true
+            },
+            name: "-- Pilih Garansi --"
+          },
+          {
+            inputAttr: {
+              value: "Tidak bergaransi"
             },
             name: "Tidak bergaransi"
           },
@@ -126,14 +171,13 @@ class AddCatalogue extends Component {
           type: "number",
           placeholder: "Jangka Waktu Garansi (Bulan)",
           className: "form-control",
-          name: "waktu_garansi",
-          required: true
+          name: "waktu_garansi"
         }
       }
     ];
     const save = (
-      <button type="submit" className="btn btn-primary pull-right">
-        Simpan
+      <button type="submit" className="btn btn-success pull-right" id="save">
+        <i className='fa fa-save'></i>  Simpan
       </button>
     );
     const close = (
@@ -146,18 +190,27 @@ class AddCatalogue extends Component {
       </button>
     );
     return (
-      <Modal title="Tambah Data Katalog" save={save} close={close}>
-        <form>
+      <form onSubmit={this.handleSubmit} id="myForm">
+        <Modal title="Tambah Data Katalog" save={save} close={close}>
           <div className="col-md-12">
             <Select formProp={forms2} />
             <FreeText formProp={forms1} />
             <Select formProp={forms4} />
             <FreeText formProp={forms3} />
           </div>
-        </form>
-      </Modal>
+          <div id="snackbar4">Berhasil...</div>
+        </Modal>
+      </form>
     );
   }
 }
 
-export default AddCatalogue;
+const mapDispatchToProps = dispatch => {
+  return {
+    submitCatalogue: catalogueData =>
+      dispatch(dispatchCatalogue(catalogueData))
+  };
+};
+
+
+export default connect(null, mapDispatchToProps)(AddCatalogue);
