@@ -33,7 +33,7 @@ const Barang = props => {
 			no: key + 1,
 			nama: lists.nama,
 			jenis: lists.jenis,
-			photo: <img src={lists.photo} alt={lists.nama}></img>,
+			photo: <img style={{ width: "100px" }} src={lists.photo} alt={lists.nama}></img>,
 			note: lists.note,
 			action: (
 				<>

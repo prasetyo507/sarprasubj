@@ -27,18 +27,17 @@ class EditBarang extends Component {
       alert('Gunakan File dengan format .jpeg, .gif atau .png');
       fileInput.value = '';
       return false;
+    } else if (fileInput.files[0].size > 524288) {
+      alert('Gunakan File dengan ukuran maksimal 512Kb');
+      fileInput.value = '';
+      return false;
     } else {
-      //Image preview
       if (fileInput.files && fileInput.files[0]) {
         var reader = new FileReader();
         reader.onload = (e) => {
           document.getElementById('imagePreview2').innerHTML = '<img style="width:300px" src="' + e.target.result + '"/>';
-          const formData = { file: e.target.result }
-          this.setState({ image: formData })
+          this.setState({ image: e.target.result })
         };
-        /* this.setState({
-          image: formData.file
-        }) */
         reader.readAsDataURL(fileInput.files[0]);
       }
     }

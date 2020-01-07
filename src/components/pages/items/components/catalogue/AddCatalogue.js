@@ -46,6 +46,7 @@ class AddCatalogue extends Component {
     }, 2000);
   }
   render() {
+
     const forms1 = [
       {
         lableFor: "price",
@@ -60,72 +61,65 @@ class AddCatalogue extends Component {
         }
       }
     ];
-    const forms2 = [
+    //barang
+    if (this.props.barang) {
+      let selectBarang = this.props.barang.map(lists => {
+        return {
+          inputAttr: {
+            value: lists.nama
+          },
+          name: lists.nama
+        }
+      })
+      let defaultBarang =
       {
+        inputAttr: {
+          value: "",
+          disabled: true
+        },
+        name: "-- Pilih Barang --"
+      }
+      selectBarang.unshift(defaultBarang)
+      var formBarang = [{
         selectName: "Nama Barang",
         selectAttr: {
           className: "form-control select2",
           name: "name",
           defaultValue: ""
         },
-        optionList: [
-          {
-            inputAttr: {
-              value: "",
-              disabled: true
-            },
-            name: "-- Pilih Barang --"
+        optionList: selectBarang
+      }];
+    }
+    //vendor
+    if (this.props.vendor) {
+      let selectVendor = this.props.vendor.map(lists => {
+        return {
+          inputAttr: {
+            value: lists.nama
           },
-          {
-            inputAttr: {
-              value: "handphone Nokia 3610"
-            },
-            name: "handphone Nokia 3610"
-          },
-          {
-            inputAttr: {
-              value: "laptop Asus Tuf Gaming"
-            },
-            name: "laptop Asus Tuf Gaming"
-          },
-          {
-            inputAttr: {
-              value: "monitor toshiba"
-            },
-            name: "Monitor toshiba"
-          }
-        ]
-      },
+          name: lists.nama
+        }
+      })
+      let defaultVendor =
       {
+        inputAttr: {
+          value: "",
+          disabled: true
+        },
+        name: "-- Pilih Vendor --"
+      }
+      selectVendor.unshift(defaultVendor)
+      var formVendor = [{
         selectName: "Vendor",
         selectAttr: {
           className: "form-control select2",
           name: "vendor",
           defaultValue: ""
         },
-        optionList: [
-          {
-            inputAttr: {
-              value: "",
-              disabled: true
-            },
-            name: "-- Pilih Vendor --"
-          },
-          {
-            inputAttr: {
-              value: "king"
-            },
-            name: "king Computer"
-          },
-          {
-            inputAttr: {
-              value: "enter"
-            },
-            name: "Enter Komputer"
-          }
-        ]
-      }
-    ];
+        optionList: selectVendor
+      }];
+    }
+
     const forms4 = [
       {
         selectName: "Tipe Garansi",
@@ -190,10 +184,11 @@ class AddCatalogue extends Component {
       </button>
     );
     return (
-      <form onSubmit={this.handleSubmit} id="myForm">
+      <form onSubmit={this.handleSubmit} id="myForm" >
         <Modal title="Tambah Data Katalog" save={save} close={close}>
           <div className="col-md-12">
-            <Select formProp={forms2} />
+            <Select formProp={formBarang} />
+            <Select formProp={formVendor} />
             <FreeText formProp={forms1} />
             <Select formProp={forms4} />
             <FreeText formProp={forms3} />
@@ -211,6 +206,11 @@ const mapDispatchToProps = dispatch => {
       dispatch(dispatchCatalogue(catalogueData))
   };
 };
+const mapStateToProps = state => {
+  return {
+    barang: state.barang.barangForm,
+    vendor: state.vendor.vendorForm
+  };
+};
 
-
-export default connect(null, mapDispatchToProps)(AddCatalogue);
+export default connect(mapStateToProps, mapDispatchToProps)(AddCatalogue);
