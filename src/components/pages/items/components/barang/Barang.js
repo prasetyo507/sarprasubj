@@ -34,6 +34,7 @@ const Barang = props => {
 			no: key + 1,
 			nama: lists.nama,
 			jenis: lists.jenis,
+			satuan: lists.satuan,
 			photo: <img style={{ width: "100px" }} src={lists.photo} alt={lists.nama}></img>,
 			note: lists.note,
 			action: (
@@ -61,9 +62,10 @@ const Barang = props => {
 			column0: "No",
 			column1: "Nama Barang",
 			column2: "Jenis",
-			column3: "Foto",
-			column4: "Catatan",
-			column5: "Aksi"
+			column3: "Satuan",
+			column4: "Foto",
+			column5: "Catatan",
+			column6: "Aksi"
 		}
 	];
 

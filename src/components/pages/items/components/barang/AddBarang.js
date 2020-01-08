@@ -47,6 +47,7 @@ class AddBarang extends Component {
       id: 1,
       nama: event.target.name.value,
       jenis: event.target.jenis.value,
+      satuan: event.target.satuan.value,
       photo: this.state.image,
       note: event.target.note.value,
     }
@@ -77,8 +78,34 @@ class AddBarang extends Component {
         }
       }
     ];
-    const forms2 = [
+    //Jenis
+    if (this.props.jenis) {
+      let selectJenis = this.props.jenis.map(lists => {
+        var klasifikasi = "-"
+        if (lists.classification === "IT") {
+          klasifikasi = "Barang IT"
+        } else if (lists.classification === "NONIT") {
+          klasifikasi = "Barang Non IT"
+        } else {
+          klasifikasi = "-"
+        }
+        return {
+          inputAttr: {
+            value: lists.name
+          },
+          name: lists.name + "(" + klasifikasi + ")"
+        }
+      })
+      let defaultJenis =
       {
+        inputAttr: {
+          value: "",
+          disabled: true
+        },
+        name: "-- Pilih Jenis --"
+      }
+      selectJenis.unshift(defaultJenis)
+      var forms2 = [{
         selectName: "Jenis",
         selectAttr: {
           className: "form-control select2",
@@ -86,36 +113,40 @@ class AddBarang extends Component {
           required: true,
           defaultValue: ""
         },
-        optionList: [
-          {
-            inputAttr: {
-              value: "",
-              disabled: true
-            },
-            name: "-- Pilih Jenis --"
+        optionList: selectJenis
+      }];
+    }
+    //Satuan
+    if (this.props.satuan) {
+      let selectSatuan = this.props.satuan.map(lists => {
+        return {
+          inputAttr: {
+            value: lists.name
           },
-          {
-            inputAttr: {
-              value: "handphone"
-            },
-            name: "Handphone"
-          },
-          {
-            inputAttr: {
-              value: "laptop"
-            },
-            name: "Laptop"
-          },
-          {
-            inputAttr: {
-              value: "monitor"
-            },
-            name: "Monitor"
-          }
-        ]
+          name: lists.name + "(" + lists.kode + ")"
+        }
+      })
+      let defaultSatuan =
+      {
+        inputAttr: {
+          value: "",
+          disabled: true
+        },
+        name: "-- Pilih Satuan --"
       }
-    ];
-    const forms3 = [
+      selectSatuan.unshift(defaultSatuan)
+      var forms3 = [{
+        selectName: "Satuan",
+        selectAttr: {
+          className: "form-control select2",
+          name: "satuan",
+          required: true,
+          defaultValue: ""
+        },
+        optionList: selectSatuan
+      }];
+    }
+    const forms4 = [
       {
         lableFor: "photo",
         lableName: "Foto",
@@ -128,7 +159,7 @@ class AddBarang extends Component {
         }
       }
     ];
-    const forms4 = [
+    const forms5 = [
       {
         lableFor: "note",
         lableName: "Catatan",
@@ -160,11 +191,12 @@ class AddBarang extends Component {
           <div className="col-md-12">
             <FreeText formProp={forms1} />
             <Select formProp={forms2} />
-            <FreeText formProp={forms3} />
+            <Select formProp={forms3} />
+            <FreeText formProp={forms4} />
             <small>Gunakan File dengan format .jpeg, .gif atau .png<br />
               Gunakan File dengan ukuran maksimal 512Kb</small>
             <div id="imagePreview"></div>
-            <TextArea formProp={forms4} />
+            <TextArea formProp={forms5} />
           </div>
           <div id="snackbar">Berhasil...</div>
         </Modal>
@@ -178,6 +210,12 @@ const mapDispatchToProps = dispatch => {
       dispatch(dispatchBarang(barangData))
   };
 };
+const mapStateToProps = state => {
+  return {
+    jenis: state.jenis.jenisForm,
+    satuan: state.satuan.satuanForm
+  };
+};
 
 
-export default connect(null, mapDispatchToProps)(AddBarang);
+export default connect(mapStateToProps, mapDispatchToProps)(AddBarang);

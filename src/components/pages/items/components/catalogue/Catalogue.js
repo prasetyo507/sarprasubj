@@ -37,7 +37,7 @@ const Catalogue = props => {
 			vendor: lists.vendor,
 			price: lists.price,
 			tipe_garansi: lists.tipe_garansi,
-			waktu_garansi: lists.waktu_garansi,
+			waktu_garansi: lists.waktu_garansi + " bulan",
 			action: (
 				<>
 					<button
