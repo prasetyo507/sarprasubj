@@ -86,8 +86,13 @@ class Menu extends Component {
 				spanIcon: "fa fa-angle-left pull-right",
 				submenu: [
 					{
-						name: "Barang",
-						destination: "/items",
+						name: "Kategori Barang",
+						destination: "/category",
+						icon: "fa fa-circle-o"
+					},
+					{
+						name: "Satuan",
+						destination: "/satuan",
 						icon: "fa fa-circle-o"
 					},
 					{
@@ -96,8 +101,8 @@ class Menu extends Component {
 						icon: "fa fa-circle-o"
 					},
 					{
-						name: "Kategori Barang",
-						destination: "/category",
+						name: "Barang",
+						destination: "/items",
 						icon: "fa fa-circle-o"
 					}
 				]
