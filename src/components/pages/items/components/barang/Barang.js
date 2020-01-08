@@ -10,6 +10,7 @@ const Barang = props => {
 		let script = document.createElement("script");
 		script.innerHTML = "$('.modal').modal('hide');";
 		document.body.appendChild(script);
+		setID(null);
 	}
 
 	const handleClick = id => {
