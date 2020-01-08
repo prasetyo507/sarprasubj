@@ -76,7 +76,7 @@ class EditCategory extends Component {
         }
       ]
       const save = (
-        <button type="submit" className="btn btn-primary pull-right">
+        <button type="submit" className="btn btn-success pull-right">
           Ubah
       </button>
       );
