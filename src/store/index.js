@@ -2,12 +2,16 @@ import { createStore, combineReducers } from "redux";
 import { submissionReducer } from "../components/pages/submission/store/reducers/submissionReducer";
 import { vendorReducer } from "../components/pages/vendor/store/reducers/vendorReducer";
 import { barangReducer, catalogueReducer } from "../components/pages/items/store/reducers/itemsReducer";
+import { kategoriReducer, jenisReducer } from "../components/pages/itemgroup/store/reducers/itemgroupReducer";
 
 const rootReducer = combineReducers({
 	submission: submissionReducer,
 	vendor: vendorReducer,
 	barang: barangReducer,
-	catalogue: catalogueReducer
+	catalogue: catalogueReducer,
+	kategori: kategoriReducer,
+	jenis: jenisReducer
+
 });
 
 const store = createStore(
