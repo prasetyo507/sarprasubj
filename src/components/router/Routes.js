@@ -7,6 +7,7 @@ import Vendor from "../pages/vendor/container";
 import NotFound from "../pages/404/404";
 import Category from "../pages/itemgroup/container";
 import Item from "../pages/items/container";
+import Satuan from "../pages/satuan/container";
 
 class Routes extends React.Component {
 	render() {
@@ -17,6 +18,7 @@ class Routes extends React.Component {
 				<Route path='/vendor' component={Vendor} />
 				<Route path='/items' component={Item} />
 				<Route path='/category' component={Category} />
+				<Route path='/satuan' component={Satuan} />
 				<Route component={NotFound} />
 			</Switch>
 		);

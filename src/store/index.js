@@ -3,6 +3,7 @@ import { submissionReducer } from "../components/pages/submission/store/reducers
 import { vendorReducer } from "../components/pages/vendor/store/reducers/vendorReducer";
 import { barangReducer, catalogueReducer } from "../components/pages/items/store/reducers/itemsReducer";
 import { kategoriReducer, jenisReducer } from "../components/pages/itemgroup/store/reducers/itemgroupReducer";
+import { satuanReducer } from "../components/pages/satuan/store/reducers/satuanReducer";
 
 const rootReducer = combineReducers({
 	submission: submissionReducer,
@@ -10,7 +11,8 @@ const rootReducer = combineReducers({
 	barang: barangReducer,
 	catalogue: catalogueReducer,
 	kategori: kategoriReducer,
-	jenis: jenisReducer
+	jenis: jenisReducer,
+	satuan: satuanReducer
 
 });
 
