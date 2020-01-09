@@ -6,13 +6,28 @@ import { connect } from "react-redux";
 import { dispatchDeleteBarang } from "../../store/actions/itemsAction";
 
 const Barang = props => {
+	function onShow(foto, nama) {
+		// Get the modal
+		var modal = document.getElementById("myModal");
+		// Get the image and insert it inside the modal - use its "alt" text as a caption
+		var modalImg = document.getElementById("img01");
+		var captionText = document.getElementById("caption");
+		modal.style.display = "block";
+		modalImg.src = foto;
+		captionText.innerHTML = nama;
+	}
+	function onHide() {
+		var modal = document.getElementById("myModal");
+		modal.style.display = "none";
+	}
+
+
 	function hideModal() {
 		let script = document.createElement("script");
 		script.innerHTML = "$('.modal').modal('hide');";
 		document.body.appendChild(script);
 		setID(null);
 	}
-
 	const handleClick = id => {
 		var result = window.confirm("Yakin menghapus data?");
 		if (result === true) {
@@ -35,7 +50,7 @@ const Barang = props => {
 			nama: lists.nama,
 			jenis: lists.jenis,
 			satuan: lists.satuan,
-			photo: <img style={{ width: "100px" }} src={lists.photo} alt={lists.nama}></img>,
+			photo: <img id="myImg" onClick={() => onShow(lists.photo, lists.nama)} src={lists.photo} alt={lists.nama}></img>,
 			note: lists.note,
 			action: (
 				<>
@@ -87,11 +102,19 @@ const Barang = props => {
 				tableKind='example1'
 			/>
 			<div id="snackbar2">Berhasil dihapus...</div>
+
+
+
 			<div className='modal fade' id='modal_add'>
 				<AddBarang hide={hideModal} />
 			</div>
 			<div className='modal fade' id='modal_edit'>
 				<EditBarang hide={hideModal} idBarang={id_barang} />
+			</div>
+			<div id="myModal" className="item">
+				<span className="close" onClick={() => onHide()}>&times;</span>
+				<img className="item-content" alt="fullscreen_image" id="img01" />
+				<div id="caption"></div>
 			</div>
 		</>
 	);

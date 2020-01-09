@@ -35,6 +35,7 @@ class EditBarang extends Component {
       if (fileInput.files && fileInput.files[0]) {
         var reader = new FileReader();
         reader.onload = (e) => {
+
           document.getElementById('imagePreview2').innerHTML = '<img style="width:300px" src="' + e.target.result + '"/>';
           this.setState({ image: e.target.result })
         };
@@ -202,7 +203,7 @@ class EditBarang extends Component {
               <FreeText formProp={forms4} />
               <small>Gunakan File dengan format .jpeg, .gif atau .png<br />
                 Gunakan File dengan ukuran maksimal 512Kb</small>
-              <div id="imagePreview2"></div>
+              <div id="imagePreview2"><img style={{ width: "300px" }} src={getEditBarang.photo} alt="preview" /></div>
               <TextArea formProp={forms5} />
             </div>
             <div id="snackbar3">Berhasil...</div>

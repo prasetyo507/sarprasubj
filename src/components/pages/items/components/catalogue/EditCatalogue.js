@@ -59,6 +59,7 @@ class EditCatalogue extends Component {
             type: "text",
             placeholder: "Harga Barang",
             className: "form-control",
+            required: true,
             name: "price",
             defaultValue: getEditCatalogue.price,
             onChange: this.handleChange,
@@ -89,6 +90,7 @@ class EditCatalogue extends Component {
           selectName: "Nama Barang",
           selectAttr: {
             className: "form-control select2",
+            required: true,
             name: "name",
             defaultValue: getEditCatalogue.barang
           },
@@ -119,6 +121,7 @@ class EditCatalogue extends Component {
           selectAttr: {
             className: "form-control select2",
             name: "vendor",
+            required: true,
             defaultValue: getEditCatalogue.vendor
           },
           optionList: selectVendor

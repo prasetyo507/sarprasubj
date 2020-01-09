@@ -56,6 +56,7 @@ class AddCatalogue extends Component {
           placeholder: "Harga Barang",
           className: "form-control",
           name: "price",
+          required: true,
           onChange: this.handleChange,
           maxLength: "15"
         }
@@ -85,6 +86,7 @@ class AddCatalogue extends Component {
         selectAttr: {
           className: "form-control select2",
           name: "name",
+          required: true,
           defaultValue: ""
         },
         optionList: selectBarang
@@ -114,6 +116,7 @@ class AddCatalogue extends Component {
         selectAttr: {
           className: "form-control select2",
           name: "vendor",
+          required: true,
           defaultValue: ""
         },
         optionList: selectVendor
@@ -126,6 +129,7 @@ class AddCatalogue extends Component {
         selectAttr: {
           className: "form-control select2",
           name: "tipe_garansi",
+          required: true,
           defaultValue: ""
         },
         optionList: [
