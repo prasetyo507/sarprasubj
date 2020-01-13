@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import Section from "../../common/Section";
 import Master from "../Master";
-import Services from "../../services/Services";
+/* import Services from "../../services/Services"; */
 
 class Home extends Component {
   componentDidMount() {
-    Services.get("users/1/albums")
+    console.log(JSON.parse(localStorage.getItem("userInfo")))
+    /* Services.get("users/1/albums")
       .then(function(response) {
         // handle success
         console.log(response.data);
@@ -16,7 +17,7 @@ class Home extends Component {
       })
       .finally(function() {
         // always executed
-      });
+      }); */
   }
   render() {
     return (

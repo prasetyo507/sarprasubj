@@ -14,7 +14,7 @@ class Menu extends Component {
 		const menus = [
 			{
 				name: "Dashboard",
-				destination: "/",
+				destination: "/home",
 				class_name: null,
 				icon: "fa fa-dashboard"
 			},

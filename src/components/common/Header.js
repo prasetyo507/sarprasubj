@@ -1,12 +1,20 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Header extends Component {
-  state = {};
+  handleClick() {
+    var result = window.confirm("Yakin keluar?");
+    if (result === true) {
+      localStorage.clear()
+      window.location.href = "/"
+    }
+  }
+
   render() {
     return (
       <header className="main-header">
         {/* Logo */}
-        <a href="index2.html" className="logo">
+        <Link to="/home" className="logo">
           {/* mini logo for sidebar mini 50x50 pixels */}
           <span className="logo-mini">
             <img src="new_ubj.png" alt="logo ubj" />
@@ -15,7 +23,7 @@ class Header extends Component {
           <span className="logo-lg">
             <b>SARPRAS </b>UBJ
           </span>
-        </a>
+        </Link>
         {/* Header Navbar: style can be found in header.less */}
         <nav className="navbar navbar-static-top">
           {/* Sidebar toggle button*/}
@@ -74,14 +82,14 @@ class Header extends Component {
               <li className="dropdown user user-menu">
                 <a href="#!" className="dropdown-toggle" data-toggle="dropdown">
                   <i className="fa fa-user"></i>
-                  <span className="hidden-xs"> Alexander Pierce</span>
+                  <span className="hidden-xs">&nbsp;{JSON.parse(localStorage.getItem("userInfo")).divisi}</span>
                 </a>
                 <ul className="dropdown-menu">
                   {/* User image */}
                   <li className="user-header">
                     <p>
-                      Alexander Pierce - Web Developer
-                      <small>Member since Nov. 2012</small>
+                      {JSON.parse(localStorage.getItem("userInfo")).divisi}
+                      <small>{JSON.parse(localStorage.getItem("userInfo")).group_name}</small>
                     </p>
                   </li>
                   {/* Menu Footer*/}
@@ -92,9 +100,9 @@ class Header extends Component {
                       </a>
                     </div>
                     <div className="pull-right">
-                      <a href="#!" className="btn btn-default btn-flat">
-                        Sign out
-                      </a>
+                      <button type="button" onClick={() => this.handleClick()} className="btn btn-default btn-flat">
+                        Keluar
+                      </button>
                     </div>
                   </li>
                 </ul>

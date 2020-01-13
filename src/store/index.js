@@ -4,8 +4,10 @@ import { vendorReducer } from "../components/pages/vendor/store/reducers/vendorR
 import { barangReducer, catalogueReducer } from "../components/pages/items/store/reducers/itemsReducer";
 import { kategoriReducer, jenisReducer } from "../components/pages/itemgroup/store/reducers/itemgroupReducer";
 import { satuanReducer } from "../components/pages/satuan/store/reducers/satuanReducer";
+import { loginReducer } from "../components/pages/login/store/reducers/loginReducer";
 
 const rootReducer = combineReducers({
+	auth: loginReducer,
 	submission: submissionReducer,
 	vendor: vendorReducer,
 	barang: barangReducer,
