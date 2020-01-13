@@ -9,15 +9,18 @@ import { dispatchDeleteVendor } from "../store/actions/vendorAction";
 const ListVendor = props => {
 	const { url } = useRouteMatch();
 	const handleClick = id => {
-		props.deleteVendor(id);
-		/* Toast */
-		var toast = document.getElementById("snackbar");
-		/* Show Toast */
-		toast.className = "show";
-		setTimeout(() => {
-			/* hide Toast after 2 seconds */
-			toast.className = toast.className.replace("show", "");
-		}, 2000);
+		var result = window.confirm("Yakin menghapus data?");
+		if (result === true) {
+			props.deleteVendor(id);
+			/* Toast */
+			var toast = document.getElementById("snackbar");
+			/* Show Toast */
+			toast.className = "show";
+			setTimeout(() => {
+				/* hide Toast after 2 seconds */
+				toast.className = toast.className.replace("show", "");
+			}, 2000);
+		}
 	}
 
 	let vendors = props.vendor.map((lists, key) => {
