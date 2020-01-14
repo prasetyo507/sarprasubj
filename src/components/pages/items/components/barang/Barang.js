@@ -39,7 +39,7 @@ const Barang = props => {
 			setTimeout(() => {
 				/* hide Toast after 2 seconds */
 				toast.className = toast.className.replace("show", "");
-			}, 2000);
+			}, 1000);
 		}
 	}
 	let [id_barang, setID] = useState(null);
