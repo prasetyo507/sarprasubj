@@ -35,7 +35,7 @@ const Category = props => {
 		setTimeout(() => {
 			/* hide Toast after 2 seconds */
 			toast.className = toast.className.replace("show", "");
-		}, 2000);
+		}, 1000);
 	};
 	const handleClick = id => {
 		var result = window.confirm("Yakin menghapus data?");
@@ -48,7 +48,7 @@ const Category = props => {
 			setTimeout(() => {
 				/* hide Toast after 2 seconds */
 				toast.className = toast.className.replace("show", "");
-			}, 2000);
+			}, 1000);
 		}
 	}
 	let [id_category, setID] = useState(null);

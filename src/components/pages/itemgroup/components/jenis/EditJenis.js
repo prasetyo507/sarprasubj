@@ -27,7 +27,7 @@ class EditJenis extends Component {
       /* hide Toast after 2 seconds */
       toast.className = toast.className.replace("show", "");
       this.props.hide();
-    }, 2000);
+    }, 1000);
   }
   render() {
     const param = this.props.idJenis;
