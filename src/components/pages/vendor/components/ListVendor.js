@@ -19,7 +19,7 @@ const ListVendor = props => {
 			setTimeout(() => {
 				/* hide Toast after 2 seconds */
 				toast.className = toast.className.replace("show", "");
-			}, 2000);
+			}, 1000);
 		}
 	}
 
