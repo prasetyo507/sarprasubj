@@ -33,7 +33,7 @@ class Login extends Component {
 				setTimeout(() => {
 					toast.className = toast.className.replace("show", "");
 					props.history.push("/home");
-				}, 2000);
+				}, 1000);
 			})
 			.catch(function (error) {
 				console.clear();
