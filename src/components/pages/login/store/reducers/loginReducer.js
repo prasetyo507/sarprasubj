@@ -1,7 +1,7 @@
 import * as actionType from "../actions/types";
 
 const initState = {
-	authForm: []
+	authForm: ""
 };
 
 export const loginReducer = (state = initState, action) => {
@@ -9,7 +9,7 @@ export const loginReducer = (state = initState, action) => {
 		case actionType.DISPATCH_AUTH:
 			return {
 				...state,
-				authForm: [...state.authForm, action.payload]
+				authForm: action.payload
 			};
 
 		default:

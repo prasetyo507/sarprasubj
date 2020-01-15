@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 class Header extends Component {
   handleClick() {
@@ -82,14 +83,14 @@ class Header extends Component {
               <li className="dropdown user user-menu">
                 <a href="#!" className="dropdown-toggle" data-toggle="dropdown">
                   <i className="fa fa-user"></i>
-                  <span className="hidden-xs">&nbsp;{JSON.parse(localStorage.getItem("userInfo")).divisi}</span>
+                  <span className="hidden-xs">&nbsp;{this.props.auth.divisi}</span>
                 </a>
                 <ul className="dropdown-menu">
                   {/* User image */}
                   <li className="user-header">
                     <p>
-                      {JSON.parse(localStorage.getItem("userInfo")).divisi}
-                      <small>{JSON.parse(localStorage.getItem("userInfo")).group_name}</small>
+                      {this.props.auth.divisi}
+                      <small>{this.props.auth.group_name}</small>
                     </p>
                   </li>
                   {/* Menu Footer*/}
@@ -115,4 +116,9 @@ class Header extends Component {
   }
 }
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    auth: state.auth.authForm
+  };
+};
+export default connect(mapStateToProps, null)(Header);

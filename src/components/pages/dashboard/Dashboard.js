@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import Section from "../../common/Section";
 import Master from "../Master";
+import { connect } from "react-redux";
 /* import Services from "../../services/Services"; */
 
 class Home extends Component {
   componentDidMount() {
-    console.log(JSON.parse(localStorage.getItem("userInfo")))
+    console.log(this.props.auth.userid)
     /* Services.get("users/1/albums")
       .then(function(response) {
         // handle success
@@ -30,4 +31,10 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => {
+  return {
+    auth: state.auth.authForm
+  };
+};
+
+export default connect(mapStateToProps, null)(Home);

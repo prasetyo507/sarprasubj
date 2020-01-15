@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Services from "../../../services/Services";
+import { connect } from "react-redux";
+import { dispatchAuth } from "../store/actions/loginAction";
 
 class Login extends Component {
 	constructor(props) {
@@ -27,7 +29,7 @@ class Login extends Component {
 		Services.post("login", Data)
 			.then(function (response) {
 				var decode = jwt.decode(response.data.data.token);
-				localStorage.setItem('userInfo', JSON.stringify(decode.UserInfo));
+				props.submitAuth(decode.UserInfo);
 				var toast = document.getElementById("snackbar");
 				toast.className = "show";
 				setTimeout(() => {
@@ -75,4 +77,11 @@ class Login extends Component {
 	}
 }
 
-export default Login;
+const mapDispatchToProps = dispatch => {
+	return {
+		submitAuth: userInfo =>
+			dispatch(dispatchAuth(userInfo))
+	};
+};
+
+export default connect(null, mapDispatchToProps)(Login);
