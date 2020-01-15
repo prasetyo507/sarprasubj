@@ -64,7 +64,8 @@ class AddSatuan extends Component {
           name: "kode",
           maxLength: "3",
           required: true,
-          onChange: this.handleChange
+          onChange: this.handleChange,
+          autoComplete: "off"
         }
       }]
     var forms2 = [
