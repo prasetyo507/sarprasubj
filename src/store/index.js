@@ -1,10 +1,12 @@
 import { createStore, combineReducers } from "redux";
+import { persistStore, persistReducer } from "redux-persist";
 import { submissionReducer } from "../components/pages/submission/store/reducers/submissionReducer";
 import { vendorReducer } from "../components/pages/vendor/store/reducers/vendorReducer";
 import { barangReducer, catalogueReducer } from "../components/pages/items/store/reducers/itemsReducer";
 import { kategoriReducer, jenisReducer } from "../components/pages/itemgroup/store/reducers/itemgroupReducer";
 import { satuanReducer } from "../components/pages/satuan/store/reducers/satuanReducer";
 import { loginReducer } from "../components/pages/login/store/reducers/loginReducer";
+import storage from "redux-persist/lib/storage";
 
 const rootReducer = combineReducers({
 	auth: loginReducer,
@@ -18,9 +20,18 @@ const rootReducer = combineReducers({
 
 });
 
+const persistConfig = {
+	key: 'root',
+	storage
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
 const store = createStore(
-	rootReducer,
+	persistedReducer,
 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-export default store;
+const persistor = persistStore(store)
+
+export { store, persistor };
