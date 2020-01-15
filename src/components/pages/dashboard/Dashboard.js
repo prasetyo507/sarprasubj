@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 
 class Home extends Component {
   componentDidMount() {
-    console.log(this.props.auth.userid)
     /* Services.get("users/1/albums")
       .then(function(response) {
         // handle success

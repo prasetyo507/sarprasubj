@@ -10,7 +10,7 @@ class Login extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	componentDidMount() {
-		if (localStorage.getItem('userInfo')) {
+		if (this.props.auth !== "") {
 			this.props.history.push("/home");
 		}
 	}
@@ -83,5 +83,9 @@ const mapDispatchToProps = dispatch => {
 			dispatch(dispatchAuth(userInfo))
 	};
 };
-
-export default connect(null, mapDispatchToProps)(Login);
+const mapStateToProps = state => {
+	return {
+		auth: state.auth.authForm
+	};
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

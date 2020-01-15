@@ -7,7 +7,7 @@ import Wrapper from "../common/Wrapper";
 import { connect } from 'react-redux';
 
 const Master = (props) => {
-    if (props.auth) {
+    if (props.auth !== "") {
         return (
             <>
                 <Header />
