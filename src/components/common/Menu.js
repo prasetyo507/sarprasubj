@@ -175,7 +175,7 @@ class Menu extends Component {
 												<li
 													key={key}
 													className={
-														sub.destination === window.location.pathname
+														sub.destination === window.location.pathname || sub.destination === parentUrlPath
 															? `active`
 															: null
 													}
