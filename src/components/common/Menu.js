@@ -5,7 +5,7 @@ import { isNull } from "util";
 class Menu extends Component {
 	componentDidMount() {
 		let script = document.createElement("script");
-		script.innerHTML = `$('.sidebar-menu').tree(); $('[data-toggle="tooltip"]').tooltip()`;
+		script.innerHTML = `$('.sidebar-menu').tree(); $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" })`;
 		document.body.appendChild(script);
 	}
 
@@ -149,40 +149,40 @@ class Menu extends Component {
 									</NavLink>
 								</li>
 							) : (
-									<li
-										key={i}
-										className={`${menu.class_name} ${
-											_.some(menu.submenu, {
-												destination: parentUrlPath
-											})
-												? "active"
-												: null
-											}`}
-									>
-										<NavLink to={menu.destination}>
-											<i className={menu.icon} /> <span>{menu.name}</span>
-											<span className='pull-right-container'>
-												<i className='fa fa-angle-left pull-right'></i>
-											</span>
-										</NavLink>
-										<ul className='treeview-menu'>
-											{menu.submenu.map((sub, key) => (
-												<li
-													key={key}
-													className={
-														sub.destination === window.location.pathname
-															? `active`
-															: null
-													}
-												>
-													<NavLink to={sub.destination} activeClassName='active'>
-														<i className={sub.icon} /> {sub.name}
-													</NavLink>
-												</li>
-											))}
-										</ul>
-									</li>
-								)
+								<li
+									key={i}
+									className={`${menu.class_name} ${
+										_.some(menu.submenu, {
+											destination: parentUrlPath
+										})
+											? "active"
+											: null
+									}`}
+								>
+									<NavLink to={menu.destination}>
+										<i className={menu.icon} /> <span>{menu.name}</span>
+										<span className='pull-right-container'>
+											<i className='fa fa-angle-left pull-right'></i>
+										</span>
+									</NavLink>
+									<ul className='treeview-menu'>
+										{menu.submenu.map((sub, key) => (
+											<li
+												key={key}
+												className={
+													sub.destination === window.location.pathname
+														? `active`
+														: null
+												}
+											>
+												<NavLink to={sub.destination} activeClassName='active'>
+													<i className={sub.icon} /> {sub.name}
+												</NavLink>
+											</li>
+										))}
+									</ul>
+								</li>
+							)
 						)}
 					</ul>
 				</section>

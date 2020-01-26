@@ -1,20 +1,134 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { connect } from "react-redux";
+import { rejectItem, approveItem } from "../store/actions/submissionAction";
 
 import HeaderLayout from "./HeaderLayout";
 import Section from "../../../common/Section";
 import Master from "../../Master";
 import Datatable from "../../../common/table/Datatable";
+import Modal from "../../../common/Modal";
+import { TextArea } from "../../../common/FormGroup";
 
 const SubmissionDetail = props => {
+	// get param from url
 	let { refnumber } = useParams();
 	const param = refnumber;
+
+	// get submission detail
 	const getDetailSubmission = props.detailSubmission.find(submission => {
 		return submission.refnumber === param;
 	});
 
-	const tableHeader = [
+	// add action button to item object if login as BAU
+	const prepareTableContent = getDetailSubmission.items.map((items, i) => {
+		let itemClone = { ...items };
+		if (props.usedByProcurementChecking) {
+			itemClone.action = (
+				<>
+					<span data-toggle='tooltip' title='tolak barang'>
+						<button
+							className='btn btn-danger'
+							data-toggle='modal'
+							data-target='#rejectModal'
+							onClick={() => setRejectItem(items.item)}
+						>
+							<i className='fa fa-ban'></i>
+						</button>
+					</span>
+					<button
+						className='btn btn-success'
+						data-toggle='tooltip'
+						title='setujui barang'
+						style={{ marginLeft: "3px" }}
+						onClick={() => proveItem(items.item)}
+					>
+						<i className='fa fa-check'></i>
+					</button>
+				</>
+			);
+		}
+		return itemClone;
+	});
+
+	// adjust object to store to the table
+	const serveTableContent = prepareTableContent.map((items, i) => {
+		return {
+			no: i + 1,
+			type: items.type,
+			item: items.item,
+			qty: items.qty,
+			note: items.note,
+			isApprove: items.isApprove,
+			action: items.action
+		};
+	});
+
+	// dispatch state store to local state
+	const [submission, setSubmission] = useState([]);
+
+	// set submission object after adjustment
+	useEffect(() => {
+		const setSubmissionState = () => {
+			setSubmission(serveTableContent);
+		};
+		setSubmissionState();
+	}, [serveTableContent]);
+
+	// provide state to be identifier when give action
+	const [rejectedItem, setRejectedItem] = useState("");
+
+	// handle reject item
+	const submitRejectReason = async () => {
+		if (
+			window.confirm("Proses ini akan menghapus item pda pengajuan, lanjutkan?")
+		) {
+			let findItem = submission.items.find(item => {
+				return item.item === rejectedItem;
+			});
+			findItem.isApprove = 2;
+			findItem.approvalNote = document.getElementById("reason").value;
+			// dispatch to store
+			await props.rejectSubmissionItem(submission);
+			// update local state
+			setSubmission(getDetailSubmission);
+			// hide modal after submit
+			const hideModal = () => {
+				document
+					.getElementById("rejectModal")
+					.setAttribute("class", "modal fade");
+
+				document
+					.getElementsByClassName("modal-backdrop")[0]
+					.setAttribute("class", "modal-backdrop fade");
+			};
+			hideModal();
+		}
+	};
+
+	// set state to identify which item would be edited
+	const setRejectItem = itemIdentifier => {
+		setRejectedItem(itemIdentifier);
+	};
+
+	// handle approve item
+	const proveItem = async id => {
+		let findItem = submission.find(item => {
+			return item.item === id;
+		});
+		findItem.isApprove = 1;
+
+		let approveSelectedItem = getDetailSubmission.items.find(item => {
+			return item.item === id;
+		});
+		approveSelectedItem.isApprove = 1;
+		await props.approveSubmissionItem(approveSelectedItem);
+		// set local state
+		setSubmission(submission);
+	};
+
+	// set table header
+	let tableHeader = [
 		{
 			column0: "No",
 			column2: "Tipe",
@@ -124,43 +238,12 @@ const SubmissionDetail = props => {
 		</>
 	);
 
-	// add action button to item object if login as BAU
-	const prepareTableContent = getDetailSubmission.items.map((items, i) => {
-		let itemClone = { ...items };
-		if (props.usedByProcurementChecking) {
-			itemClone.action = (
-				<>
-					<button
-						className='btn btn-danger'
-						data-toggle='tooltip'
-						title='tolak barang'
-					>
-						<i className='fa fa-ban'></i>
-					</button>
-					<button
-						className='btn btn-success'
-						data-toggle='tooltip'
-						title='setujui barang'
-						style={{ marginLeft: "3px" }}
-					>
-						<i className='fa fa-check'></i>
-					</button>
-				</>
-			);
-		}
-		return itemClone;
-	});
-
-	const serveTableContent = prepareTableContent.map((items, i) => {
-		return {
-			no: i + 1,
-			type: items.type,
-			item: items.item,
-			qty: items.qty,
-			note: items.note,
-			action: items.action
-		};
-	});
+	// itemClone.action = (
+	// 	<i>
+	// 		*No action, item has{" "}
+	// 		<span className='badge bg-green'>approved</span>
+	// 	</i>
+	// );
 
 	return (
 		<Master>
@@ -179,10 +262,53 @@ const SubmissionDetail = props => {
 					}}
 				/>
 				<hr />
-				<Datatable headContent={tableHeader} content={serveTableContent} />
+				<Datatable headContent={tableHeader} content={submission} />
+				<div className='modal fade' id='rejectModal'>
+					<Modal
+						title='Reject Item'
+						close={
+							<button
+								className='btn btn-default'
+								data-dismiss='modal'
+								role='dialog'
+							>
+								Close
+							</button>
+						}
+						save={
+							<button
+								className='btn btn-success'
+								onClick={() => submitRejectReason()}
+							>
+								Submit
+							</button>
+						}
+					>
+						<TextArea
+							formProp={[
+								{
+									forAttr: "reason",
+									lableName: "Masukan alasan penolakan",
+									inputAttr: {
+										className: "form-control",
+										id: "reason",
+										name: "reason"
+									}
+								}
+							]}
+						></TextArea>
+					</Modal>
+				</div>
 			</Section>
 		</Master>
 	);
+};
+
+const mapDispatchToProps = dispatch => {
+	return {
+		rejectSubmissionItem: payload => dispatch(rejectItem(payload)),
+		approveSubmissionItem: payload => dispatch(approveItem(payload))
+	};
 };
 
 const mapStateToProps = state => {
@@ -191,4 +317,4 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps, null)(SubmissionDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(SubmissionDetail);

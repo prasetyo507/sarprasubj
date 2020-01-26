@@ -12,6 +12,14 @@ export const submissionReducer = (state = initState, action) => {
 				submissionForm: [...state.submissionForm, action.payload]
 			};
 
+		case actionType.REJECT_SUBMISSION_ITEM:
+			let submission = [...state.submissionForm];
+			let index = action.payload.refnumber;
+			let validationResult = action.payload;
+			submission[index] = validationResult;
+
+			return { ...state };
+
 		default:
 			return state;
 	}

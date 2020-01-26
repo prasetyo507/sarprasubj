@@ -27,6 +27,7 @@ class NewSubmission extends Component {
 		let itemName = $("input[name=item_name]").val();
 		let itemQty = $("input[name=item_qty]").val();
 		let itemType = $("#type option:selected").val();
+		let itemTypeText = $("#type option:selected").text();
 		let itemNote = $("input[name=item_note]").val();
 
 		if (itemName === "" || itemQty === "" || itemType === "") {
@@ -35,9 +36,12 @@ class NewSubmission extends Component {
 		}
 
 		let newItem = {
-			id: `ITEM-${this.state.items.length + 1}`,
-			item: itemName,
+			id: this.state.items.length + 1,
 			type: itemType,
+			typeText: itemTypeText,
+			item: itemName,
+			isApprove: 0,
+			approvalNote: "",
 			qty: itemQty,
 			note: itemNote
 		};
@@ -80,7 +84,14 @@ class NewSubmission extends Component {
 	async handleSubmitSubmission() {
 		const _ = require("lodash");
 		const items = this.state.items.map(item => {
-			return _.pick(item, ["item", "qty", "type", "note"]);
+			return _.pick(item, [
+				"item",
+				"qty",
+				"type",
+				"note",
+				"isApprove",
+				"approvalNote"
+			]);
 		});
 
 		if (this.state.headerForm.subject === "") {
@@ -113,24 +124,22 @@ class NewSubmission extends Component {
 			/* hide Toast after 2 seconds */
 			toast.className = toast.className.replace("show", "");
 			this.props.history.push("/submission");
-		}, 2000);
+		}, 1200);
 	}
 
 	render() {
 		const tableHeader = [
 			{
-				column0: "ID Barang",
-				column2: "Jenis",
+				column0: "Jenis",
 				column1: "Nama Barang",
-				column3: "QTY",
-				column4: "Catatan",
-				column5: "Aksi"
+				column2: "QTY",
+				column3: "Catatan",
+				column4: "Aksi"
 			}
 		];
 
 		const tableInput = [
 			{
-				id: <p style={{ fontWeight: "bold", fontSize: "16px" }}>#</p>,
 				tipe: (
 					<select
 						className='form-control form-input'
@@ -183,6 +192,10 @@ class NewSubmission extends Component {
 		if (this.state.items !== "") {
 			let newItemList = this.state.items.map(items => {
 				let itemClone = { ...items };
+				delete itemClone.id;
+				delete itemClone.type;
+				delete itemClone.isApprove;
+				delete itemClone.approvalNote;
 				itemClone.action = (
 					<button
 						className='btn btn-danger btn-sm'

@@ -15,7 +15,8 @@ export const HeaderService = props => {
 				refnumber: $('input[name="refnumber"]').val(),
 				date: $('input[name="date"]').val(),
 				to: $('input[name="to"]').val(),
-				from: $('input[name="from"]').val()
+				from: $('input[name="from"]').val(),
+				type: "pengajuan"
 			});
 		}
 	};
@@ -36,6 +37,7 @@ export const HeaderService = props => {
 		handleSubjectInput({ ...headerState });
 	}, [headerState, handleSubjectInput]);
 
+	const date = currentDate().replace(/-/g, "");
 	const refNumber = [
 		{
 			forAttr: "refnumber",
@@ -47,7 +49,7 @@ export const HeaderService = props => {
 				className: "form-control",
 				name: "refnumber",
 				readOnly: true,
-				value: Math.floor(Math.random() * 1001)
+				value: `256-${date}-${Math.floor(Math.random() * 1001)}`
 			}
 		}
 	];
