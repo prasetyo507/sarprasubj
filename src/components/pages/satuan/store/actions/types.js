@@ -1,0 +1,3 @@
+export const DISPATCH_SATUAN = "DISPATCH_SATUAN";
+export const EDIT_SATUAN = "EDIT_SATUAN";
+export const DELETE_SATUAN = "DELETE_SATUAN";

@@ -54,7 +54,7 @@ class AddVendor extends Component {
       /* hide Toast after 2 seconds */
       toast.className = toast.className.replace("show", "");
       this.props.history.push("/vendor");
-    }, 2000);
+    }, 1000);
 
   }
 
@@ -254,8 +254,7 @@ class AddVendor extends Component {
           type: "url",
           placeholder: "Website Vendor (http://)",
           className: "form-control",
-          name: "website",
-          defaultValue: "http://"
+          name: "website"
         }
       },
       {

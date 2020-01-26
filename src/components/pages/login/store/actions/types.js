@@ -1,0 +1,1 @@
+export const DISPATCH_AUTH = "DISPATCH_AUTH";

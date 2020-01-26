@@ -5,26 +5,24 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import Submission from "../pages/submission/container";
 import Procurement from "../pages/procurement/container";
 import Vendor from "../pages/vendor/container";
-import Items from "../pages/barang/Items";
-import AddBarang from "../pages/barang/AddBarang";
-import EditBarang from "../pages/barang/EditBarang";
 import NotFound from "../pages/404/404";
-import Category from "../pages/itemgroup/Category";
-import Jenis from "../pages/itemgroup/Jenis";
+import Category from "../pages/itemgroup/container";
+import Item from "../pages/items/container";
+import Satuan from "../pages/satuan/container";
+import Login from "../pages/login/container";
 
 class Routes extends React.Component {
 	render() {
 		return (
 			<Switch>
-				<Route path='/' exact component={Dashboard} />
 				<Route path='/submission' component={Submission} />
 				<Route path='/procurement' component={Procurement} />
+				<Route path='/' exact component={Login} />
+				<Route path='/home' component={Dashboard} />
 				<Route path='/vendor' component={Vendor} />
-				<Route path='/items' component={Items} />
-				<Route path='/additem' component={AddBarang} />
-				<Route path='/edititem' component={EditBarang} />
+				<Route path='/items' component={Item} />
 				<Route path='/category' component={Category} />
-				<Route path='/jenis' component={Jenis} />
+				<Route path='/satuan' component={Satuan} />
 				<Route component={NotFound} />
 			</Switch>
 		);

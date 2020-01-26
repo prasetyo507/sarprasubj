@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import Section from "../../common/Section";
 import Master from "../Master";
-import Services from "../../services/Services";
+import { connect } from "react-redux";
+/* import Services from "../../services/Services"; */
 
 class Home extends Component {
   componentDidMount() {
-    Services.get("users/1/albums")
+    /* Services.get("users/1/albums")
       .then(function(response) {
         // handle success
         console.log(response.data);
@@ -16,7 +17,7 @@ class Home extends Component {
       })
       .finally(function() {
         // always executed
-      });
+      }); */
   }
   render() {
     return (
@@ -29,4 +30,10 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => {
+  return {
+    auth: state.auth.authForm
+  };
+};
+
+export default connect(mapStateToProps, null)(Home);

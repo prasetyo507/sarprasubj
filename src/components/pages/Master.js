@@ -4,18 +4,30 @@ import Header from "../common/Header";
 import Menu from "../common/Menu";
 import Footer from "../common/Footer"
 import Wrapper from "../common/Wrapper";
+import { connect } from 'react-redux';
 
 const Master = (props) => {
-    return(
-        <>
-            <Header />
-            <Menu />
-            <Wrapper>
-                {props.children}
-            </Wrapper>
-            <Footer />
-        </>
-    )
+    if (props.auth !== "") {
+        return (
+            <>
+                <Header />
+                <Menu />
+                <Wrapper>
+                    {props.children}
+                </Wrapper>
+                <Footer />
+            </>
+        )
+    } else {
+        localStorage.clear();
+        window.location.href = "/"
+        return false;
+    }
 }
 
-export default Master;
+const mapStateToProps = state => {
+    return {
+        auth: state.auth.authForm
+    };
+};
+export default connect(mapStateToProps, null)(Master);

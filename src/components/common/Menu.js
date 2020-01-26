@@ -14,7 +14,7 @@ class Menu extends Component {
 		const menus = [
 			{
 				name: "Dashboard",
-				destination: "/",
+				destination: "/home",
 				class_name: null,
 				icon: "fa fa-dashboard"
 			},
@@ -86,8 +86,13 @@ class Menu extends Component {
 				spanIcon: "fa fa-angle-left pull-right",
 				submenu: [
 					{
-						name: "Barang",
-						destination: "/items",
+						name: "Kategori Barang",
+						destination: "/category",
+						icon: "fa fa-circle-o"
+					},
+					{
+						name: "Satuan",
+						destination: "/satuan",
 						icon: "fa fa-circle-o"
 					},
 					{
@@ -96,8 +101,8 @@ class Menu extends Component {
 						icon: "fa fa-circle-o"
 					},
 					{
-						name: "Kategori Barang",
-						destination: "/category",
+						name: "Barang",
+						destination: "/items",
 						icon: "fa fa-circle-o"
 					}
 				]
@@ -170,7 +175,8 @@ class Menu extends Component {
 											<li
 												key={key}
 												className={
-													sub.destination === window.location.pathname
+													sub.destination === window.location.pathname ||
+													sub.destination === parentUrlPath
 														? `active`
 														: null
 												}
