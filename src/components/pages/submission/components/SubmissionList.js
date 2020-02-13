@@ -67,7 +67,8 @@ const SubmissionList = props => {
 
 const mapStateToProps = state => {
 	return {
-		submission: state.submission.submissionForm
+		submission: state.submission.submissionForm,
+		auth: state.auth.authForm
 	};
 };
 
