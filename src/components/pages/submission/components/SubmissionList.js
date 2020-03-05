@@ -8,7 +8,6 @@ import Datatable from "../../../common/table/Datatable";
 
 const SubmissionList = props => {
 	const { url } = useRouteMatch();
-
 	let submissions = props.submission.map((lists, key) => {
 		return {
 			no: key + 1,
@@ -16,12 +15,6 @@ const SubmissionList = props => {
 			date: lists.date,
 			action: (
 				<>
-					<Link
-						className='btn btn-success btn-sm'
-						to={`${url}/${lists.refnumber}/detail`}
-					>
-						<i className='fa fa-eye'></i>
-					</Link>
 					<Link
 						className='btn btn-info btn-sm'
 						to={`${url}/${lists.refnumber}/seesubmission`}
@@ -33,6 +26,7 @@ const SubmissionList = props => {
 		};
 	});
 
+	console.log(props.submission)
 	const tableHead = [
 		{
 			column1: "No",
@@ -43,7 +37,7 @@ const SubmissionList = props => {
 	];
 
 	const createSubmissionBtn = (
-		<Link className='btn btn-success' to={`${url}/new`}>
+		<Link className='btn btn-primary' to={`${url}/new`}>
 			<i className='fa fa-file'></i> Buat Pengajuan
 		</Link>
 	);

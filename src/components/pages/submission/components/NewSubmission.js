@@ -22,23 +22,18 @@ class NewSubmission extends Component {
     this.subjectInputHandler = this.subjectInputHandler.bind(this);
   }
 
-  handleAddNewItem() {
+  handleAddNewItem(e) {
+    e.preventDefault();
     // name and qty item column do not empty
-    let itemName = $("input[name=item_name]").val();
-    let itemQty = $("input[name=item_qty]").val();
-    let itemType = $("#type option:selected").val();
-    let itemTypeText = $("#type option:selected").text();
-    let itemNote = $("input[name=item_note]").val();
+    let itemName = e.target.item_name.value;
+    let itemQty = e.target.item_qty.value;
+    let itemReferensi = e.target.referensi.value;
+    let itemNote = e.target.item_note.value;
 
-    if (itemName === "" || itemQty === "" || itemType === "") {
-      alert("Kolom Nama Barang, Quantity, dan Tipe barang tidak boleh kosong!");
-      return;
-    }
 
     let newItem = {
       id: this.state.items.length + 1,
-      type: itemType,
-      typeText: itemTypeText,
+      referensi: itemReferensi,
       item: itemName,
       isApprove: 0,
       approvalNote: "",
@@ -49,12 +44,14 @@ class NewSubmission extends Component {
     this.setState({ items: newItem });
 
     // clear input column after add an item
-    this.clearRowInput();
+
+    e.target.item_name.value = "";
+    e.target.item_qty.value = "";
+    e.target.referensi.value = "";
+    e.target.item_note.value = "";
   }
 
-  clearRowInput() {
-    $(".form-input").val("");
-  }
+
 
   handleRemoveItem(id) {
     let filteredItem = this.state.items.filter(itemList => itemList.id !== id);
@@ -87,7 +84,7 @@ class NewSubmission extends Component {
       return _.pick(item, [
         "item",
         "qty",
-        "type",
+        "referensi",
         "note",
         "isApprove",
         "approvalNote"
@@ -130,7 +127,7 @@ class NewSubmission extends Component {
   render() {
     const tableHeader = [
       {
-        column0: "Jenis",
+        column0: "Link Referensi",
         column1: "Nama Barang",
         column2: "QTY",
         column3: "Catatan",
@@ -141,16 +138,12 @@ class NewSubmission extends Component {
     const tableInput = [
       {
         tipe: (
-          <select
+          <input
+            type="url"
             className="form-control form-input"
-            name="item_type"
-            id="type"
-          >
-            <option value="">-- Pilih Jenis Barang --</option>
-            <option value="monitorpc">Monitor PC</option>
-            <option value="sepeda">Sepeda</option>
-            <option value="mejakerja">Meja Kerja</option>
-          </select>
+            name="referensi"
+            placeholder="contoh(http://www.link-referensi.com)"
+          />
         ),
         item: (
           <input
@@ -158,6 +151,7 @@ class NewSubmission extends Component {
             className="form-control form-input"
             name="item_name"
             placeholder="masukan nama item"
+            required
           />
         ),
         qty: (
@@ -167,6 +161,7 @@ class NewSubmission extends Component {
             name="item_qty"
             placeholder="masukan jumlah item"
             onChange={this.handleQtyInput}
+            required
           />
         ),
         note: (
@@ -179,8 +174,8 @@ class NewSubmission extends Component {
         ),
         action: (
           <button
+            type="submit"
             className="btn btn-success btn-sm"
-            onClick={this.handleAddNewItem}
           >
             <i className="fa fa-plus"></i>
           </button>
@@ -191,20 +186,24 @@ class NewSubmission extends Component {
     // add new item to table content
     if (this.state.items !== "") {
       let newItemList = this.state.items.map(items => {
-        let itemClone = { ...items };
-        delete itemClone.id;
-        delete itemClone.type;
-        delete itemClone.isApprove;
-        delete itemClone.approvalNote;
-        itemClone.action = (
-          <button
-            className="btn btn-danger btn-sm"
-            onClick={() => this.handleRemoveItem(items.id)}
-          >
-            <i className="fa fa-minus"></i>
-          </button>
-        );
-        return itemClone;
+        let link_ref = ""
+        if (items.referensi) {
+          link_ref = (<a rel="noopener noreferrer" href={items.referensi} target="_blank">{items.item}</a>)
+        }
+        return ({
+          referensi: link_ref,
+          item: items.item,
+          qty: items.qty,
+          note: items.note,
+          action: (
+            <button
+              className="btn btn-danger btn-sm"
+              onClick={() => this.handleRemoveItem(items.id)}
+            >
+              <i className="fa fa-minus"></i>
+            </button>
+          )
+        })
       });
 
       newItemList.map(newList => tableInput.push(newList));
@@ -215,14 +214,16 @@ class NewSubmission extends Component {
         <Section
           pageName={"Formulir Pengajuan"}
           pageSubject={"Buat pengajuan barang baru"}
-          box_header={
+        >
+          <form
+            onSubmit={this.handleAddNewItem}>
             <HeaderService
               handleSubjectInput={this.subjectInputHandler}
               resetHeader={this.state.resetHeader}
             />
-          }
-        >
-          <Datatable headContent={tableHeader} content={tableInput} />
+            <hr />
+            <Datatable headContent={tableHeader} content={tableInput} />
+          </form>
           <button
             className="btn btn-success pull-right"
             onClick={() => this.handleSubmitSubmission()}

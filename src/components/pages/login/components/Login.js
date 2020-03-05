@@ -18,15 +18,18 @@ class Login extends Component {
 		var notice = document.getElementById("notice");
 		notice.innerHTML = '';
 	}
-	handleSubmit(event) {
+	async handleSubmit(event) {
 		event.preventDefault();
 		let Data = {
 			username: event.target.username.value,
 			password: event.target.password.value
 		}
+		let cfg = {
+			headers: { "sarpras-key": "RLtxMNjW8o" }
+		}
 		var jwt = require("jsonwebtoken");
 		var props = this.props;
-		Services.post("login", Data)
+		await Services.post("login", Data, cfg)
 			.then(function (response) {
 				var decode = jwt.decode(response.data.data.token);
 				props.submitAuth(decode.UserInfo);
@@ -38,7 +41,7 @@ class Login extends Component {
 				}, 1000);
 			})
 			.catch(function (error) {
-				console.clear();
+				console.log(error);
 				var notice = document.getElementById("notice");
 				notice.innerHTML = '<small style="color:red">Username atau Password salah,<br/>Periksa kembali username dan password anda!</small>';
 			})

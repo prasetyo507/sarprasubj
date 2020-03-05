@@ -2,7 +2,8 @@ import React from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 
 import ProcurementList from "../components/ProcurementList";
-import MakeProcurement from "../components/MakeProcurement";
+import Procurements from "../components/ProcurementDetail";
+import ProcurementsFinal from "../components/ProcurementRektor";
 
 const Procurement = () => {
 	const { path } = useRouteMatch();
@@ -10,12 +11,12 @@ const Procurement = () => {
 		<Switch>
 			<Route path={path} exact component={ProcurementList} />
 			<Route
-				path={`${path}/:refnumber/submission/create_procurement`}
-				component={MakeProcurement}
+				path={`${path}/:refnumber/procurement`}
+				component={Procurements}
 			/>
 			<Route
-				path={`${path}/:refnumber/procurement`}
-				component={MakeProcurement}
+				path={`${path}/:refnumber/Procurementsfinal`}
+				component={ProcurementsFinal}
 			/>
 		</Switch>
 	);

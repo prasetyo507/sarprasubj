@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import { rejectItem, approveItem } from "../store/actions/submissionAction";
-
+import { dispatchEditSubmission } from "../store/actions/submissionAction";
+import { currentDate } from "../../../services/Helper";
 import HeaderLayout from "./HeaderLayout";
 import Section from "../../../common/Section";
 import Master from "../../Master";
 import Datatable from "../../../common/table/Datatable";
 import Modal from "../../../common/Modal";
 import { TextArea } from "../../../common/FormGroup";
+import Select2 from 'react-select';
+import { dispatchProcurement } from "../../procurement/store/actions/procurementAction";
 
 const SubmissionDetail = props => {
   // get param from url
@@ -16,108 +18,142 @@ const SubmissionDetail = props => {
   const param = refnumber;
 
   // get submission detail
-  const getDetailSubmission = props.detailSubmission.find(submission => {
-    return submission.refnumber === param;
+  const getDetailSubmission = props.detailSubmission.find(submis => {
+    return submis.refnumber === param;
+  });
+  console.log(getDetailSubmission.items)
+  const approvedSubmission = getDetailSubmission.items.filter(submis => {
+    return submis.isApprove === 1;
+  });
+  const uncheckedSubmission = getDetailSubmission.items.filter(submis => {
+    return submis.isApprove === 0;
+  });
+  const checkedSubmission = getDetailSubmission.items.filter(submis => {
+    return submis.isApprove !== 0;
   });
 
-  // dispatch state store to local state
-  const [submission, setSubmission] = useState([...getDetailSubmission.items]);
 
-  // add action button to item object if login as BAU
-  const prepareTableContent = submission.map((items, i) => {
-    // let itemClone = { ...items };
-    if (props.usedByProcurementChecking) {
-      let id = i + 1;
-      items.action = (
+  let prepareTableContent = getDetailSubmission.items.map((items, i) => {
+    let id = i + 1;
+    var status = "-"
+    var act = ""
+    if (items.isApprove === 1) {
+      status = "Disetujui"
+    } else if (items.isApprove === 2) {
+      status = "TIdak Disetujui"
+    } else {
+      status = "Belum Disetujui"
+    }
+    if (props.auth.group_id === 11 + "") {
+      act =
         <>
           <span data-toggle="tooltip" title="tolak barang">
             <button
+              id={"reject" + id}
               className="btn btn-danger"
               data-toggle="modal"
               data-target="#rejectModal"
               onClick={() => setRejectItem(id)}
+              disabled={(items.isApprove !== 0) ? 'disabled' : null}
             >
               <i className="fa fa-ban"></i>
             </button>
           </span>
           <button
+            id={"approve" + id}
             className="btn btn-success"
             data-toggle="tooltip"
             title="setujui barang"
             style={{ marginLeft: "3px" }}
             onClick={() => proveItem(id)}
+            disabled={(items.isApprove !== 0) ? 'disabled' : null}
           >
             <i className="fa fa-check"></i>
           </button>
         </>
-      );
     }
-    return items;
-  });
-
-  // set submission object after adjustment
-  useEffect(() => {
-    // adjust object to store to the table
-    const serveTableContent = prepareTableContent.map((items, i) => {
-      return {
-        no: i + 1,
-        type: items.type,
-        item: items.item,
-        qty: items.qty,
-        note: items.note,
-        isApprove: items.isApprove,
-        action: items.action
-      };
-    });
-    setSubmission(serveTableContent);
-  }, [getDetailSubmission]);
-
+    let link_ref = ""
+    if (items.referensi) {
+      link_ref = <a rel="noopener noreferrer" href={items.referensi} target="_blank">{items.item}</a>
+    }
+    return {
+      no: id,
+      referensi: link_ref,
+      item: items.item,
+      qty: items.qty,
+      note: items.note,
+      isApprove: status,
+      action: act
+    };
+  })
   // handle approve item
   const proveItem = id => {
-    let findItem = submission.find(item => {
+    let findItem = prepareTableContent.find(item => {
       return item.no === id;
     });
-    findItem.isApprove = 1;
-
-    let approveSelectedItem = getDetailSubmission.items.find(item => {
-      return item.item === id;
-    });
-    approveSelectedItem.isApprove = 1;
-    props.approveSubmissionItem(approveSelectedItem);
-    // set local state
-    setSubmission(submission);
+    let link = ""
+    if (findItem.referensi !== "") {
+      link = findItem.referensi.props.href
+    }
+    let fillStatus = {
+      item: findItem.item,
+      qty: findItem.qty,
+      referensi: link,
+      note: findItem.note,
+      isApprove: 1,
+      approvalNote: ""
+    }
+    props.EditSubmission(param, fillStatus.item, fillStatus)
   };
 
   // provide state to be identifier when give action
   const [rejectedItem, setRejectedItem] = useState("");
 
+  const approvePengadaan = () => {
+    if (getDetailSubmission.items.length === checkedSubmission.length) {
+      document.getElementById("formPengadaan").style.display = "block";
+    } else {
+      document.getElementById("formPengadaan").style.display = "none";
+    }
+  }
+
+  const focusHandle = () => {
+    let noticeReason = document.getElementById("noticeReason")
+    noticeReason.style.display = "none"
+  }
   // handle reject item
   const submitRejectReason = async () => {
-    if (
-      window.confirm(
-        "Proses ini akan menghapus item pada pengajuan, lanjutkan?"
-      )
-    ) {
-      let findItem = submission.items.find(item => {
-        return item.item === rejectedItem;
-      });
-      findItem.isApprove = 2;
-      findItem.approvalNote = document.getElementById("reason").value;
-      // dispatch to store
-      await props.rejectSubmissionItem(submission);
-      // update local state
-      setSubmission(getDetailSubmission);
-      // hide modal after submit
-      const hideModal = () => {
-        document
-          .getElementById("rejectModal")
-          .setAttribute("class", "modal fade");
+    let saveReject = document.getElementById("reason")
+    let noticeReason = document.getElementById("noticeReason")
+    if (saveReject.value.length === 0) {
+      noticeReason.style.display = "block"
+    } else {
+      if (
+        window.confirm(
+          "Proses ini akan menghapus item pada pengajuan, lanjutkan?"
+        )
+      ) {
+        let findItem = prepareTableContent.find(item => {
+          return item.no === rejectedItem;
+        });
+        let fillStatus = {
+          item: findItem.item,
+          qty: findItem.qty,
+          referensi: findItem.referensi,
+          note: findItem.note,
+          isApprove: 2,
+          approvalNote: document.getElementById("reason").value
+        }
 
-        document
-          .getElementsByClassName("modal-backdrop")[0]
-          .setAttribute("class", "modal-backdrop fade");
-      };
-      hideModal();
+        // dispatch to store
+        await props.EditSubmission(param, fillStatus.item, fillStatus);
+
+        // hide modal after submit
+
+        let script = document.createElement("script");
+        script.innerHTML = "$('.modal').modal('hide');";
+        document.body.appendChild(script);
+      }
     }
   };
 
@@ -130,8 +166,8 @@ const SubmissionDetail = props => {
   let tableHeader = [
     {
       column0: "No",
-      column2: "Tipe",
-      column1: "Nama Barang",
+      column1: "Link Referensi",
+      column2: "Nama Barang",
       column3: "QTY",
       column4: "Catatan",
       column5: "Status Barang"
@@ -139,8 +175,8 @@ const SubmissionDetail = props => {
   ];
 
   // will show action button if login by BAU
-  if (props.usedByProcurementChecking) {
-    tableHeader.map(header => (header.column5 = "Aksi"));
+  if (props.auth.group_id === 11 + "") {
+    tableHeader.map(header => (header.column6 = "Aksi"));
   }
 
   const refNumber = [
@@ -217,33 +253,180 @@ const SubmissionDetail = props => {
     }
   ];
 
+  //buat pengadaan
+  // handle add item before submit the procurement
+  const [procItem, setprocItem] = useState([]);
+  const addItemHandler = (e, i) => {
+    e.preventDefault();
+    const myForms = document.getElementById('myForm' + i);
+    if (myForms.item_name.value) {
+
+      let itemList = {
+        i: i,
+        id: procItem.length + 1,
+        id_catalogue: myForms.item_name.value,
+        amount: myForms.amount.value
+      };
+      setprocItem([...procItem, itemList])
+      // reset form
+      myForms.item_name.value = "";
+      myForms.amount.value = "";
+    } else {
+      alert('Barang Harus diisi')
+    }
+  };
+
+  const handleChange = (e, i) => {
+    let Price = props.catalogue.find(vdr => {
+      return vdr.id === e.value;
+    })
+    let pricetag = document.getElementById('price' + i);
+    pricetag.value = Price.price
+  }
+
+  const submitProcurementHandler = e => {
+    e.preventDefault();
+    const pickItemObject = procItem.map(item => {
+      return {
+        id_catalogue: item.id_catalogue,
+        amount: item.amount,
+        isApprove: 0
+      };
+    });
+
+    let procurement = {
+      submission_id: e.target.noref.value,
+      date: currentDate(),
+      subject: e.target.subject.value,
+      to: e.target.to.value,
+      from: e.target.from.value,
+      note: e.target.note.value,
+      approvalNote: "",
+      approval: 0,
+      grandTotal: 0,
+      items: [...pickItemObject]
+    };
+    props.submitProcurement(procurement);
+    var btnSubmit = document.getElementById("save");
+    btnSubmit.disabled = "disabled";
+    /* Toast */
+    var toast = document.getElementById("snackbar");
+    /* Show Toast */
+    toast.className = "show";
+    setTimeout(() => {
+      /* hide Toast after 2 seconds */
+      toast.className = toast.className.replace("show", "");
+      props.history.push("/submission");
+    }, 1000);
+  };
+  const noteInput = [
+    {
+      forAttr: "note",
+      lableName: "Catatan",
+      inputAttr: {
+        className: "form-control",
+        name: "note"
+      }
+    }
+  ];
+
+  const tableHead = [
+    {
+      column1: "Nama Barang",
+      column3: "Harga Satuan",
+      column6: "Jumlah",
+      column5: "Aksi"
+    }
+  ];
+  var selectBarang = props.catalogue.map((item) => {
+    return {
+      value: item.id,
+      label: item.name + ' - ' + item.vendor
+    }
+  });
+  const removeProcItemHandler = (id) => {
+    let items = procItem.filter(item => item.id !== id);
+    setprocItem(items);
+  };
+  const tableContent = (qty, i) => [
+    {
+      item: (
+        <Select2 id="itemSelect" name='item_name' options={selectBarang} onChange={e => handleChange(e, i)} required="true" />
+
+      ),
+      price: (
+        <input
+          type='text'
+          className='form-control'
+          id={'price' + i}
+          name='price'
+          placeholder='masukan harga item'
+          readOnly="readonly"
+          required
+        />
+      ),
+      amount: (
+        <input
+          type='text'
+          className='form-control'
+          id='amount'
+          name='amount'
+          value={qty}
+          placeholder='jumlah barang'
+          readOnly="readonly"
+          required
+        />
+      ),
+      action: (
+        <button className='btn btn-success btn-sm' type='submit'>
+          <i className='fa fa-plus'></i>
+        </button>
+      )
+    }
+  ];
   let navButton = (
     <>
       <Link className="btn btn-warning" to="/submission">
-        Kembali
+        <i className="fa fa-chevron-left"></i> Kembali
       </Link>
-      {/* button will different depend on who is login */}
-      {props.usedByProcurementChecking ? (
-        <Link
-          className="btn btn-success pull-right"
-          to={`/procurement/${refnumber}/submission/create_procurement`}
-        >
-          Buat Pengadaan
-        </Link>
-      ) : (
-        <Link className="btn btn-danger pull-right" to="">
-          Batalkan Pengajuan
-        </Link>
-      )}
     </>
   );
+  let addpengadaan =
+    <>
+      <button
+        id="showForm" className="btn btn-success pull-right" type="button" disabled="disabled"
+      >
+        Buat Form Pengadaan
+        </button>
+    </>
+  console.log(approvedSubmission)
+  if ((uncheckedSubmission.length === 0) && (approvedSubmission.length > 0)) {
+    (
+      addpengadaan =
+      <>
+        <button
+          id="showForm" className="btn btn-success pull-right" type="button" onClick={() => approvePengadaan()}
+        >
+          Buat Form Pengadaan
+        </button>
+      </>
+    )
+  }
 
+  const setting =
+    (
+      <div className="box-tools pull-right">
+        <button type="button" className="btn btn-box-tool" data-widget="collapse"><i className="fa fa-minus"></i></button>
+      </div>
+    )
   return (
     <Master>
       <Section
         pageName={"Detail Pengajuan"}
         pageSubject={`Nomor ${getDetailSubmission.refnumber}`}
         box_header={navButton}
+        class_section={"padding_bottom"}
+        box_setting={setting}
       >
         <HeaderLayout
           formAttr={{
@@ -255,10 +438,11 @@ const SubmissionDetail = props => {
           }}
         />
         <hr />
-        <Datatable headContent={tableHeader} content={submission} />
+        <Datatable headContent={tableHeader} content={prepareTableContent} />
+        {addpengadaan}
         <div className="modal fade" id="rejectModal">
           <Modal
-            title="Reject Item"
+            title="Tolak Barang"
             close={
               <button
                 className="btn btn-default"
@@ -285,28 +469,103 @@ const SubmissionDetail = props => {
                   inputAttr: {
                     className: "form-control",
                     id: "reason",
-                    name: "reason"
+                    name: "reason",
+                    onFocus: () => focusHandle()
                   }
                 }
               ]}
             ></TextArea>
+            <small id="noticeReason" style={{ color: "red", display: 'none' }}>*Alasan penolakan harus diisi</small>
           </Modal>
         </div>
       </Section>
-    </Master>
+      <div id="formPengadaan" style={{ display: "none" }}>
+        <Section
+          pageName='NaN'
+          box_header={"Form Pengadaan"}
+          class_section={"padding_top"}>
+
+          {
+            approvedSubmission.map((item, i) => {
+              var procy = procItem.filter(proc => {
+                return proc.i === i;
+              })
+              let adjustItemList = procy.map(itemList => {
+                let detail = props.catalogue.find(vdr => {
+                  return vdr.id + "" === itemList.id_catalogue;
+                })
+                // remove item from item list
+                return {
+                  item: detail.name + '-' + detail.vendor,
+                  price: detail.price,
+                  amount: itemList.amount,
+                  action: (<button type="button" className="btn btn-danger btn-sm" onClick={() => removeProcItemHandler(itemList.id)}><i className="fa fa-minus"></i></button >)
+                }
+              })
+              return (
+                <div className="post" key={i}>
+                  <div className="user-block">
+                    <span className="username">
+                      <p>{item.item}</p>
+                    </span>
+                  </div>
+                  <div>
+                    <form onSubmit={e => addItemHandler(e, i)} name='formInput' id={"myForm" + i} >
+                      <Datatable headContent={tableHead} content={tableContent(item.qty, i)} />
+                      <div className="row">
+                        <div className="col-xs-12">
+                          <table className="table table-bordered table-striped">
+                            <tbody>
+                              {
+                                adjustItemList.map((content, key) =>
+                                  (
+                                    <tr key={key}>
+                                      <td>{content.item}</td>
+                                      <td>{content.price}</td>
+                                      <td>{content.amount}</td>
+                                      <td>{content.action}</td>
+                                    </tr>
+                                  )
+                                )}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              )
+            })}
+          <form onSubmit={e => submitProcurementHandler(e)} >
+            <TextArea formProp={noteInput} />
+            <input type="hidden" name="noref" value={getDetailSubmission.refnumber} />
+            <input type="hidden" name="subject" value={getDetailSubmission.subject} />
+            <input type="hidden" name="to" value={getDetailSubmission.to} />
+            <input type="hidden" name="from" value={getDetailSubmission.from} />
+            <button className='btn btn-success pull-right' type='submit' id="save">
+              <i className="fa fa-paper-plane"></i> Ajukan</button>
+          </form>
+        </Section>
+      </div>
+      <div id="snackbar">Berhasil...</div>
+    </Master >
   );
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    rejectSubmissionItem: payload => dispatch(rejectItem(payload)),
-    approveSubmissionItem: payload => dispatch(approveItem(payload))
+    EditSubmission: (refnumber, index, submissionData) =>
+      dispatch(dispatchEditSubmission(refnumber, index, submissionData)),
+    submitProcurement: payload =>
+      dispatch(dispatchProcurement(payload))
   };
 };
 
 const mapStateToProps = state => {
   return {
-    detailSubmission: state.submission.submissionForm
+    detailSubmission: state.submission.submissionForm,
+    catalogue: state.catalogue.catalogueForm,
+    auth: state.auth.authForm
   };
 };
 

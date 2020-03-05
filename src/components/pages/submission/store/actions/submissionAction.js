@@ -5,12 +5,8 @@ export const dispatchSubmission = submissionData => ({
 	payload: submissionData
 });
 
-export const rejectItem = payloadAfterItemReject => ({
-	type: actionType.REJECT_SUBMISSION_ITEM,
-	payload: payloadAfterItemReject
+export const dispatchEditSubmission = (refnumber, index, itemData) => ({
+	type: actionType.EDIT_SUBMISSION_STATUS,
+	payload: { refnumber, index, itemData }
 });
 
-export const approveItem = payloadAfterItemApprove => ({
-	type: actionType.APPROVE_SUBMISSION_ITEM,
-	payload: payloadAfterItemApprove
-});

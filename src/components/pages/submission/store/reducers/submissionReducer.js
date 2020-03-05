@@ -12,14 +12,34 @@ export const submissionReducer = (state = initState, action) => {
 				submissionForm: [...state.submissionForm, action.payload]
 			};
 
-		case actionType.REJECT_SUBMISSION_ITEM:
-			let submission = [...state.submissionForm];
-			let index = action.payload.refnumber;
-			let validationResult = action.payload;
-			submission[index] = validationResult;
+		case actionType.EDIT_SUBMISSION_STATUS:
+			// ganti data todo
+			var submissionForm = [...state.submissionForm]
+			var index = action.payload.index
+			var refnumber = action.payload.refnumber
+			var itemData = action.payload.itemData
+			var form = submissionForm.find(submission => {
+				return submission.refnumber === refnumber;
+			});
+			var itemnya = form.items.find(items => {
+				return items.item === index;
+			});
 
-			return { ...state };
-
+			var itemx = form.items.filter(items => {
+				return items.item !== index;
+			});
+			var formx = submissionForm.filter(submission => {
+				return submission.refnumber !== refnumber;
+			});
+			itemnya = itemData
+			itemx.push(itemnya)
+			form.items = itemx;
+			formx.push(form)
+			// return state baru
+			return {
+				...state,
+				submissionForm: formx
+			}
 		default:
 			return state;
 	}

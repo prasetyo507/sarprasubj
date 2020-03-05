@@ -23,15 +23,17 @@ class AddCatalogue extends Component {
     }
   }
   async handleSubmit(event) {
+    console.log(this.props.catalogue.length)
     event.preventDefault();
     let fillCatalogue = {
-      id: 1,
+      id: this.props.catalogue.length + 1,
       name: event.target.name.value,
       price: event.target.price.value,
       vendor: event.target.vendor.value,
       tipe_garansi: event.target.tipe_garansi.value,
       waktu_garansi: event.target.waktu_garansi.value
     }
+    console.log(fillCatalogue)
     await this.props.submitCatalogue(fillCatalogue);
     var my_form = document.getElementById("myForm");
     my_form.reset()
@@ -213,7 +215,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     barang: state.barang.barangForm,
-    vendor: state.vendor.vendorForm
+    vendor: state.vendor.vendorForm,
+    catalogue: state.catalogue.catalogueForm
   };
 };
 

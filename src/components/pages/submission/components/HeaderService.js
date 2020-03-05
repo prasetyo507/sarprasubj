@@ -79,7 +79,8 @@ export const HeaderService = props => {
 				placeholder: "perihal pengajuan",
 				className: "form-control",
 				name: "subject",
-				onBlur: e => handleFormChange(e)
+				onBlur: e => handleFormChange(e),
+				required: true
 			}
 		}
 	];
