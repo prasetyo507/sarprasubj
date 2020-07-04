@@ -17,6 +17,7 @@ const ProcurementList = props => {
 			column6: "Lihat"
 		}
 	];
+	console.log(props.procurement)
 	const tableContent = [];
 
 	const procurementList = props.procurement.map((procurements, i) => {

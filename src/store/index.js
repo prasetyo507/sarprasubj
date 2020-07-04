@@ -12,10 +12,11 @@ import {
 	jenisReducer
 } from "../components/pages/itemgroup/store/reducers/itemgroupReducer";
 import { satuanReducer } from "../components/pages/satuan/store/reducers/satuanReducer";
-import { loginReducer } from "../components/pages/login/store/reducers/loginReducer";
+import { loginReducer, tokenReducer } from "../components/pages/login/store/reducers/loginReducer";
 import storage from "redux-persist/lib/storage";
 
 const rootReducer = combineReducers({
+	token: tokenReducer,
 	auth: loginReducer,
 	submission: submissionReducer,
 	procurement: procurementReducer,

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 /* import Services from "../../services/Services"; */
 
 class Home extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     /* Services.get("users/1/albums")
       .then(function(response) {
         // handle success
@@ -18,6 +18,7 @@ class Home extends Component {
       .finally(function() {
         // always executed
       }); */
+
   }
   render() {
     return (
@@ -32,7 +33,8 @@ class Home extends Component {
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth.authForm
+    auth: state.auth.authForm,
+    token: state.token.tokenKey
   };
 };
 

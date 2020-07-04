@@ -12,7 +12,6 @@ class DetailVendor extends Component {
     this.state = {
     };
   }
-
   render() {
     const param = this.props.match.params.refnumber;
     var getDetailVendor = this.props.detailVendor.find(vendor => {
@@ -27,7 +26,7 @@ class DetailVendor extends Component {
           type: "text",
           className: "form-control",
           name: "name",
-          defaultValue: getDetailVendor.nama,
+          defaultValue: getDetailVendor.name,
           readOnly: true
         }
       },
@@ -38,7 +37,7 @@ class DetailVendor extends Component {
           type: "text",
           className: "form-control",
           name: "country",
-          defaultValue: getDetailVendor.negara,
+          defaultValue: getDetailVendor.country,
           readOnly: true
         }
       },
@@ -49,7 +48,7 @@ class DetailVendor extends Component {
           type: "text",
           className: "form-control",
           name: "province",
-          defaultValue: getDetailVendor.provinsi,
+          defaultValue: getDetailVendor.province,
           readOnly: true
         }
       },
@@ -60,7 +59,7 @@ class DetailVendor extends Component {
           type: "text",
           className: "form-control",
           name: "city",
-          defaultValue: getDetailVendor.kota,
+          defaultValue: getDetailVendor.city,
           readOnly: true
         }
       },
@@ -73,7 +72,7 @@ class DetailVendor extends Component {
           className: "form-control",
           name: "zip",
           maxLength: "10",
-          defaultValue: getDetailVendor.kodepos,
+          defaultValue: getDetailVendor.zip_code,
           readOnly: true
         }
       }
@@ -87,7 +86,7 @@ class DetailVendor extends Component {
           placeholder: "Alamat Vendor",
           className: "form-control",
           name: "address",
-          defaultValue: getDetailVendor.alamat,
+          defaultValue: getDetailVendor.address,
           readOnly: true
         }
       }
@@ -101,7 +100,7 @@ class DetailVendor extends Component {
           placeholder: "Kontak Vendor",
           className: "form-control",
           name: "contact",
-          defaultValue: getDetailVendor.kontak,
+          defaultValue: getDetailVendor.contact_name,
           readOnly: true
         }
       },
@@ -114,7 +113,7 @@ class DetailVendor extends Component {
           className: "form-control",
           name: "phone",
           maxLength: "18",
-          defaultValue: getDetailVendor.telp,
+          defaultValue: getDetailVendor.phone,
           readOnly: true
         }
       },
@@ -139,7 +138,7 @@ class DetailVendor extends Component {
           placeholder: "Website Vendor",
           className: "form-control",
           name: "website",
-          defaultValue: getDetailVendor.web,
+          defaultValue: getDetailVendor.url,
           readOnly: true
         }
       },
@@ -165,7 +164,7 @@ class DetailVendor extends Component {
           placeholder: "Keterangan Tambahan",
           className: "form-control",
           name: "note",
-          defaultValue: getDetailVendor.catatan,
+          defaultValue: getDetailVendor.note,
           readOnly: true
         }
       }

@@ -3,9 +3,13 @@ import * as actionType from "../actions/types";
 const initState = {
 	vendorForm: []
 };
-
 export const vendorReducer = (state = initState, action) => {
 	switch (action.type) {
+		case actionType.FETCH_VENDOR:
+			return {
+				...state,
+				vendorForm: action.payload
+			};
 		case actionType.DISPATCH_VENDOR:
 			return {
 				...state,
@@ -44,3 +48,4 @@ export const vendorReducer = (state = initState, action) => {
 			return state;
 	}
 };
+

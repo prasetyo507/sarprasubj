@@ -31,18 +31,18 @@ class EditVendor extends Component {
     event.preventDefault();
     let fillVendor = {
       id: 1,
-      nama: event.target.name.value,
-      negara: event.target.country.value,
-      provinsi: event.target.province.value,
-      kota: event.target.city.value,
-      kodepos: event.target.zip.value,
-      alamat: event.target.address.value,
-      kontak: event.target.contact.value,
-      telp: event.target.phone.value,
+      name: event.target.name.value,
+      country: event.target.country.value,
+      province: event.target.province.value,
+      city: event.target.city.value,
+      zip_code: event.target.zip.value,
+      address: event.target.address.value,
+      contact_name: event.target.contact.value,
+      phone: event.target.phone.value,
       fax: event.target.fax.value,
-      web: event.target.website.value,
+      url: event.target.website.value,
       email: event.target.email.value,
-      catatan: event.target.note.value
+      note: event.target.note.value
     }
     await this.props.submitVendor(fillVendor.id, fillVendor);
     var btnSubmit = document.getElementById("save");
@@ -74,7 +74,7 @@ class EditVendor extends Component {
           placeholder: "Nama Vendor",
           className: "form-control",
           name: "name",
-          defaultValue: getEditVendor.nama,
+          defaultValue: getEditVendor.name,
           required: true
         }
       }
@@ -85,7 +85,7 @@ class EditVendor extends Component {
         selectAttr: {
           className: "form-control select2",
           name: "country",
-          defaultValue: getEditVendor.negara,
+          defaultValue: getEditVendor.country,
           required: true
         },
         optionList: [
@@ -98,19 +98,19 @@ class EditVendor extends Component {
           },
           {
             inputAttr: {
-              value: "indonesia"
+              value: "1"
             },
             name: "Indonesia"
           },
           {
             inputAttr: {
-              value: "malaysia"
+              value: "2"
             },
             name: "Malaysia"
           },
           {
             inputAttr: {
-              value: "singapore"
+              value: "3"
             },
             name: "Singapore"
           }
@@ -121,7 +121,7 @@ class EditVendor extends Component {
         selectAttr: {
           className: "form-control select2",
           name: "province",
-          defaultValue: getEditVendor.provinsi,
+          defaultValue: getEditVendor.province,
           required: true
         },
         optionList: [
@@ -134,19 +134,19 @@ class EditVendor extends Component {
           },
           {
             inputAttr: {
-              value: "jabar"
+              value: "1"
             },
             name: "Jawa Barat"
           },
           {
             inputAttr: {
-              value: "dki"
+              value: "2"
             },
             name: "DKI Jakarta"
           },
           {
             inputAttr: {
-              value: "sumbar"
+              value: "3"
             },
             name: "Sumatera Barat"
           }
@@ -157,7 +157,7 @@ class EditVendor extends Component {
         selectAttr: {
           className: "form-control select2",
           name: "city",
-          defaultValue: getEditVendor.kota,
+          defaultValue: getEditVendor.city,
           required: true
         },
         optionList: [
@@ -170,19 +170,19 @@ class EditVendor extends Component {
           },
           {
             inputAttr: {
-              value: "bekasikota"
+              value: "1"
             },
             name: "Bekasi Kota"
           },
           {
             inputAttr: {
-              value: "jakarta selatan"
+              value: "2"
             },
             name: "Jakarta Selatan"
           },
           {
             inputAttr: {
-              value: "medan"
+              value: "3"
             },
             name: "Medan"
           }
@@ -200,7 +200,7 @@ class EditVendor extends Component {
           className: "form-control",
           name: "zip",
           maxLength: "10",
-          defaultValue: getEditVendor.kodepos,
+          defaultValue: getEditVendor.zip_code,
           required: true
         }
       }
@@ -213,7 +213,7 @@ class EditVendor extends Component {
           placeholder: "Alamat Vendor",
           className: "form-control",
           name: "address",
-          defaultValue: getEditVendor.alamat,
+          defaultValue: getEditVendor.address,
           required: true
         }
       }
@@ -227,7 +227,7 @@ class EditVendor extends Component {
           placeholder: "Kontak Vendor",
           className: "form-control",
           name: "contact",
-          defaultValue: getEditVendor.kontak,
+          defaultValue: getEditVendor.contact_name,
           required: true
         }
       },
@@ -241,7 +241,7 @@ class EditVendor extends Component {
           name: "phone",
           onChange: this.handleChange,
           maxLength: "18",
-          defaultValue: getEditVendor.telp,
+          defaultValue: getEditVendor.phone,
           required: true
         }
       },
@@ -266,7 +266,7 @@ class EditVendor extends Component {
           placeholder: "Website Vendor",
           className: "form-control",
           name: "website",
-          defaultValue: getEditVendor.web
+          defaultValue: getEditVendor.url
         }
       },
       {
@@ -291,7 +291,7 @@ class EditVendor extends Component {
           placeholder: "Keterangan Tambahan",
           className: "form-control",
           name: "note",
-          defaultValue: getEditVendor.catatan
+          defaultValue: getEditVendor.note
         }
       }
     ];

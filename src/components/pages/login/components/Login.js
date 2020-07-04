@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Services from "../../../services/Services";
 import { connect } from "react-redux";
-import { dispatchAuth } from "../store/actions/loginAction";
+import { dispatchAuth, dispatchToken } from "../store/actions/loginAction";
 
 class Login extends Component {
 	constructor(props) {
@@ -32,6 +32,7 @@ class Login extends Component {
 		await Services.post("login", Data, cfg)
 			.then(function (response) {
 				var decode = jwt.decode(response.data.data.token);
+				props.submitToken(response.data.data.token);
 				props.submitAuth(decode.UserInfo);
 				var toast = document.getElementById("snackbar");
 				toast.className = "show";
@@ -83,7 +84,9 @@ class Login extends Component {
 const mapDispatchToProps = dispatch => {
 	return {
 		submitAuth: userInfo =>
-			dispatch(dispatchAuth(userInfo))
+			dispatch(dispatchAuth(userInfo)),
+		submitToken: token =>
+			dispatch(dispatchToken(token))
 	};
 };
 const mapStateToProps = state => {

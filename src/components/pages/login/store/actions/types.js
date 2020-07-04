@@ -1,1 +1,2 @@
 export const DISPATCH_AUTH = "DISPATCH_AUTH";
+export const DISPATCH_TOKEN = "DISPATCH_TOKEN";

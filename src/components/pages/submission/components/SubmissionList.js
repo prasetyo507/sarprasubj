@@ -26,7 +26,6 @@ const SubmissionList = props => {
 		};
 	});
 
-	console.log(props.submission)
 	const tableHead = [
 		{
 			column1: "No",

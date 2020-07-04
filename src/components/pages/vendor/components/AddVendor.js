@@ -3,8 +3,9 @@ import Section from "../../../common/Section";
 import Master from "../../Master";
 import { FreeText, Select, TextArea } from "../../../common/FormGroup";
 import { connect } from "react-redux";
-import { dispatchVendor } from "../store/actions/vendorAction";
+// import { dispatchVendor } from "../store/actions/vendorAction";
 import { Link } from "react-router-dom";
+import Services from "../../../services/Services";
 
 
 class AddVendor extends Component {
@@ -28,33 +29,38 @@ class AddVendor extends Component {
   }
   async handleSubmit(event) {
     event.preventDefault();
-    let fillVendor = {
-      id: 1,
-      nama: event.target.name.value,
-      negara: event.target.country.value,
-      provinsi: event.target.province.value,
-      kota: event.target.city.value,
-      kodepos: event.target.zip.value,
-      alamat: event.target.address.value,
-      kontak: event.target.contact.value,
-      telp: event.target.phone.value,
+    const props = this.props;
+    let Data = {
+      name: event.target.name.value,
+      country: Number(event.target.country.value),
+      province: Number(event.target.province.value),
+      city: Number(event.target.city.value),
+      zip_code: Number(event.target.zip.value),
+      address: event.target.address.value,
+      contact_name: event.target.contact.value,
+      phone: event.target.phone.value,
       fax: event.target.fax.value,
-      web: event.target.website.value,
+      url: event.target.website.value,
       email: event.target.email.value,
-      catatan: event.target.note.value
+      note: event.target.note.value
     }
-    await this.props.submitVendor(fillVendor);
-    var btnSubmit = document.getElementById("save");
-    btnSubmit.disabled = "disabled";
-    /* Toast */
-    var toast = document.getElementById("snackbar");
-    /* Show Toast */
-    toast.className = "show";
-    setTimeout(() => {
-      /* hide Toast after 2 seconds */
-      toast.className = toast.className.replace("show", "");
-      this.props.history.push("/vendor");
-    }, 1000);
+    let cfg = {
+      headers: { "user-token": props.token }
+    }
+    await Services.post("vendor", Data, cfg)
+      .then(function (response) {
+        var btnSubmit = document.getElementById("save");
+        btnSubmit.disabled = "disabled";
+        var toast = document.getElementById("snackbar");
+        toast.className = "show";
+        setTimeout(() => {
+          toast.className = toast.className.replace("show", "");
+          props.history.push("/vendor");
+        }, 1000);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
 
   }
 
@@ -92,19 +98,19 @@ class AddVendor extends Component {
           },
           {
             inputAttr: {
-              value: "indonesia"
+              value: 1
             },
             name: "Indonesia"
           },
           {
             inputAttr: {
-              value: "malaysia"
+              value: 2
             },
             name: "Malaysia"
           },
           {
             inputAttr: {
-              value: "singapore"
+              value: 3
             },
             name: "Singapore"
           }
@@ -128,19 +134,19 @@ class AddVendor extends Component {
           },
           {
             inputAttr: {
-              value: "jabar"
+              value: 1
             },
             name: "Jawa Barat"
           },
           {
             inputAttr: {
-              value: "dki"
+              value: 2
             },
             name: "DKI Jakarta"
           },
           {
             inputAttr: {
-              value: "sumbar"
+              value: 3
             },
             name: "Sumatera Barat"
           }
@@ -164,19 +170,19 @@ class AddVendor extends Component {
           },
           {
             inputAttr: {
-              value: "bekasikota"
+              value: 1
             },
             name: "Bekasi Kota"
           },
           {
             inputAttr: {
-              value: "jakarta selatan"
+              value: 2
             },
             name: "Jakarta Selatan"
           },
           {
             inputAttr: {
-              value: "medan"
+              value: 3
             },
             name: "Medan"
           }
@@ -311,11 +317,16 @@ class AddVendor extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     submitVendor: vendorData =>
+//       dispatch(dispatchVendor(vendorData))
+//   };
+// };
+const mapStateToProps = state => {
   return {
-    submitVendor: vendorData =>
-      dispatch(dispatchVendor(vendorData))
+    token: state.token.tokenKey
   };
 };
 
-export default connect(null, mapDispatchToProps)(AddVendor);
+export default connect(mapStateToProps, null)(AddVendor);

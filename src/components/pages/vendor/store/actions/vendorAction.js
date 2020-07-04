@@ -14,3 +14,7 @@ export const dispatchDeleteVendor = id => ({
 	type: actionType.DELETE_VENDOR,
 	payload: id
 });
+export const dispatchFetchVendor = value => ({
+	type: actionType.FETCH_VENDOR,
+	payload: value
+});
